@@ -161,7 +161,7 @@
       100% { transform: scale(1); }
     }
 
-    /* Stile del Mini Radar in basso a sinistra */
+    /* Mini Radar in basso a sinistra */
     .galaxy-radar {
       position: absolute;
       bottom: 15px;
@@ -197,7 +197,6 @@
       border-radius: 50%;
       box-shadow: 0 0 4px #F0E8D5;
       transform: translate(-50%, -50%);
-      transition: all 0.05s linear;
     }
 
     .galaxy-controls {
@@ -286,18 +285,18 @@
       <div class="galaxy-board" id="galaxyBoard">
         
         <div class="galaxy-canvas-world" id="galaxyWorld">
-          <!-- Simboli distribuiti su tutta la mappa -->
-          <a href="https://example.com" target="_blank" class="cosmic-sticker-link anim-float" style="top: 450px; left: 700px; animation-delay: 0s;" title="Planet 1">🪐</a>
-          <a href="https://example.com" target="_blank" class="cosmic-sticker-link anim-drift" style="top: 250px; left: 1050px; animation-delay: 1.2s;" title="Rocket 1">🚀</a>
-          <a href="https://example.com" target="_blank" class="cosmic-sticker-link anim-pulse" style="top: 750px; left: 400px; animation-delay: 2.5s;" title="UFO 1">🛸</a>
-          <a href="https://example.com" target="_blank" class="cosmic-sticker-link anim-float" style="top: 180px; left: 350px; animation-delay: 0.8s;" title="Star 1">⭐</a>
-          <a href="https://example.com" target="_blank" class="cosmic-sticker-link anim-drift" style="top: 680px; left: 1150px; animation-delay: 1.8s;" title="Astronaut 1">👨‍🚀</a>
+          <!-- Simboli distribuiti su tutta la mappa (sostituisci i link con quelli reali dei membri!) -->
+          <a href="https://example.com/1" target="_blank" class="cosmic-sticker-link anim-float" style="top: 450px; left: 700px; animation-delay: 0s;" title="Planet 1">🪐</a>
+          <a href="https://example.com/2" target="_blank" class="cosmic-sticker-link anim-drift" style="top: 250px; left: 1050px; animation-delay: 1.2s;" title="Rocket 1">🚀</a>
+          <a href="https://example.com/3" target="_blank" class="cosmic-sticker-link anim-pulse" style="top: 750px; left: 400px; animation-delay: 2.5s;" title="UFO 1">🛸</a>
+          <a href="https://example.com/4" target="_blank" class="cosmic-sticker-link anim-float" style="top: 180px; left: 350px; animation-delay: 0.8s;" title="Star 1">⭐</a>
+          <a href="https://example.com/5" target="_blank" class="cosmic-sticker-link anim-drift" style="top: 680px; left: 1150px; animation-delay: 1.8s;" title="Astronaut 1">👨‍🚀</a>
           
-          <a href="https://example.com" target="_blank" class="cosmic-sticker-link anim-pulse" style="top: 120px; left: 800px; animation-delay: 0.5s;" title="Alien">👽</a>
-          <a href="https://example.com" target="_blank" class="cosmic-sticker-link anim-float" style="top: 580px; left: 250px; animation-delay: 1.5s;" title="Saturn">🪐</a>
-          <a href="https://example.com" target="_blank" class="cosmic-sticker-link anim-drift" style="top: 850px; left: 850px; animation-delay: 2.1s;" title="Rocket 2">🚀</a>
-          <a href="https://example.com" target="_blank" class="cosmic-sticker-link anim-float" style="top: 380px; left: 180px; animation-delay: 1.0s;" title="Star 2">🌟</a>
-          <a href="https://example.com" target="_blank" class="cosmic-sticker-link anim-pulse" style="top: 480px; left: 1250px; animation-delay: 0.3s;" title="Comet">☄️</a>
+          <a href="https://example.com/6" target="_blank" class="cosmic-sticker-link anim-pulse" style="top: 120px; left: 800px; animation-delay: 0.5s;" title="Alien">👽</a>
+          <a href="https://example.com/7" target="_blank" class="cosmic-sticker-link anim-float" style="top: 580px; left: 250px; animation-delay: 1.5s;" title="Saturn">🪐</a>
+          <a href="https://example.com/8" target="_blank" class="cosmic-sticker-link anim-drift" style="top: 850px; left: 850px; animation-delay: 2.1s;" title="Rocket 2">🚀</a>
+          <a href="https://example.com/9" target="_blank" class="cosmic-sticker-link anim-float" style="top: 380px; left: 180px; animation-delay: 1.0s;" title="Star 2">🌟</a>
+          <a href="https://example.com/10" target="_blank" class="cosmic-sticker-link anim-pulse" style="top: 480px; left: 1250px; animation-delay: 0.3s;" title="Comet">☄️</a>
         </div>
 
         <!-- Mini Radar in basso a sinistra -->
@@ -306,7 +305,11 @@
           <div class="radar-blip" id="radarBlip"></div>
         </div>
 
+        <!-- Controlli in basso a destra (inclusi Zoom, Fullscreen e il tasto Random) -->
         <div class="galaxy-controls">
+          <button class="control-btn" id="randomBtn" title="Visita un sito casuale (Random)">
+            <i class="fa-solid fa-dice"></i>
+          </button>
           <button class="control-btn" id="zoomOutBtn" title="Zoom Out (-)">
             <i class="fa-solid fa-minus"></i>
           </button>
@@ -351,19 +354,17 @@
     }
 
     function updateWorldTransform() {
-      const maxDragX = Math.max(0, (700 * scale - 200));
-      const maxDragY = Math.max(0, (500 * scale - 150));
+      const maxDragX = 400;
+      const maxDragY = 300;
 
       currentX = clamp(currentX, -maxDragX, maxDragX);
       currentY = clamp(currentY, -maxDragY, maxDragY);
 
       world.style.transform = `translate(calc(-50% + ${currentX}px), calc(-50% + ${currentY}px)) scale(${scale})`;
 
-      // Aggiorna la posizione del puntino nel mini radar in base al movimento e allo zoom
-      const radarRangeX = 35; // Raggio di movimento in pixel dentro il radar
-      const radarRangeY = 35;
-      const blipX = 45 - (currentX / maxDragX || 0) * radarRangeX;
-      const blipY = 45 - (currentY / maxDragY || 0) * radarRangeY;
+      // Posizionamento del puntino nel mini radar in proporzione
+      const blipX = 45 - (currentX / maxDragX) * 35;
+      const blipY = 45 - (currentY / maxDragY) * 35;
       
       radarBlip.style.left = `${blipX}px`;
       radarBlip.style.top = `${blipY}px`;
@@ -434,6 +435,19 @@
       updateWorldTransform();
     }, { passive: false });
 
+    // Funzione per il pulsante "Sito Casuale" (🎲)
+    const randomBtn = document.getElementById('randomBtn');
+    randomBtn.addEventListener('click', () => {
+      const links = world.querySelectorAll('.cosmic-sticker-link');
+      if (links.length > 0) {
+        const randomIndex = Math.floor(Math.random() * links.length);
+        const randomUrl = links[randomIndex].getAttribute('href');
+        if (randomUrl && randomUrl !== '#') {
+          window.open(randomUrl, '_blank');
+        }
+      }
+    });
+
     const fullscreenBtn = document.getElementById('fullscreenBtn');
     const fullscreenIcon = document.getElementById('fullscreenIcon');
 
@@ -460,3 +474,4 @@
 
 </body>
 </html>
+
