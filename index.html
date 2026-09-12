@@ -117,6 +117,7 @@
         radial-gradient(rgba(255,255,255,0.6) 1px, transparent 1px);
       background-size: 130px 130px, 190px 190px, 85px 85px;
       background-position: 0 0, 65px 95px, 40px 40px;
+      transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); /* Transizione fluida quando si cerca un pianeta random */
     }
 
     .cosmic-sticker-link {
@@ -305,9 +306,9 @@
           <div class="radar-blip" id="radarBlip"></div>
         </div>
 
-        <!-- Controlli in basso a destra (inclusi Zoom, Fullscreen e il tasto Random) -->
+        <!-- Controlli in basso a destra -->
         <div class="galaxy-controls">
-          <button class="control-btn" id="randomBtn" title="Visita un sito casuale (Random)">
+          <button class="control-btn" id="randomBtn" title="Inquadra un pianeta casuale (Random)">
             <i class="fa-solid fa-dice"></i>
           </button>
           <button class="control-btn" id="zoomOutBtn" title="Zoom Out (-)">
@@ -348,17 +349,24 @@
     let currentX = 0;
     let currentY = 0;
     let scale = 0.55;
+    let isAnimatingRandom = false;
 
     function clamp(val, min, max) {
       return Math.max(min, Math.min(max, val));
     }
 
-    function updateWorldTransform() {
+    function updateWorldTransform(withTransition = false) {
       const maxDragX = 400;
       const maxDragY = 300;
 
       currentX = clamp(currentX, -maxDragX, maxDragX);
       currentY = clamp(currentY, -maxDragY, maxDragY);
+
+      if (withTransition) {
+        world.style.transition = 'transform 0.6s cubic-bezier(0.25, 1, 0.5, 1)';
+      } else {
+        world.style.transition = 'none';
+      }
 
       world.style.transform = `translate(calc(-50% + ${currentX}px), calc(-50% + ${currentY}px)) scale(${scale})`;
 
@@ -383,7 +391,7 @@
       if (!isDragging) return;
       currentX = e.clientX - startX;
       currentY = e.clientY - startY;
-      updateWorldTransform();
+      updateWorldTransform(false);
     });
 
     window.addEventListener('mouseup', () => {
@@ -401,7 +409,7 @@
       if (!isDragging) return;
       currentX = e.touches[0].clientX - startX;
       currentY = e.touches[0].clientY - startY;
-      updateWorldTransform();
+      updateWorldTransform(false);
     });
 
     window.addEventListener('touchend', () => {
@@ -414,14 +422,14 @@
     zoomInBtn.addEventListener('click', () => {
       if (scale < 2.0) {
         scale += 0.25;
-        updateWorldTransform();
+        updateWorldTransform(false);
       }
     });
 
     zoomOutBtn.addEventListener('click', () => {
       if (scale > 0.4) {
         scale -= 0.25;
-        updateWorldTransform();
+        updateWorldTransform(false);
       }
     });
 
@@ -432,19 +440,27 @@
       } else if (e.deltaY > 0 && scale > 0.4) {
         scale -= 0.1;
       }
-      updateWorldTransform();
+      updateWorldTransform(false);
     }, { passive: false });
 
-    // Funzione per il pulsante "Sito Casuale" (🎲)
+    // Funzione per il pulsante "Random" (🎲): zooma e sposta la telecamera su un pianeta casuale
     const randomBtn = document.getElementById('randomBtn');
     randomBtn.addEventListener('click', () => {
       const links = world.querySelectorAll('.cosmic-sticker-link');
       if (links.length > 0) {
         const randomIndex = Math.floor(Math.random() * links.length);
-        const randomUrl = links[randomIndex].getAttribute('href');
-        if (randomUrl && randomUrl !== '#') {
-          window.open(randomUrl, '_blank');
-        }
+        const targetLink = links[randomIndex];
+
+        // Legge le coordinate top e left del pianeta scelto rispetto al centro del canvas mondiale (1400x1000)
+        const targetTop = parseFloat(targetLink.style.top);
+        const targetLeft = parseFloat(targetLink.style.left);
+
+        // Calcola lo spostamento esatto per centrare quel pianeta nello schermo
+        currentX = -(targetLeft - 700);
+        currentY = -(targetTop - 500);
+        scale = 1.2; // Zoom ravvicinato per metterlo in primo piano
+
+        updateWorldTransform(true); // Applica l'animazione fluida
       }
     });
 
@@ -474,4 +490,3 @@
 
 </body>
 </html>
-
