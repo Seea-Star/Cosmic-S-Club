@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>COSMIC-S - Deep Space</title>
+  <title>COSMIC-S - Cosmic Club</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,10 +15,6 @@
 
     body {
       background-color: #000000;
-      background-image: 
-        linear-gradient(rgba(240, 232, 213, 0.18) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(240, 232, 213, 0.18) 1px, transparent 1px);
-      background-size: 20px 20px;
       color: #F0E8D5;
       font-family: 'Quicksand', sans-serif;
       padding: 30px 10px;
@@ -35,34 +31,39 @@
       gap: 16px;
     }
 
+    /* Top Banner con sfondo a quadretti bianchi/chiari */
     .top-banner {
-      background: #000000;
+      background-color: #F0E8D5;
+      background-image: 
+        linear-gradient(rgba(0, 0, 0, 0.12) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 0, 0, 0.12) 1px, transparent 1px);
+      background-size: 20px 20px;
       border: 2px solid #F0E8D5;
       border-radius: 20px;
       padding: 12px 25px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      box-shadow: 4px 4px 0px #F0E8D5;
+      box-shadow: 4px 4px 0px rgba(240, 232, 213, 0.4);
     }
 
     .top-banner h1 { 
       font-size: 2rem; 
       font-weight: 800; 
       letter-spacing: 2px; 
-      color: #F0E8D5;
+      color: #111111;
     }
 
     .back-btn {
-      background: #F0E8D5;
-      color: #111111;
-      border: 2px solid #F0E8D5;
+      background: #000000;
+      color: #F0E8D5;
+      border: 2px solid #111111;
       padding: 8px 14px;
       border-radius: 12px;
       font-weight: 800;
       font-size: 0.75rem;
       text-decoration: none;
-      box-shadow: 2px 2px 0px #F0E8D5;
+      box-shadow: 2px 2px 0px #111111;
       transition: transform 0.1s ease;
     }
 
@@ -70,7 +71,7 @@
       transform: translateY(-1px);
     }
 
-    /* Main Content Area */
+    /* Main Content Area (Sfondo totalmente nero) */
     .space-container {
       background: #000000;
       border: 2px solid #F0E8D5;
@@ -82,20 +83,7 @@
       gap: 20px;
     }
 
-    .space-intro {
-      font-size: 0.95rem;
-      line-height: 1.6;
-      font-weight: 700;
-      opacity: 0.9;
-    }
-
-    .space-intro a {
-      color: #F0E8D5;
-      font-weight: bold;
-      text-decoration: underline;
-    }
-
-    /* Galaxy Board con sfondo a quadretti diretto */
+    /* Galaxy Board con sfondo a quadretti chiari */
     .galaxy-board {
       width: 100%;
       min-height: 400px;
@@ -105,10 +93,10 @@
       align-items: center;
       justify-content: center;
       position: relative;
-      background-color: #000000;
+      background-color: #F0E8D5;
       background-image: 
-        linear-gradient(rgba(240, 232, 213, 0.18) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(240, 232, 213, 0.18) 1px, transparent 1px);
+        linear-gradient(rgba(0, 0, 0, 0.12) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 0, 0, 0.12) 1px, transparent 1px);
       background-size: 20px 20px;
       padding: 20px;
       text-align: center;
@@ -118,11 +106,26 @@
     .galaxy-empty-text {
       font-size: 0.9rem;
       font-weight: 700;
-      opacity: 0.7;
-      text-shadow: 1px 1px 2px #000;
-      background: rgba(0, 0, 0, 0.7);
+      color: #111111;
+      background: rgba(240, 232, 213, 0.9);
       padding: 10px 15px;
       border-radius: 8px;
+      border: 1px solid #111111;
+    }
+
+    .space-intro {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      font-weight: 700;
+      opacity: 0.9;
+      border-top: 1px dashed rgba(240, 232, 213, 0.3);
+      padding-top: 20px;
+    }
+
+    .space-intro a {
+      color: #F0E8D5;
+      font-weight: bold;
+      text-decoration: underline;
     }
 
     /* Footer Credits Inside Page */
@@ -146,26 +149,29 @@
 
   <div class="site-wrapper">
 
-    <!-- Header with Home button -->
+    <!-- Header con titolo e sfondo a quadretti bianchi -->
     <header class="top-banner">
-      <h1>DEEP SPACE</h1>
+      <h1>COSMIC CLUB</h1>
       <a href="https://seea-star.github.io/Cosmic-S-Home/" class="back-btn"><i class="fa-solid fa-chevron-left"></i> HOME</a>
     </header>
 
-    <!-- Main Content Box -->
+    <!-- Main Content Box con sfondo nero -->
     <div class="space-container">
-      <div class="space-intro">
-        Welcome to the Deep Space! This is an open cosmic canvas for everyone. Send me your custom pixel art, star, planet, UFO, rocket, or astronaut, and I will place it floating around here. 
-        <br><br>
-        To join the galaxy, head over to the <a href="https://cosmic-seea.neocities.org/" target="_blank">Guestbook</a> and send your creation!
-      </div>
 
-      <!-- Galaxy Board con sfondo a quadretti -->
+      <!-- Galaxy Board (Canvas con quadretti bianchi) posizionato subito sotto -->
       <div class="galaxy-board">
         <div class="galaxy-empty-text">
           ✨ The space is quiet right now... Waiting for the first celestial bodies to arrive. ✨
         </div>
       </div>
+
+      <!-- Descrizione e istruzioni messe in fondo -->
+      <div class="space-intro">
+        Welcome to the Cosmic Club! This is an open cosmic canvas for everyone. Send me your custom pixel art, star, planet, UFO, rocket, or astronaut, and I will place it floating around here. 
+        <br><br>
+        To join the galaxy, head over to the <a href="https://cosmic-seea.neocities.org/" target="_blank">Guestbook</a> and send your creation!
+      </div>
+
     </div>
 
     <!-- Footer -->
@@ -178,3 +184,4 @@
 
 </body>
 </html>
+
