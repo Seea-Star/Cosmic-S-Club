@@ -71,9 +71,13 @@
       transform: translateY(-1px);
     }
 
-    /* Main Content Area */
+    /* Main Container esterno con sfondo a quadretti */
     .space-container {
-      background: #000000;
+      background-color: #000000;
+      background-image: 
+        linear-gradient(rgba(240, 232, 213, 0.18) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(240, 232, 213, 0.18) 1px, transparent 1px);
+      background-size: 20px 20px;
       border: 2px solid #F0E8D5;
       border-radius: 20px;
       padding: 30px;
@@ -83,7 +87,7 @@
       gap: 20px;
     }
 
-    /* Galaxy Board con sfondo nero e griglia color crema */
+    /* Galaxy Board interna completamente nera */
     .galaxy-board {
       width: 100%;
       min-height: 400px;
@@ -94,10 +98,7 @@
       justify-content: center;
       position: relative;
       background-color: #000000;
-      background-image: 
-        linear-gradient(rgba(240, 232, 213, 0.18) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(240, 232, 213, 0.18) 1px, transparent 1px);
-      background-size: 20px 20px;
+      background-image: none;
       padding: 20px;
       text-align: center;
       box-shadow: 4px 4px 0px #F0E8D5;
@@ -117,9 +118,12 @@
       font-size: 0.95rem;
       line-height: 1.6;
       font-weight: 700;
-      opacity: 0.9;
-      border-top: 1px dashed rgba(240, 232, 213, 0.3);
-      padding-top: 20px;
+      color: #F0E8D5;
+      background: rgba(0, 0, 0, 0.85);
+      padding: 15px;
+      border-radius: 12px;
+      border: 1px solid #F0E8D5;
+      border-top: 1px solid #F0E8D5;
     }
 
     .space-intro a {
@@ -149,23 +153,23 @@
 
   <div class="site-wrapper">
 
-    <!-- Header con titolo e sfondo a quadretti neri/crema -->
+    <!-- Header -->
     <header class="top-banner">
       <h1>COSMIC CLUB</h1>
       <a href="https://seea-star.github.io/Cosmic-S-Home/" class="back-btn"><i class="fa-solid fa-chevron-left"></i> HOME</a>
     </header>
 
-    <!-- Main Content Box con sfondo nero -->
+    <!-- Main Container con sfondo a quadretti -->
     <div class="space-container">
 
-      <!-- Galaxy Board (Canvas con quadretti neri e dettagli crema) -->
+      <!-- Galaxy Board interna completamente nera -->
       <div class="galaxy-board">
         <div class="galaxy-empty-text">
           ✨ The space is quiet right now... Waiting for the first celestial bodies to arrive. ✨
         </div>
       </div>
 
-      <!-- Descrizione e istruzioni in fondo -->
+      <!-- Descrizione e istruzioni in fondo dentro il blocco esterno -->
       <div class="space-intro">
         Welcome to the Cosmic Club! This is an open cosmic canvas for everyone. Send me your custom pixel art, star, planet, UFO, rocket, or astronaut, and I will place it floating around here. 
         <br><br>
@@ -184,3 +188,4 @@
 
 </body>
 </html>
+
