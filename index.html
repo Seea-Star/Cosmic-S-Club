@@ -87,24 +87,38 @@
       gap: 20px;
     }
 
-    /* Galaxy Board interna completamente nera */
+    /* Galaxy Board interna completamente nera con supporto al trascinamento (Google Maps style) */
     .galaxy-board {
       width: 100%;
-      min-height: 400px;
+      height: 450px;
       border: 2px solid #F0E8D5;
       border-radius: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       position: relative;
       background-color: #000000;
-      background-image: none;
-      padding: 20px;
-      text-align: center;
+      overflow: hidden;
       box-shadow: 4px 4px 0px #F0E8D5;
+      cursor: grab;
+    }
+
+    .galaxy-board:active {
+      cursor: grabbing;
+    }
+
+    /* Area interna mobile che si sposta trascinando il mouse */
+    .galaxy-canvas-world {
+      position: absolute;
+      width: 2000px;
+      height: 2000px;
+      top: -750px;
+      left: -750px;
+      user-select: none;
     }
 
     .galaxy-empty-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       font-size: 0.9rem;
       font-weight: 700;
       color: #F0E8D5;
@@ -112,6 +126,57 @@
       padding: 10px 15px;
       border-radius: 8px;
       border: 1px solid #F0E8D5;
+      pointer-events: none;
+    }
+
+    /* Esempi di sticker posizionati nel mondo virtuale (simboli fittizi) */
+    .cosmic-sticker {
+      position: absolute;
+      font-size: 2rem;
+      filter: drop-shadow(2px 2px 0px #F0E8D5);
+      animation: float 4s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+      100% { transform: translateY(0px); }
+    }
+
+    /* Pulsante Fullscreen in basso a destra dentro il canvas */
+    .fullscreen-btn {
+      position: absolute;
+      bottom: 15px;
+      right: 15px;
+      background: #000000;
+      color: #F0E8D5;
+      border: 2px solid #F0E8D5;
+      border-radius: 10px;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1rem;
+      box-shadow: 2px 2px 0px #F0E8D5;
+      z-index: 10;
+      transition: transform 0.1s ease, background 0.1s ease;
+    }
+
+    .fullscreen-btn:hover {
+      background: #F0E8D5;
+      color: #000000;
+      transform: scale(1.05);
+    }
+
+    /* Quando il canvas va a schermo intero */
+    .galaxy-board:fullscreen {
+      width: 100vw;
+      height: 100vh;
+      border: none;
+      border-radius: 0;
+      box-shadow: none;
     }
 
     .space-intro {
@@ -123,7 +188,6 @@
       padding: 15px;
       border-radius: 12px;
       border: 1px solid #F0E8D5;
-      border-top: 1px solid #F0E8D5;
     }
 
     .space-intro a {
@@ -162,18 +226,35 @@
     <!-- Main Container con sfondo a quadretti -->
     <div class="space-container">
 
-      <!-- Galaxy Board interna completamente nera -->
-      <div class="galaxy-board">
-        <div class="galaxy-empty-text">
-          ✨ The space is quiet right now... Waiting for the first celestial bodies to arrive. ✨
+      <!-- Galaxy Board interna completamente nera con supporto drag & drop -->
+      <div class="galaxy-board" id="galaxyBoard">
+        
+        <!-- Mondo virtuale grande per il trascinamento tipo Google Maps -->
+        <div class="galaxy-canvas-world" id="galaxyWorld">
+          <div class="galaxy-empty-text" id="emptyText">
+            ✨ The space is quiet right now... Waiting for the first celestial bodies to arrive. ✨
+          </div>
+
+          <!-- Esempi di sticker dimostrativi (simboli) distribuiti nello spazio -->
+          <div class="cosmic-sticker" style="top: 900px; left: 950px; animation-delay: 0s;">🪐</div>
+          <div class="cosmic-sticker" style="top: 850px; left: 1100px; animation-delay: 1.2s;">🚀</div>
+          <div class="cosmic-sticker" style="top: 1020px; left: 880px; animation-delay: 2.5s;">🛸</div>
+          <div class="cosmic-sticker" style="top: 780px; left: 820px; animation-delay: 0.8s;">⭐</div>
+          <div class="cosmic-sticker" style="top: 980px; left: 1150px; animation-delay: 1.8s;">👨‍🚀</div>
         </div>
+
+        <!-- Tasto Fullscreen in basso a destra -->
+        <button class="fullscreen-btn" id="fullscreenBtn" title="Fullscreen">
+          <i class="fa-solid fa-expand" id="fullscreenIcon"></i>
+        </button>
+
       </div>
 
       <!-- Descrizione e istruzioni in fondo dentro il blocco esterno -->
       <div class="space-intro">
         Welcome to the Cosmic Club! This is an open cosmic canvas for everyone. Send me your custom pixel art, star, planet, UFO, rocket, or astronaut, and I will place it floating around here. 
         <br><br>
-        To join the galaxy, head over to the <a href="https://cosmic-seea.neocities.org/" target="_blank">Guestbook</a> and send your creation!
+        To join the galaxy, head over to the <a href="https://seea-star.github.io/Cosmic-S-Home/" target="_blank">Guestbook</a> and send your creation!
       </div>
 
     </div>
@@ -185,6 +266,76 @@
     </div>
 
   </div>
+
+  <script>
+    // Logica di trascinamento stile Google Maps (Pan & Drag)
+    const board = document.getElementById('galaxyBoard');
+    const world = document.getElementById('galaxyWorld');
+
+    let isDragging = false;
+    let startX, startY;
+    let currentX = -750;
+    let currentY = -750;
+
+    board.addEventListener('mousedown', (e) => {
+      isDragging = true;
+      startX = e.clientX - currentX;
+      startY = e.clientY - currentY;
+    });
+
+    window.addEventListener('mousemove', (e) => {
+      if (!isDragging) return;
+      currentX = e.clientX - startX;
+      currentY = e.clientY - startY;
+      world.style.transform = `translate(${currentX + 750}px, ${currentY + 750}px)`;
+    });
+
+    window.addEventListener('mouseup', () => {
+      isDragging = false;
+    });
+
+    // Supporto anche per il touchscreen su smartphone/tablet
+    board.addEventListener('touchstart', (e) => {
+      isDragging = true;
+      startX = e.touches[0].clientX - currentX;
+      startY = e.touches[0].clientY - currentY;
+    });
+
+    window.addEventListener('touchmove', (e) => {
+      if (!isDragging) return;
+      currentX = e.touches[0].clientX - startX;
+      currentY = e.touches[0].clientY - startY;
+      world.style.transform = `translate(${currentX + 750}px, ${currentY + 750}px)`;
+    });
+
+    window.addEventListener('touchend', () => {
+      isDragging = false;
+    });
+
+    // Logica Fullscreen
+    const fullscreenBtn = document.getElementById('fullscreenBtn');
+    const fullscreenIcon = document.getElementById('fullscreenIcon');
+
+    fullscreenBtn.addEventListener('click', () => {
+      if (!document.fullscreenElement) {
+        board.requestFullscreen().catch(err => {
+          alert(`Error attempting to enable fullscreen mode: ${err.message}`);
+        });
+      } else {
+        document.exitFullscreen();
+      }
+    });
+
+    document.addEventListener('fullscreenchange', () => {
+      if (document.fullscreenElement) {
+        fullscreenIcon.classList.remove('fa-expand');
+        fullscreenIcon.classList.add('fa-compress');
+      } else {
+        fullscreenIcon.classList.remove('fa-compress');
+        fullscreenIcon.classList.add('fa-expand');
+      }
+    });
+  </script>
 
 </body>
 </html>
