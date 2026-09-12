@@ -31,12 +31,12 @@
       gap: 16px;
     }
 
-    /* Top Banner con sfondo a quadretti bianchi/chiari */
+    /* Top Banner con sfondo nero e griglia color crema */
     .top-banner {
-      background-color: #F0E8D5;
+      background-color: #000000;
       background-image: 
-        linear-gradient(rgba(0, 0, 0, 0.12) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 0, 0, 0.12) 1px, transparent 1px);
+        linear-gradient(rgba(240, 232, 213, 0.18) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(240, 232, 213, 0.18) 1px, transparent 1px);
       background-size: 20px 20px;
       border: 2px solid #F0E8D5;
       border-radius: 20px;
@@ -44,26 +44,26 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      box-shadow: 4px 4px 0px rgba(240, 232, 213, 0.4);
+      box-shadow: 4px 4px 0px #F0E8D5;
     }
 
     .top-banner h1 { 
       font-size: 2rem; 
       font-weight: 800; 
       letter-spacing: 2px; 
-      color: #111111;
+      color: #F0E8D5;
     }
 
     .back-btn {
-      background: #000000;
-      color: #F0E8D5;
-      border: 2px solid #111111;
+      background: #F0E8D5;
+      color: #000000;
+      border: 2px solid #F0E8D5;
       padding: 8px 14px;
       border-radius: 12px;
       font-weight: 800;
       font-size: 0.75rem;
       text-decoration: none;
-      box-shadow: 2px 2px 0px #111111;
+      box-shadow: 2px 2px 0px #F0E8D5;
       transition: transform 0.1s ease;
     }
 
@@ -71,7 +71,7 @@
       transform: translateY(-1px);
     }
 
-    /* Main Content Area (Sfondo totalmente nero) */
+    /* Main Content Area */
     .space-container {
       background: #000000;
       border: 2px solid #F0E8D5;
@@ -83,7 +83,7 @@
       gap: 20px;
     }
 
-    /* Galaxy Board con sfondo a quadretti chiari */
+    /* Galaxy Board con sfondo nero e griglia color crema */
     .galaxy-board {
       width: 100%;
       min-height: 400px;
@@ -93,10 +93,10 @@
       align-items: center;
       justify-content: center;
       position: relative;
-      background-color: #F0E8D5;
+      background-color: #000000;
       background-image: 
-        linear-gradient(rgba(0, 0, 0, 0.12) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 0, 0, 0.12) 1px, transparent 1px);
+        linear-gradient(rgba(240, 232, 213, 0.18) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(240, 232, 213, 0.18) 1px, transparent 1px);
       background-size: 20px 20px;
       padding: 20px;
       text-align: center;
@@ -106,11 +106,11 @@
     .galaxy-empty-text {
       font-size: 0.9rem;
       font-weight: 700;
-      color: #111111;
-      background: rgba(240, 232, 213, 0.9);
+      color: #F0E8D5;
+      background: rgba(0, 0, 0, 0.85);
       padding: 10px 15px;
       border-radius: 8px;
-      border: 1px solid #111111;
+      border: 1px solid #F0E8D5;
     }
 
     .space-intro {
@@ -149,7 +149,7 @@
 
   <div class="site-wrapper">
 
-    <!-- Header con titolo e sfondo a quadretti bianchi -->
+    <!-- Header con titolo e sfondo a quadretti neri/crema -->
     <header class="top-banner">
       <h1>COSMIC CLUB</h1>
       <a href="https://seea-star.github.io/Cosmic-S-Home/" class="back-btn"><i class="fa-solid fa-chevron-left"></i> HOME</a>
@@ -158,14 +158,14 @@
     <!-- Main Content Box con sfondo nero -->
     <div class="space-container">
 
-      <!-- Galaxy Board (Canvas con quadretti bianchi) posizionato subito sotto -->
+      <!-- Galaxy Board (Canvas con quadretti neri e dettagli crema) -->
       <div class="galaxy-board">
         <div class="galaxy-empty-text">
           ✨ The space is quiet right now... Waiting for the first celestial bodies to arrive. ✨
         </div>
       </div>
 
-      <!-- Descrizione e istruzioni messe in fondo -->
+      <!-- Descrizione e istruzioni in fondo -->
       <div class="space-intro">
         Welcome to the Cosmic Club! This is an open cosmic canvas for everyone. Send me your custom pixel art, star, planet, UFO, rocket, or astronaut, and I will place it floating around here. 
         <br><br>
@@ -184,4 +184,3 @@
 
 </body>
 </html>
-
