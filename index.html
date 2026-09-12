@@ -101,11 +101,11 @@
       cursor: grabbing;
     }
 
-    /* Mondo spaziale centrato, con limiti di movimento per non perdersi */
+    /* Mappa dimensionata in modo che a zoom minimo (0.5x) si veda l'intera mappa con tutti gli elementi */
     .galaxy-canvas-world {
       position: absolute;
-      width: 1600px;
-      height: 1200px;
+      width: 1000px;
+      height: 700px;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
@@ -115,8 +115,8 @@
       background-image: 
         radial-gradient(white 1.2px, transparent 1.2px),
         radial-gradient(white 0.8px, transparent 0.8px);
-      background-size: 220px 220px, 320px 320px;
-      background-position: 0 0, 110px 160px;
+      background-size: 180px 180px, 280px 280px;
+      background-position: 0 0, 90px 140px;
     }
 
     .cosmic-sticker-link {
@@ -244,22 +244,22 @@
 
     <div class="space-container">
 
-      <!-- Unico rettangolo nero dello spazio con limiti di trascinamento -->
+      <!-- Unico rettangolo nero dello spazio -->
       <div class="galaxy-board" id="galaxyBoard">
         
         <div class="galaxy-canvas-world" id="galaxyWorld">
-          <!-- Simboli distribuiti all'interno dell'area circoscritta -->
-          <a href="https://example.com" target="_blank" class="cosmic-sticker-link anim-float" style="top: 550px; left: 750px; animation-delay: 0s;" title="Planet 1">🪐</a>
-          <a href="https://example.com" target="_blank" class="cosmic-sticker-link anim-drift" style="top: 350px; left: 1100px; animation-delay: 1.2s;" title="Rocket 1">🚀</a>
-          <a href="https://example.com" target="_blank" class="cosmic-sticker-link anim-pulse" style="top: 850px; left: 600px; animation-delay: 2.5s;" title="UFO 1">🛸</a>
-          <a href="https://example.com" target="_blank" class="cosmic-sticker-link anim-float" style="top: 250px; left: 500px; animation-delay: 0.8s;" title="Star 1">⭐</a>
-          <a href="https://example.com" target="_blank" class="cosmic-sticker-link anim-drift" style="top: 750px; left: 1200px; animation-delay: 1.8s;" title="Astronaut 1">👨‍🚀</a>
+          <!-- Simboli distribuiti all'interno dell'intera mappa visibile a zoom ridotto -->
+          <a href="https://example.com" target="_blank" class="cosmic-sticker-link anim-float" style="top: 320px; left: 480px; animation-delay: 0s;" title="Planet 1">🪐</a>
+          <a href="https://example.com" target="_blank" class="cosmic-sticker-link anim-drift" style="top: 150px; left: 750px; animation-delay: 1.2s;" title="Rocket 1">🚀</a>
+          <a href="https://example.com" target="_blank" class="cosmic-sticker-link anim-pulse" style="top: 500px; left: 300px; animation-delay: 2.5s;" title="UFO 1">🛸</a>
+          <a href="https://example.com" target="_blank" class="cosmic-sticker-link anim-float" style="top: 100px; left: 200px; animation-delay: 0.8s;" title="Star 1">⭐</a>
+          <a href="https://example.com" target="_blank" class="cosmic-sticker-link anim-drift" style="top: 450px; left: 800px; animation-delay: 1.8s;" title="Astronaut 1">👨‍🚀</a>
           
-          <a href="https://example.com" target="_blank" class="cosmic-sticker-link anim-pulse" style="top: 150px; left: 900px; animation-delay: 0.5s;" title="Alien">👽</a>
-          <a href="https://example.com" target="_blank" class="cosmic-sticker-link anim-float" style="top: 700px; left: 400px; animation-delay: 1.5s;" title="Saturn">🪐</a>
-          <a href="https://example.com" target="_blank" class="cosmic-sticker-link anim-drift" style="top: 950px; left: 900px; animation-delay: 2.1s;" title="Rocket 2">🚀</a>
-          <a href="https://example.com" target="_blank" class="cosmic-sticker-link anim-float" style="top: 450px; left: 300px; animation-delay: 1.0s;" title="Star 2">🌟</a>
-          <a href="https://example.com" target="_blank" class="cosmic-sticker-link anim-pulse" style="top: 550px; left: 1350px; animation-delay: 0.3s;" title="Comet">☄️</a>
+          <a href="https://example.com" target="_blank" class="cosmic-sticker-link anim-pulse" style="top: 80px; left: 550px; animation-delay: 0.5s;" title="Alien">👽</a>
+          <a href="https://example.com" target="_blank" class="cosmic-sticker-link anim-float" style="top: 400px; left: 150px; animation-delay: 1.5s;" title="Saturn">🪐</a>
+          <a href="https://example.com" target="_blank" class="cosmic-sticker-link anim-drift" style="top: 580px; left: 600px; animation-delay: 2.1s;" title="Rocket 2">🚀</a>
+          <a href="https://example.com" target="_blank" class="cosmic-sticker-link anim-float" style="top: 250px; left: 100px; animation-delay: 1.0s;" title="Star 2">🌟</a>
+          <a href="https://example.com" target="_blank" class="cosmic-sticker-link anim-pulse" style="top: 300px; left: 880px; animation-delay: 0.3s;" title="Comet">☄️</a>
         </div>
 
         <div class="galaxy-controls">
@@ -299,23 +299,25 @@
     let startX, startY;
     let currentX = 0;
     let currentY = 0;
-    let scale = 1;
+    let scale = 0.65; // Parte con una visuale d'insieme in cui vedi tutta la mappa
 
-    // Limiti di movimento per impedire di perdersi nello spazio infinito
     function clamp(val, min, max) {
       return Math.max(min, Math.min(max, val));
     }
 
     function updateWorldTransform() {
-      // Calcola i limiti in base allo zoom per bloccare il trascinamento ai bordi dell'area
-      const maxDragX = 350 * scale;
-      const maxDragY = 300 * scale;
+      // Calcola i limiti di trascinamento proporzionali allo zoom corrente
+      const maxDragX = Math.max(0, (500 * scale - 200));
+      const maxDragY = Math.max(0, (350 * scale - 150));
 
       currentX = clamp(currentX, -maxDragX, maxDragX);
       currentY = clamp(currentY, -maxDragY, maxDragY);
 
       world.style.transform = `translate(calc(-50% + ${currentX}px), calc(-50% + ${currentY}px)) scale(${scale})`;
     }
+
+    // Applica subito la trasformazione iniziale
+    updateWorldTransform();
 
     board.addEventListener('mousedown', (e) => {
       if (e.target.closest('.galaxy-controls')) return;
@@ -358,14 +360,14 @@
 
     zoomInBtn.addEventListener('click', () => {
       if (scale < 2.0) {
-        scale += 0.2;
+        scale += 0.25;
         updateWorldTransform();
       }
     });
 
     zoomOutBtn.addEventListener('click', () => {
-      if (scale > 0.8) {
-        scale -= 0.2;
+      if (scale > 0.5) {
+        scale -= 0.25;
         updateWorldTransform();
       }
     });
@@ -374,7 +376,7 @@
       e.preventDefault();
       if (e.deltaY < 0 && scale < 2.0) {
         scale += 0.1;
-      } else if (e.deltaY > 0 && scale > 0.8) {
+      } else if (e.deltaY > 0 && scale > 0.5) {
         scale -= 0.1;
       }
       updateWorldTransform();
@@ -406,3 +408,4 @@
 
 </body>
 </html>
+
