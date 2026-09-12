@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>COSMIC-S - Deep Space</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: #000000;
+      background-image: 
+        linear-gradient(rgba(240, 232, 213, 0.18) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(240, 232, 213, 0.18) 1px, transparent 1px);
+      background-size: 20px 20px;
+      color: #F0E8D5;
+      font-family: 'Quicksand', sans-serif;
+      padding: 30px 10px;
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    .site-wrapper {
+      max-width: 900px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .top-banner {
+      background: #000000;
+      border: 2px solid #F0E8D5;
+      border-radius: 20px;
+      padding: 12px 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 4px 4px 0px #F0E8D5;
+    }
+
+    .top-banner h1 { 
+      font-size: 2rem; 
+      font-weight: 800; 
+      letter-spacing: 2px; 
+      color: #F0E8D5;
+    }
+
+    .back-btn {
+      background: #F0E8D5;
+      color: #111111;
+      border: 2px solid #F0E8D5;
+      padding: 8px 14px;
+      border-radius: 12px;
+      font-weight: 800;
+      font-size: 0.75rem;
+      text-decoration: none;
+      box-shadow: 2px 2px 0px #F0E8D5;
+      transition: transform 0.1s ease;
+    }
+
+    .back-btn:hover {
+      transform: translateY(-1px);
+    }
+
+    /* Main Content Area */
+    .space-container {
+      background: #000000;
+      border: 2px solid #F0E8D5;
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 6px 6px 0px #F0E8D5;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .space-intro {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      font-weight: 700;
+      opacity: 0.9;
+    }
+
+    .space-intro a {
+      color: #F0E8D5;
+      font-weight: bold;
+      text-decoration: underline;
+    }
+
+    /* Cosmic Orbit / Empty Space Area */
+    .galaxy-board {
+      width: 100%;
+      min-height: 400px;
+      border: 2px dashed rgba(240, 232, 213, 0.4);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 20px;
+      text-align: center;
+    }
+
+    .galaxy-empty-text {
+      font-size: 0.9rem;
+      font-weight: 700;
+      opacity: 0.6;
+    }
+
+    /* Footer Credits Inside Page */
+    .space-footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 13px;
+      opacity: 0.8;
+      border-top: 1px dashed rgba(240, 232, 213, 0.3);
+      margin-top: 10px;
+    }
+
+    .space-footer a {
+      color: #F0E8D5;
+      text-decoration: underline;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="site-wrapper">
+
+    <header class="top-banner">
+      <h1>DEEP SPACE</h1>
+      <a href="https://seea-star.github.io/Cosmic-S-Home/" class="back-btn"><i class="fa-solid fa-chevron-left"></i> HOME</a>
+    </header>
+
+    <div class="space-container">
+      <div class="space-intro">
+        Welcome to the Deep Space! This is an open cosmic canvas for everyone. Send me your custom pixel art, star, planet, UFO, rocket, or astronaut, and I will place it floating around here. 
+        <br><br>
+        To join the galaxy, head over to the <a href="https://cosmic-seea.neocities.org/" target="_blank">Guestbook</a> and send your creation!
+      </div>
+
+      <div class="galaxy-board">
+        <div class="galaxy-empty-text">
+          ✨ The space is quiet right now... Waiting for the first celestial bodies to arrive. ✨
+        </div>
+      </div>
+    </div>
+
+    <div class="space-footer">
+      Created by Cosmic-S<br>
+      <a href="https://cosmic-seea.neocities.org/" target="_blank">https://cosmic-seea.neocities.org/</a>
+    </div>
+
+  </div>
+
+</body>
+</html>
