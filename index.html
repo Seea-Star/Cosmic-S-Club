@@ -95,25 +95,34 @@
       text-decoration: underline;
     }
 
-    /* Cosmic Orbit / Empty Space Area */
+    /* Galaxy Board con sfondo a quadretti diretto */
     .galaxy-board {
       width: 100%;
       min-height: 400px;
-      border: 2px dashed rgba(240, 232, 213, 0.4);
+      border: 2px solid #F0E8D5;
       border-radius: 16px;
       display: flex;
       align-items: center;
       justify-content: center;
       position: relative;
-      background-color: rgba(0, 0, 0, 0.5);
+      background-color: #000000;
+      background-image: 
+        linear-gradient(rgba(240, 232, 213, 0.18) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(240, 232, 213, 0.18) 1px, transparent 1px);
+      background-size: 20px 20px;
       padding: 20px;
       text-align: center;
+      box-shadow: 4px 4px 0px #F0E8D5;
     }
 
     .galaxy-empty-text {
       font-size: 0.9rem;
       font-weight: 700;
-      opacity: 0.6;
+      opacity: 0.7;
+      text-shadow: 1px 1px 2px #000;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 10px 15px;
+      border-radius: 8px;
     }
 
     /* Footer Credits Inside Page */
@@ -137,11 +146,13 @@
 
   <div class="site-wrapper">
 
+    <!-- Header with Home button -->
     <header class="top-banner">
       <h1>DEEP SPACE</h1>
       <a href="https://seea-star.github.io/Cosmic-S-Home/" class="back-btn"><i class="fa-solid fa-chevron-left"></i> HOME</a>
     </header>
 
+    <!-- Main Content Box -->
     <div class="space-container">
       <div class="space-intro">
         Welcome to the Deep Space! This is an open cosmic canvas for everyone. Send me your custom pixel art, star, planet, UFO, rocket, or astronaut, and I will place it floating around here. 
@@ -149,6 +160,7 @@
         To join the galaxy, head over to the <a href="https://cosmic-seea.neocities.org/" target="_blank">Guestbook</a> and send your creation!
       </div>
 
+      <!-- Galaxy Board con sfondo a quadretti -->
       <div class="galaxy-board">
         <div class="galaxy-empty-text">
           ✨ The space is quiet right now... Waiting for the first celestial bodies to arrive. ✨
@@ -156,6 +168,7 @@
       </div>
     </div>
 
+    <!-- Footer -->
     <div class="space-footer">
       Created by Cosmic-S<br>
       <a href="https://cosmic-seea.neocities.org/" target="_blank">https://cosmic-seea.neocities.org/</a>
