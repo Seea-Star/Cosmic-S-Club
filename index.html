@@ -101,7 +101,6 @@
       cursor: grabbing;
     }
 
-    /* Il mondo (canvas) contiene sia lo sfondo stellato che le emoji: si muovono e zoomano insieme perfettamente */
     .galaxy-canvas-world {
       position: absolute;
       width: 1400px;
@@ -160,6 +159,45 @@
       0% { transform: scale(1); }
       50% { transform: scale(1.15); }
       100% { transform: scale(1); }
+    }
+
+    /* Stile del Mini Radar in basso a sinistra */
+    .galaxy-radar {
+      position: absolute;
+      bottom: 15px;
+      left: 15px;
+      width: 90px;
+      height: 90px;
+      background: rgba(0, 0, 0, 0.85);
+      border: 2px solid #F0E8D5;
+      border-radius: 12px;
+      box-shadow: 2px 2px 0px #F0E8D5;
+      z-index: 20;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .radar-grid {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        linear-gradient(rgba(240, 232, 213, 0.15) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(240, 232, 213, 0.15) 1px, transparent 1px);
+      background-size: 15px 15px;
+    }
+
+    .radar-blip {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background-color: #F0E8D5;
+      border-radius: 50%;
+      box-shadow: 0 0 4px #F0E8D5;
+      transform: translate(-50%, -50%);
+      transition: all 0.05s linear;
     }
 
     .galaxy-controls {
@@ -262,6 +300,12 @@
           <a href="https://example.com" target="_blank" class="cosmic-sticker-link anim-pulse" style="top: 480px; left: 1250px; animation-delay: 0.3s;" title="Comet">☄️</a>
         </div>
 
+        <!-- Mini Radar in basso a sinistra -->
+        <div class="galaxy-radar" id="galaxyRadar">
+          <div class="radar-grid"></div>
+          <div class="radar-blip" id="radarBlip"></div>
+        </div>
+
         <div class="galaxy-controls">
           <button class="control-btn" id="zoomOutBtn" title="Zoom Out (-)">
             <i class="fa-solid fa-minus"></i>
@@ -294,12 +338,13 @@
   <script>
     const board = document.getElementById('galaxyBoard');
     const world = document.getElementById('galaxyWorld');
+    const radarBlip = document.getElementById('radarBlip');
 
     let isDragging = false;
     let startX, startY;
     let currentX = 0;
     let currentY = 0;
-    let scale = 0.55; // Visuale d'insieme bilanciata
+    let scale = 0.55;
 
     function clamp(val, min, max) {
       return Math.max(min, Math.min(max, val));
@@ -313,12 +358,21 @@
       currentY = clamp(currentY, -maxDragY, maxDragY);
 
       world.style.transform = `translate(calc(-50% + ${currentX}px), calc(-50% + ${currentY}px)) scale(${scale})`;
+
+      // Aggiorna la posizione del puntino nel mini radar in base al movimento e allo zoom
+      const radarRangeX = 35; // Raggio di movimento in pixel dentro il radar
+      const radarRangeY = 35;
+      const blipX = 45 - (currentX / maxDragX || 0) * radarRangeX;
+      const blipY = 45 - (currentY / maxDragY || 0) * radarRangeY;
+      
+      radarBlip.style.left = `${blipX}px`;
+      radarBlip.style.top = `${blipY}px`;
     }
 
     updateWorldTransform();
 
     board.addEventListener('mousedown', (e) => {
-      if (e.target.closest('.galaxy-controls')) return;
+      if (e.target.closest('.galaxy-controls') || e.target.closest('.galaxy-radar')) return;
       isDragging = true;
       startX = e.clientX - currentX;
       startY = e.clientY - currentY;
@@ -336,7 +390,7 @@
     });
 
     board.addEventListener('touchstart', (e) => {
-      if (e.target.closest('.galaxy-controls')) return;
+      if (e.target.closest('.galaxy-controls') || e.target.closest('.galaxy-radar')) return;
       isDragging = true;
       startX = e.touches[0].clientX - currentX;
       startY = e.touches[0].clientY - currentY;
@@ -406,4 +460,3 @@
 
 </body>
 </html>
-
