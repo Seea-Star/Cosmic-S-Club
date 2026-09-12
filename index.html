@@ -101,15 +101,16 @@
       cursor: grabbing;
     }
 
-    /* Unico mondo spaziale esteso (non infinito) con stelline bianche ben distribuite ovunque */
+    /* Mondo spaziale centrato con zoom fluido e stelline diffuse */
     .galaxy-canvas-world {
       position: absolute;
       width: 3000px;
       height: 3000px;
-      top: -1000px;
-      left: -1000px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      transform-origin: center center;
       user-select: none;
-      transform-origin: 0 0;
       background-color: #000000;
       background-image: 
         radial-gradient(white 1.2px, transparent 1.2px),
@@ -118,7 +119,6 @@
       background-position: 0 0, 150px 225px;
     }
 
-    /* Simboli con effetto hover, link e varie animazioni delicate */
     .cosmic-sticker-link {
       position: absolute;
       display: inline-block;
@@ -249,17 +249,17 @@
         
         <div class="galaxy-canvas-world" id="galaxyWorld">
           <!-- Simboli distribuiti con varie animazioni, link e effetto hover -->
-          <a href="https://example.com" target="_blank" class="cosmic-sticker-link anim-float" style="top: 1300px; left: 1400px; animation-delay: 0s;" title="Planet 1">🪐</a>
-          <a href="https://example.com" target="_blank" class="cosmic-sticker-link anim-drift" style="top: 1100px; left: 1800px; animation-delay: 1.2s;" title="Rocket 1">🚀</a>
-          <a href="https://example.com" target="_blank" class="cosmic-sticker-link anim-pulse" style="top: 1600px; left: 1500px; animation-delay: 2.5s;" title="UFO 1">🛸</a>
-          <a href="https://example.com" target="_blank" class="cosmic-sticker-link anim-float" style="top: 950px; left: 1200px; animation-delay: 0.8s;" title="Star 1">⭐</a>
-          <a href="https://example.com" target="_blank" class="cosmic-sticker-link anim-drift" style="top: 1700px; left: 1900px; animation-delay: 1.8s;" title="Astronaut 1">👨‍🚀</a>
+          <a href="https://example.com" target="_blank" class="cosmic-sticker-link anim-float" style="top: 1550px; left: 1550px; animation-delay: 0s;" title="Planet 1">🪐</a>
+          <a href="https://example.com" target="_blank" class="cosmic-sticker-link anim-drift" style="top: 1350px; left: 1800px; animation-delay: 1.2s;" title="Rocket 1">🚀</a>
+          <a href="https://example.com" target="_blank" class="cosmic-sticker-link anim-pulse" style="top: 1750px; left: 1400px; animation-delay: 2.5s;" title="UFO 1">🛸</a>
+          <a href="https://example.com" target="_blank" class="cosmic-sticker-link anim-float" style="top: 1250px; left: 1300px; animation-delay: 0.8s;" title="Star 1">⭐</a>
+          <a href="https://example.com" target="_blank" class="cosmic-sticker-link anim-drift" style="top: 1650px; left: 1850px; animation-delay: 1.8s;" title="Astronaut 1">👨‍🚀</a>
           
-          <a href="https://example.com" target="_blank" class="cosmic-sticker-link anim-pulse" style="top: 800px; left: 1600px; animation-delay: 0.5s;" title="Alien">👽</a>
-          <a href="https://example.com" target="_blank" class="cosmic-sticker-link anim-float" style="top: 1400px; left: 1000px; animation-delay: 1.5s;" title="Saturn">🪐</a>
-          <a href="https://example.com" target="_blank" class="cosmic-sticker-link anim-drift" style="top: 1900px; left: 1300px; animation-delay: 2.1s;" title="Rocket 2">🚀</a>
-          <a href="https://example.com" target="_blank" class="cosmic-sticker-link anim-float" style="top: 1150px; left: 900px; animation-delay: 1.0s;" title="Star 2">🌟</a>
-          <a href="https://example.com" target="_blank" class="cosmic-sticker-link anim-pulse" style="top: 1500px; left: 2100px; animation-delay: 0.3s;" title="Comet">☄️</a>
+          <a href="https://example.com" target="_blank" class="cosmic-sticker-link anim-pulse" style="top: 1100px; left: 1600px; animation-delay: 0.5s;" title="Alien">👽</a>
+          <a href="https://example.com" target="_blank" class="cosmic-sticker-link anim-float" style="top: 1600px; left: 1200px; animation-delay: 1.5s;" title="Saturn">🪐</a>
+          <a href="https://example.com" target="_blank" class="cosmic-sticker-link anim-drift" style="top: 1850px; left: 1500px; animation-delay: 2.1s;" title="Rocket 2">🚀</a>
+          <a href="https://example.com" target="_blank" class="cosmic-sticker-link anim-float" style="top: 1400px; left: 1100px; animation-delay: 1.0s;" title="Star 2">🌟</a>
+          <a href="https://example.com" target="_blank" class="cosmic-sticker-link anim-pulse" style="top: 1500px; left: 1950px; animation-delay: 0.3s;" title="Comet">☄️</a>
         </div>
 
         <div class="galaxy-controls">
@@ -297,12 +297,12 @@
 
     let isDragging = false;
     let startX, startY;
-    let currentX = -1000;
-    let currentY = -1000;
+    let currentX = 0;
+    let currentY = 0;
     let scale = 1;
 
     function updateWorldTransform() {
-      world.style.transform = `translate(${currentX}px, ${currentY}px) scale(${scale})`;
+      world.style.transform = `translate(calc(-50% + ${currentX}px), calc(-50% + ${currentY}px)) scale(${scale})`;
     }
 
     board.addEventListener('mousedown', (e) => {
