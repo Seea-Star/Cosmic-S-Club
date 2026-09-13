@@ -146,7 +146,6 @@
       filter: drop-shadow(0px 0px 10px #F0E8D5);
     }
 
-    /* Comete ed effetti di movimento extra sullo sfondo */
     .shooting-comet-1 {
       position: absolute;
       font-size: 1.6rem;
@@ -203,7 +202,6 @@
       100% { transform: scale(1); }
     }
 
-    /* Mini Radar in basso a sinistra */
     .galaxy-radar {
       position: absolute;
       bottom: 15px;
@@ -337,11 +335,9 @@
       <div class="galaxy-board" id="galaxyBoard">
         
         <div class="galaxy-canvas-world" id="galaxyWorld">
-          <!-- Effetti spaziali in movimento continuo -->
           <div class="shooting-comet-1">☄️</div>
           <div class="shooting-comet-2">🛸</div>
 
-          <!-- Pianeti con link reali funzionanti e titoli -->
           <a href="https://www.wikipedia.org" target="_blank" class="cosmic-sticker-link anim-float" style="top: 450px; left: 700px; animation-delay: 0s;" title="Wikipedia Planet">🪐</a>
           <a href="https://neocities.org" target="_blank" class="cosmic-sticker-link anim-drift" style="top: 250px; left: 1050px; animation-delay: 1.2s;" title="Neocities Rocket">🚀</a>
           <a href="https://archive.org" target="_blank" class="cosmic-sticker-link anim-pulse" style="top: 750px; left: 400px; animation-delay: 2.5s;" title="Archive UFO">🛸</a>
@@ -355,13 +351,11 @@
           <a href="https://it.wikipedia.org" target="_blank" class="cosmic-sticker-link anim-pulse" style="top: 480px; left: 1250px; animation-delay: 0.3s;" title="Comet Star">☄️</a>
         </div>
 
-        <!-- Mini Radar in basso a sinistra -->
         <div class="galaxy-radar" id="galaxyRadar">
           <div class="radar-grid"></div>
           <div class="radar-blip" id="radarBlip"></div>
         </div>
 
-        <!-- Controlli in basso a destra -->
         <div class="galaxy-controls">
           <button class="control-btn" id="randomBtn" title="Inquadra un pianeta casuale (Random)">
             <i class="fa-solid fa-dice"></i>
@@ -395,6 +389,63 @@
   </div>
 
   <script>
+    // Sintetizzatore audio retrò (Web Audio API)
+    let audioCtx = null;
+
+    function initAudio() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+    }
+
+    function playBeep(freq = 440, type = 'sine', duration = 0.08) {
+      try {
+        initAudio();
+        if (audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = type;
+        osc.frequency.value = freq;
+        
+        gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+      } catch (e) {
+        // Ignora se l'audio non è permesso dal browser prima di un'interazione
+      }
+    }
+
+    function playWarpSound() {
+      try {
+        initAudio();
+        if (audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'triangle';
+        
+        osc.frequency.setValueAtTime(150, audioCtx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(800, audioCtx.currentTime + 0.3);
+
+        gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.3);
+
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.3);
+      } catch (e) {}
+    }
+
     const board = document.getElementById('galaxyBoard');
     const world = document.getElementById('galaxyWorld');
     const radarBlip = document.getElementById('radarBlip');
@@ -408,6 +459,13 @@
 
     const links = world.querySelectorAll('.cosmic-sticker-link');
     galaxyCounter.textContent = `🌟 Pianeti attivi nella galassia: ${links.length}`;
+
+    // Aggiunge il suono quando si clicca sui pianeti per aprire il sito
+    links.forEach(link => {
+      link.addEventListener('click', () => {
+        playWarpSound();
+      });
+    });
 
     function clamp(val, min, max) {
       return Math.max(min, Math.min(max, val));
@@ -477,6 +535,7 @@
     const zoomOutBtn = document.getElementById('zoomOutBtn');
 
     zoomInBtn.addEventListener('click', () => {
+      playBeep(600, 'sine', 0.06);
       if (scale < 2.0) {
         scale += 0.25;
         updateWorldTransform(false);
@@ -484,6 +543,7 @@
     });
 
     zoomOutBtn.addEventListener('click', () => {
+      playBeep(300, 'sine', 0.06);
       if (scale > 0.4) {
         scale -= 0.25;
         updateWorldTransform(false);
@@ -502,6 +562,7 @@
 
     const randomBtn = document.getElementById('randomBtn');
     randomBtn.addEventListener('click', () => {
+      playBeep(800, 'square', 0.1);
       if (links.length > 0) {
         const randomIndex = Math.floor(Math.random() * links.length);
         const targetLink = links[randomIndex];
@@ -521,6 +582,7 @@
     const fullscreenIcon = document.getElementById('fullscreenIcon');
 
     fullscreenBtn.addEventListener('click', () => {
+      playBeep(500, 'sine', 0.08);
       if (!document.fullscreenElement) {
         board.requestFullscreen().catch(err => {
           alert(`Error attempting to enable fullscreen mode: ${err.message}`);
@@ -543,3 +605,4 @@
 
 </body>
 </html>
+
