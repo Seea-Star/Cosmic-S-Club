@@ -53,19 +53,6 @@
       color: #F0E8D5;
     }
 
-    .back-btn {
-      background: #F0E8D5;
-      color: #000000;
-      border: 2px solid #F0E8D5;
-      padding: 8px 14px;
-      border-radius: 12px;
-      font-weight: 800;
-      font-size: 0.75rem;
-      text-decoration: none;
-      box-shadow: 2px 2px 0px #F0E8D5;
-      transition: transform 0.1s ease;
-    }
-
     .back-btn:active, .control-btn:active, .command-visit-btn:active, .reset-galaxy-btn:active, .search-bar input:focus {
       transform: translate(2px, 2px) !important;
       box-shadow: 0px 0px 0px #F0E8D5 !important;
@@ -330,7 +317,6 @@
       transform: scale(1.05);
     }
 
-    /* Schermata Computer di Bordo / Monitor Tecnico */
     .command-screen {
       position: absolute;
       top: 15px; left: 15px; right: 15px; bottom: 15px;
@@ -389,7 +375,6 @@
       color: #000000;
     }
 
-    /* Corpo del terminale: layout diviso in griglia dati */
     .command-body {
       display: grid;
       grid-template-columns: 100px 1fr;
@@ -398,7 +383,6 @@
       padding: 12px 0;
     }
 
-    /* Visore piccolo in basso a sinistra nel computer */
     .command-viewer {
       width: 100px;
       height: 100px;
@@ -428,13 +412,12 @@
       100% { top: 100%; }
     }
 
-    /* Pannello Dati Tecnici del Computer */
     .command-tech-data {
       display: flex;
       flex-direction: column;
       gap: 6px;
       font-size: 0.8rem;
-      font-family: monospace; /* Effetto terminale digitale */
+      font-family: monospace;
       background: rgba(240, 232, 213, 0.05);
       border: 1px dashed rgba(240, 232, 213, 0.3);
       padding: 10px;
@@ -459,7 +442,6 @@
       letter-spacing: 0.5px;
     }
 
-    /* Box Descrizione Separato */
     .command-desc-box {
       grid-column: span 2;
       display: flex;
@@ -506,7 +488,6 @@
       transition: transform 0.1s ease;
     }
 
-    /* Adattamento per dispositivi mobili */
     @media (max-width: 600px) {
       .command-body {
         grid-template-columns: 1fr;
@@ -579,7 +560,6 @@
 
     <header class="top-banner">
       <h1>COSMIC CLUB</h1>
-      <a href="https://seea-star.github.io/Cosmic-S-Home/" class="back-btn"><i class="fa-solid fa-chevron-left"></i> HOME</a>
     </header>
 
     <div class="space-container">
@@ -612,7 +592,6 @@
           <a href="https://it.wikipedia.org" data-name="Comet Star" data-desc="Esplora le meraviglie della conoscenza in italiano." data-type="Cometa Errante" data-sector="Theta-3" data-speed="77.6 LY/s" class="cosmic-sticker-link anim-pulse" style="top: 480px; left: 1250px; animation-delay: 0.3s;">☄️</a>
         </div>
 
-        <!-- Schermata Computer di Bordo / Monitor Tecnico -->
         <div class="command-screen" id="commandScreen">
           <div class="command-header">
             <div class="command-title" id="commandTitle">TITOLO SEGNALE</div>
@@ -622,10 +601,8 @@
           </div>
 
           <div class="command-body">
-            <!-- Visore a sinistra -->
             <div class="command-viewer" id="commandViewer">🪐</div>
 
-            <!-- Pannello con dati tecnici del computer -->
             <div class="command-tech-data">
               <div class="tech-row">
                 <span class="tech-label">CLASSIFICAZIONE:</span>
@@ -645,7 +622,6 @@
               </div>
             </div>
 
-            <!-- Box della descrizione sotto -->
             <div class="command-desc-box">
               <span class="command-subtitle">Rilevamento / Note di bordo</span>
               <div class="command-desc" id="commandDesc">Descrizione del sito di questa persona.</div>
@@ -817,7 +793,6 @@
         commandTitle.textContent = link.getAttribute('data-name');
         commandDesc.textContent = link.getAttribute('data-desc');
         
-        // Assegna i dati tecnici aggiuntivi nel computer di bordo
         techType.textContent = link.getAttribute('data-type') || 'Oggetto Sconosciuto';
         techSector.textContent = link.getAttribute('data-sector') || 'Settore-X';
         techSpeed.textContent = link.getAttribute('data-speed') || '10.0 LY/s';
