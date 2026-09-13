@@ -117,7 +117,7 @@
         radial-gradient(rgba(255,255,255,0.6) 1px, transparent 1px);
       background-size: 130px 130px, 190px 190px, 85px 85px;
       background-position: 0 0, 65px 95px, 40px 40px;
-      transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); /* Transizione fluida quando si cerca un pianeta random */
+      transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
     }
 
     .cosmic-sticker-link {
@@ -286,18 +286,18 @@
       <div class="galaxy-board" id="galaxyBoard">
         
         <div class="galaxy-canvas-world" id="galaxyWorld">
-          <!-- Simboli distribuiti su tutta la mappa (sostituisci i link con quelli reali dei membri!) -->
-          <a href="https://example.com/1" target="_blank" class="cosmic-sticker-link anim-float" style="top: 450px; left: 700px; animation-delay: 0s;" title="Planet 1">🪐</a>
-          <a href="https://example.com/2" target="_blank" class="cosmic-sticker-link anim-drift" style="top: 250px; left: 1050px; animation-delay: 1.2s;" title="Rocket 1">🚀</a>
-          <a href="https://example.com/3" target="_blank" class="cosmic-sticker-link anim-pulse" style="top: 750px; left: 400px; animation-delay: 2.5s;" title="UFO 1">🛸</a>
-          <a href="https://example.com/4" target="_blank" class="cosmic-sticker-link anim-float" style="top: 180px; left: 350px; animation-delay: 0.8s;" title="Star 1">⭐</a>
-          <a href="https://example.com/5" target="_blank" class="cosmic-sticker-link anim-drift" style="top: 680px; left: 1150px; animation-delay: 1.8s;" title="Astronaut 1">👨‍🚀</a>
+          <!-- Pianeti con link reali funzionanti -->
+          <a href="https://www.wikipedia.org" target="_blank" class="cosmic-sticker-link anim-float" style="top: 450px; left: 700px; animation-delay: 0s;" title="Wikipedia Planet">🪐</a>
+          <a href="https://neocities.org" target="_blank" class="cosmic-sticker-link anim-drift" style="top: 250px; left: 1050px; animation-delay: 1.2s;" title="Neocities Rocket">🚀</a>
+          <a href="https://archive.org" target="_blank" class="cosmic-sticker-link anim-pulse" style="top: 750px; left: 400px; animation-delay: 2.5s;" title="Archive UFO">🛸</a>
+          <a href="https://github.com" target="_blank" class="cosmic-sticker-link anim-float" style="top: 180px; left: 350px; animation-delay: 0.8s;" title="GitHub Star">⭐</a>
+          <a href="https://developer.mozilla.org" target="_blank" class="cosmic-sticker-link anim-drift" style="top: 680px; left: 1150px; animation-delay: 1.8s;" title="MDN Astronaut">👨‍🚀</a>
           
-          <a href="https://example.com/6" target="_blank" class="cosmic-sticker-link anim-pulse" style="top: 120px; left: 800px; animation-delay: 0.5s;" title="Alien">👽</a>
-          <a href="https://example.com/7" target="_blank" class="cosmic-sticker-link anim-float" style="top: 580px; left: 250px; animation-delay: 1.5s;" title="Saturn">🪐</a>
-          <a href="https://example.com/8" target="_blank" class="cosmic-sticker-link anim-drift" style="top: 850px; left: 850px; animation-delay: 2.1s;" title="Rocket 2">🚀</a>
-          <a href="https://example.com/9" target="_blank" class="cosmic-sticker-link anim-float" style="top: 380px; left: 180px; animation-delay: 1.0s;" title="Star 2">🌟</a>
-          <a href="https://example.com/10" target="_blank" class="cosmic-sticker-link anim-pulse" style="top: 480px; left: 1250px; animation-delay: 0.3s;" title="Comet">☄️</a>
+          <a href="https://html.com" target="_blank" class="cosmic-sticker-link anim-pulse" style="top: 120px; left: 800px; animation-delay: 0.5s;" title="Alien">👽</a>
+          <a href="https://validator.w3.org" target="_blank" class="cosmic-sticker-link anim-float" style="top: 580px; left: 250px; animation-delay: 1.5s;" title="Saturn">🪐</a>
+          <a href="https://css-tricks.com" target="_blank" class="cosmic-sticker-link anim-drift" style="top: 850px; left: 850px; animation-delay: 2.1s;" title="Rocket 2">🚀</a>
+          <a href="https://nekoweb.org" target="_blank" class="cosmic-sticker-link anim-float" style="top: 380px; left: 180px; animation-delay: 1.0s;" title="Star 2">🌟</a>
+          <a href="https://it.wikipedia.org" target="_blank" class="cosmic-sticker-link anim-pulse" style="top: 480px; left: 1250px; animation-delay: 0.3s;" title="Comet">☄️</a>
         </div>
 
         <!-- Mini Radar in basso a sinistra -->
@@ -327,14 +327,14 @@
       <div class="space-intro">
         Welcome to the Cosmic Club! This is an open cosmic canvas for everyone. Send me your custom pixel art, star, planet, UFO, rocket, or astronaut, and I will place it floating around here. 
         <br><br>
-        To join the galaxy, head over to the <a href="https://cosmic-seea.neocities.org/" target="_blank">Guestbook</a> and send your creation!
+        To join the galaxy, head over to the <a href="https://cosmic-s.atabook.org/" target="_blank">Guestbook</a> and send your creation!
       </div>
 
     </div>
 
     <div class="space-footer">
       Created by Cosmic-S<br>
-      <a href="https://cosmic-seea.neocities.org/" target="_blank">https://cosmic-seea.neocities.org/</a>
+      <a href="https://cosmic-s.atabook.org/" target="_blank">https://cosmic-s.atabook.org/</a>
     </div>
 
   </div>
@@ -349,7 +349,6 @@
     let currentX = 0;
     let currentY = 0;
     let scale = 0.55;
-    let isAnimatingRandom = false;
 
     function clamp(val, min, max) {
       return Math.max(min, Math.min(max, val));
@@ -370,7 +369,6 @@
 
       world.style.transform = `translate(calc(-50% + ${currentX}px), calc(-50% + ${currentY}px)) scale(${scale})`;
 
-      // Posizionamento del puntino nel mini radar in proporzione
       const blipX = 45 - (currentX / maxDragX) * 35;
       const blipY = 45 - (currentY / maxDragY) * 35;
       
@@ -443,7 +441,6 @@
       updateWorldTransform(false);
     }, { passive: false });
 
-    // Funzione per il pulsante "Random" (🎲): zooma e sposta la telecamera su un pianeta casuale
     const randomBtn = document.getElementById('randomBtn');
     randomBtn.addEventListener('click', () => {
       const links = world.querySelectorAll('.cosmic-sticker-link');
@@ -451,16 +448,14 @@
         const randomIndex = Math.floor(Math.random() * links.length);
         const targetLink = links[randomIndex];
 
-        // Legge le coordinate top e left del pianeta scelto rispetto al centro del canvas mondiale (1400x1000)
         const targetTop = parseFloat(targetLink.style.top);
         const targetLeft = parseFloat(targetLink.style.left);
 
-        // Calcola lo spostamento esatto per centrare quel pianeta nello schermo
         currentX = -(targetLeft - 700);
         currentY = -(targetTop - 500);
-        scale = 1.2; // Zoom ravvicinato per metterlo in primo piano
+        scale = 1.2;
 
-        updateWorldTransform(true); // Applica l'animazione fluida
+        updateWorldTransform(true);
       }
     });
 
@@ -490,3 +485,4 @@
 
 </body>
 </html>
+
