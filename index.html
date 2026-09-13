@@ -53,16 +53,6 @@
       color: #F0E8D5;
     }
 
-    /* Animazione di click universale per qualsiasi pulsante o input */
-    .back-btn, .control-btn, .command-visit-btn, .reset-galaxy-btn, .command-close-btn, .search-bar input {
-      transition: transform 0.1s ease, box-shadow 0.1s ease !important;
-    }
-
-    .back-btn:active, .control-btn:active, .command-visit-btn:active, .reset-galaxy-btn:active, .command-close-btn:active, .search-bar input:focus {
-      transform: translate(2px, 2px) !important;
-      box-shadow: 0px 0px 0px #F0E8D5 !important;
-    }
-
     .back-btn {
       background: #F0E8D5;
       color: #000000;
@@ -73,6 +63,12 @@
       font-size: 0.75rem;
       text-decoration: none;
       box-shadow: 2px 2px 0px #F0E8D5;
+      transition: transform 0.1s ease;
+    }
+
+    .back-btn:active, .control-btn:active, .command-visit-btn:active, .reset-galaxy-btn:active, .search-bar input:focus {
+      transform: translate(2px, 2px) !important;
+      box-shadow: 0px 0px 0px #F0E8D5 !important;
     }
 
     .space-container {
@@ -107,6 +103,7 @@
       font-size: 0.95rem;
       box-shadow: 4px 4px 0px #F0E8D5;
       outline: none;
+      transition: background 0.2s ease;
     }
 
     .search-bar input::placeholder {
@@ -257,6 +254,7 @@
       cursor: pointer;
       box-shadow: 2px 2px 0px #F0E8D5;
       z-index: 20;
+      transition: transform 0.1s ease, background 0.1s ease, color 0.1s ease;
     }
 
     .reset-galaxy-btn:hover {
@@ -323,6 +321,7 @@
       cursor: pointer;
       font-size: 1rem;
       box-shadow: 2px 2px 0px #F0E8D5;
+      transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.1s ease;
     }
 
     .control-btn:hover {
@@ -331,7 +330,7 @@
       transform: scale(1.05);
     }
 
-    /* Schermata Computer di Bordo / Terminale Retro */
+    /* Schermata Computer di Bordo / Monitor Tecnico */
     .command-screen {
       position: absolute;
       top: 15px; left: 15px; right: 15px; bottom: 15px;
@@ -339,7 +338,7 @@
       border: 2px solid #F0E8D5;
       border-radius: 14px;
       z-index: 100;
-      padding: 16px;
+      padding: 18px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -360,21 +359,13 @@
       justify-content: space-between;
       align-items: center;
       border-bottom: 2px dashed rgba(240, 232, 213, 0.3);
-      padding-bottom: 8px;
+      padding-bottom: 10px;
     }
 
-    /* Nome utente cliccabile che porta al suo sito */
-    .command-title-link {
-      font-size: 1.15rem;
+    .command-title {
+      font-size: 1.1rem;
       font-weight: 800;
       letter-spacing: 1px;
-      color: #F0E8D5;
-      text-decoration: underline;
-      cursor: pointer;
-    }
-    .command-title-link:hover {
-      color: #FFF;
-      text-shadow: 0 0 8px #F0E8D5;
     }
 
     .command-close-btn {
@@ -382,14 +373,15 @@
       color: #F0E8D5;
       border: 2px solid #F0E8D5;
       border-radius: 10px;
-      width: 30px;
-      height: 30px;
+      width: 32px;
+      height: 32px;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
       font-size: 0.85rem;
       box-shadow: 2px 2px 0px #F0E8D5;
+      transition: transform 0.1s ease, background 0.1s ease, color 0.1s ease;
     }
 
     .command-close-btn:hover {
@@ -397,48 +389,101 @@
       color: #000000;
     }
 
-    /* Corpo in stile terminale con mini blocchi informativi */
+    /* Corpo del terminale: layout diviso in griglia dati */
     .command-body {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      padding: 10px 0;
-      font-family: monospace;
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      gap: 15px;
+      align-items: start;
+      padding: 12px 0;
     }
 
-    .terminal-field {
+    /* Visore piccolo in basso a sinistra nel computer */
+    .command-viewer {
+      width: 100px;
+      height: 100px;
+      background: #000000;
+      border: 2px solid #F0E8D5;
+      border-radius: 12px;
       display: flex;
-      flex-direction: column;
-      gap: 3px;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      box-shadow: 3px 3px 0px #F0E8D5;
+      position: relative;
+      overflow: hidden;
     }
 
-    .terminal-label {
+    .command-viewer::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 3px;
+      background: rgba(240, 232, 213, 0.4);
+      animation: scanBeam 2s linear infinite;
+    }
+
+    @keyframes scanBeam {
+      0% { top: 0%; }
+      100% { top: 100%; }
+    }
+
+    /* Pannello Dati Tecnici del Computer */
+    .command-tech-data {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 0.8rem;
+      font-family: monospace; /* Effetto terminale digitale */
+      background: rgba(240, 232, 213, 0.05);
+      border: 1px dashed rgba(240, 232, 213, 0.3);
+      padding: 10px;
+      border-radius: 10px;
+    }
+
+    .tech-row {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px dotted rgba(240, 232, 213, 0.15);
+      padding-bottom: 3px;
+    }
+
+    .tech-label {
+      opacity: 0.6;
+      font-weight: 600;
+    }
+
+    .tech-value {
+      font-weight: 800;
+      color: #FFF;
+      letter-spacing: 0.5px;
+    }
+
+    /* Box Descrizione Separato */
+    .command-desc-box {
+      grid-column: span 2;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      background: rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(240, 232, 213, 0.2);
+      padding: 8px 10px;
+      border-radius: 8px;
+    }
+
+    .command-subtitle {
       font-size: 0.65rem;
-      letter-spacing: 1px;
+      letter-spacing: 1.5px;
+      opacity: 0.7;
       font-weight: 800;
       text-transform: uppercase;
-      opacity: 0.7;
-      font-family: 'Quicksand', sans-serif;
     }
 
-    .terminal-box {
-      background: rgba(240, 232, 213, 0.05);
-      border: 1px dashed rgba(240, 232, 213, 0.3);
-      border-radius: 8px;
-      padding: 8px 10px;
+    .command-desc {
       font-size: 0.85rem;
+      line-height: 1.4;
       font-weight: 700;
-      color: #FFF;
-    }
-
-    .terminal-items {
-      display: flex;
-      gap: 8px;
-      font-size: 1.2rem;
-      background: rgba(240, 232, 213, 0.05);
-      border: 1px dashed rgba(240, 232, 213, 0.3);
-      border-radius: 8px;
-      padding: 8px 10px;
+      opacity: 0.95;
     }
 
     .command-footer {
@@ -452,12 +497,29 @@
       background: #F0E8D5;
       color: #000000;
       border: 2px solid #F0E8D5;
-      padding: 8px 16px;
+      padding: 8px 18px;
       border-radius: 10px;
       font-weight: 800;
       font-size: 0.8rem;
       text-decoration: none;
       box-shadow: 2px 2px 0px #F0E8D5;
+      transition: transform 0.1s ease;
+    }
+
+    /* Adattamento per dispositivi mobili */
+    @media (max-width: 600px) {
+      .command-body {
+        grid-template-columns: 1fr;
+      }
+      .command-viewer {
+        width: 80px;
+        height: 80px;
+        font-size: 2.5rem;
+        margin-bottom: 5px;
+      }
+      .command-desc-box {
+        grid-column: span 1;
+      }
     }
 
     .galaxy-board:fullscreen {
@@ -524,7 +586,7 @@
 
       <div class="search-bar">
         <i class="fa-solid fa-magnifying-glass"></i>
-        <input type="text" id="galaxySearchInput" placeholder="Cerca un utente, un interesse o un oggetto...">
+        <input type="text" id="galaxySearchInput" placeholder="Cerca un elemento, un nome o una descrizione nella galassia...">
       </div>
 
       <div class="galaxy-board" id="galaxyBoard">
@@ -537,47 +599,61 @@
           <div class="shooting-comet-1">☄️</div>
           <div class="shooting-comet-2">🛸</div>
 
-          <!-- Dati puliti e personalizzati per ogni utente nel terminale -->
-          <a href="https://www.wikipedia.org" data-name="Star" data-status="Online / Attiva" data-interests="drawing, coding, exploring" data-notes="esplorando la galassia digitale" data-items="🍀, 🪐, 🎒" class="cosmic-sticker-link anim-float" style="top: 450px; left: 700px; animation-delay: 0s;">🪐</a>
-          <a href="https://neocities.org" data-name="NeoPilot" data-status="In orbita" data-interests="pixel art, synthwave, html" data-notes="costruendo stazioni web indipendenti" data-items="🚀, 💾, 🎧" class="cosmic-sticker-link anim-drift" style="top: 250px; left: 1050px; animation-delay: 1.2s;">🚀</a>
-          <a href="https://archive.org" data-name="TimeWanderer" data-status="Segnale stabile" data-interests="retro tech, archiving, books" data-notes="conservando vecchie reliquie digitali" data-items="🛸, 📼, 📚" class="cosmic-sticker-link anim-pulse" style="top: 750px; left: 400px; animation-delay: 2.5s;">🛸</a>
-          <a href="https://github.com" data-name="CodeStar" data-status="Compilazione in corso" data-interests="javascript, open source, tea" data-notes="scrivendo codice sotto le stelle" data-items="⭐, 💻, ☕" class="cosmic-sticker-link anim-float" style="top: 180px; left: 350px; animation-delay: 0.8s;">⭐</a>
-          <a href="https://developer.mozilla.org" data-name="Devonaut" data-status="Esplorazione" data-interests="css tricks, web standards" data-notes="documentando i segreti del web" data-items="👨‍🚀, 📜, 🔭" class="cosmic-sticker-link anim-drift" style="top: 680px; left: 1150px; animation-delay: 1.8s;">👨‍🚀</a>
+          <a href="https://www.wikipedia.org" data-name="Wikipedia Planet" data-desc="Enciclopedia libera universale della galassia." data-type="Pianeta Archivio" data-sector="Alpha-9" data-speed="42.8 LY/s" class="cosmic-sticker-link anim-float" style="top: 450px; left: 700px; animation-delay: 0s;">🪐</a>
+          <a href="https://neocities.org" data-name="Neocities Rocket" data-desc="Base spaziale per siti web indipendenti e retrò." data-type="Navetta Orbitale" data-sector="Beta-2" data-speed="88.1 LY/s" class="cosmic-sticker-link anim-drift" style="top: 250px; left: 1050px; animation-delay: 1.2s;">🚀</a>
+          <a href="https://archive.org" data-name="Archive UFO" data-desc="La capsula del tempo che conserva la storia di internet." data-type="Sonda Temporale" data-sector="Gamma-5" data-speed="12.4 LY/s" class="cosmic-sticker-link anim-pulse" style="top: 750px; left: 400px; animation-delay: 2.5s;">🛸</a>
+          <a href="https://github.com" data-name="GitHub Star" data-desc="Pianeta dei codici sorgente e degli sviluppatori." data-type="Stella Binaria" data-sector="Delta-1" data-speed="99.9 LY/s" class="cosmic-sticker-link anim-float" style="top: 180px; left: 350px; animation-delay: 0.8s;">⭐</a>
+          <a href="https://developer.mozilla.org" data-name="MDN Astronaut" data-desc="Manuale di sopravvivenza per esploratori del web." data-type="Unità Esplorativa" data-sector="Omega-7" data-speed="05.2 LY/s" class="cosmic-sticker-link anim-drift" style="top: 680px; left: 1150px; animation-delay: 1.8s;">👨‍🚀</a>
+          
+          <a href="https://html.com" data-name="Alien Visitor" data-desc="Un misterioso alieno atterrato da un altro sistema solare." data-type="Entità Extraterrestre" data-sector="X-Zone" data-speed="110.0 LY/s" class="cosmic-sticker-link anim-pulse" style="top: 120px; left: 800px; animation-delay: 0.5s;">👽</a>
+          <a href="https://validator.w3.org" data-name="Saturn Station" data-desc="Stazione di controllo per la purezza del codice." data-type="Avamposto Spaziale" data-sector="Sector-0" data-speed="00.0 LY/s" class="cosmic-sticker-link anim-float" style="top: 580px; left: 250px; animation-delay: 1.5s;">🪐</a>
+          <a href="https://css-tricks.com" data-name="Rocket Express" data-desc="Navetta veloce carica di trucchi grafici celesti." data-type="Vettore Rapido" data-sector="Epsilon-4" data-speed="145.3 LY/s" class="cosmic-sticker-link anim-drift" style="top: 850px; left: 850px; animation-delay: 2.1s;">🚀</a>
+          <a href="https://nekoweb.org" data-name="Star 2" data-desc="Nuova galassia emergente di siti personali." data-type="Proto-Stella" data-sector="Zeta-8" data-speed="33.4 LY/s" class="cosmic-sticker-link anim-float" style="top: 380px; left: 180px; animation-delay: 1.0s;">🌟</a>
+          <a href="https://it.wikipedia.org" data-name="Comet Star" data-desc="Esplora le meraviglie della conoscenza in italiano." data-type="Cometa Errante" data-sector="Theta-3" data-speed="77.6 LY/s" class="cosmic-sticker-link anim-pulse" style="top: 480px; left: 1250px; animation-delay: 0.3s;">☄️</a>
         </div>
 
-        <!-- Finestra Terminale di Bordo -->
+        <!-- Schermata Computer di Bordo / Monitor Tecnico -->
         <div class="command-screen" id="commandScreen">
           <div class="command-header">
-            <a href="#" id="commandTitleLink" target="_blank" class="command-title-link">NOME UTENTE</a>
-            <button class="command-close-btn" id="commandCloseBtn" title="Chiudi terminale">
+            <div class="command-title" id="commandTitle">TITOLO SEGNALE</div>
+            <button class="command-close-btn" id="commandCloseBtn" title="Chiudi schermo">
               <i class="fa-solid fa-xmark"></i>
             </button>
           </div>
 
           <div class="command-body">
-            <div class="terminal-field">
-              <span class="terminal-label">Stato Frequenza</span>
-              <div class="terminal-box" id="infoStatus">---</div>
+            <!-- Visore a sinistra -->
+            <div class="command-viewer" id="commandViewer">🪐</div>
+
+            <!-- Pannello con dati tecnici del computer -->
+            <div class="command-tech-data">
+              <div class="tech-row">
+                <span class="tech-label">CLASSIFICAZIONE:</span>
+                <span class="tech-value" id="techType">---</span>
+              </div>
+              <div class="tech-row">
+                <span class="tech-label">SETTORE:</span>
+                <span class="tech-value" id="techSector">---</span>
+              </div>
+              <div class="tech-row">
+                <span class="tech-label">VELOCITÀ SEGNALE:</span>
+                <span class="tech-value" id="techSpeed">---</span>
+              </div>
+              <div class="tech-row">
+                <span class="tech-label">STATO SCANSIONE:</span>
+                <span class="tech-value" style="color: #4ef073;">COMPLETATA</span>
+              </div>
             </div>
 
-            <div class="terminal-field">
-              <span class="terminal-label">Interessi / Passioni</span>
-              <div class="terminal-box" id="infoInterests">---</div>
-            </div>
-
-            <div class="terminal-field">
-              <span class="terminal-label">Note di Bordo</span>
-              <div class="terminal-box" id="infoNotes">---</div>
-            </div>
-
-            <div class="terminal-field">
-              <span class="terminal-label">Oggetti Personali</span>
-              <div class="terminal-items" id="infoItems">🎒 🪐</div>
+            <!-- Box della descrizione sotto -->
+            <div class="command-desc-box">
+              <span class="command-subtitle">Rilevamento / Note di bordo</span>
+              <div class="command-desc" id="commandDesc">Descrizione del sito di questa persona.</div>
             </div>
           </div>
 
           <div class="command-footer">
-            <a href="#" id="commandVisitLink" target="_blank" class="command-visit-btn">Visita il sito <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+            <a href="#" id="commandVisitLink" target="_blank" class="command-visit-btn">Accedi alla frequenza</a>
           </div>
         </div>
 
@@ -662,6 +738,24 @@
       } catch (e) {}
     }
 
+    function playWarpSound() {
+      try {
+        initAudio();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(150, audioCtx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(800, audioCtx.currentTime + 0.3);
+        gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.3);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.3);
+      } catch (e) {}
+    }
+
     const board = document.getElementById('galaxyBoard');
     const world = document.getElementById('galaxyWorld');
     const radarBlip = document.getElementById('radarBlip');
@@ -669,14 +763,15 @@
     const searchInput = document.getElementById('galaxySearchInput');
     
     const commandScreen = document.getElementById('commandScreen');
-    const commandTitleLink = document.getElementById('commandTitleLink');
+    const commandViewer = document.getElementById('commandViewer');
+    const commandTitle = document.getElementById('commandTitle');
+    const commandDesc = document.getElementById('commandDesc');
     const commandVisitLink = document.getElementById('commandVisitLink');
     const commandCloseBtn = document.getElementById('commandCloseBtn');
 
-    const infoStatus = document.getElementById('infoStatus');
-    const infoInterests = document.getElementById('infoInterests');
-    const infoNotes = document.getElementById('infoNotes');
-    const infoItems = document.getElementById('infoItems');
+    const techType = document.getElementById('techType');
+    const techSector = document.getElementById('techSector');
+    const techSpeed = document.getElementById('techSpeed');
 
     let isDragging = false;
     let startX, startY;
@@ -692,11 +787,11 @@
 
       links.forEach(link => {
         const name = link.getAttribute('data-name').toLowerCase();
-        const interests = link.getAttribute('data-interests').toLowerCase();
+        const desc = link.getAttribute('data-desc').toLowerCase();
 
         if (term === '') {
           link.classList.remove('dimmed', 'highlighted');
-        } else if (name.includes(term) || interests.includes(term)) {
+        } else if (name.includes(term) || desc.includes(term)) {
           link.classList.remove('dimmed');
           link.classList.add('highlighted');
           
@@ -716,20 +811,18 @@
     links.forEach(link => {
       link.addEventListener('click', (e) => {
         e.preventDefault();
-        playBeep(520, 'sine', 0.1);
+        playWarpSound();
         
-        const userUrl = link.href;
-        const userName = link.getAttribute('data-name');
-
-        commandTitleLink.textContent = userName;
-        commandTitleLink.href = userUrl;
+        commandViewer.textContent = link.textContent;
+        commandTitle.textContent = link.getAttribute('data-name');
+        commandDesc.textContent = link.getAttribute('data-desc');
         
-        infoStatus.textContent = link.getAttribute('data-status') || 'Attiva';
-        infoInterests.textContent = link.getAttribute('data-interests') || '---';
-        infoNotes.textContent = link.getAttribute('data-notes') || '---';
-        infoItems.textContent = link.getAttribute('data-items') || '🪐';
+        // Assegna i dati tecnici aggiuntivi nel computer di bordo
+        techType.textContent = link.getAttribute('data-type') || 'Oggetto Sconosciuto';
+        techSector.textContent = link.getAttribute('data-sector') || 'Settore-X';
+        techSpeed.textContent = link.getAttribute('data-speed') || '10.0 LY/s';
 
-        commandVisitLink.href = userUrl;
+        commandVisitLink.href = link.href;
         commandScreen.classList.add('active');
       });
     });
@@ -867,4 +960,3 @@
 
 </body>
 </html>
-
