@@ -70,7 +70,7 @@
       transform: translateY(-1px);
     }
 
-    .back-btn:active, .control-btn:active, .modal-visit-btn:active {
+    .back-btn:active, .control-btn:active, .modal-visit-btn:active, .reset-galaxy-btn:active {
       transform: translate(2px, 2px) !important;
       box-shadow: 0px 0px 0px #F0E8D5 !important;
     }
@@ -195,6 +195,29 @@
       0% { transform: scale(1); }
       50% { transform: scale(1.15); }
       100% { transform: scale(1); }
+    }
+
+    /* Tasto Reset in alto a sinistra dentro la board */
+    .reset-galaxy-btn {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      background: #000000;
+      color: #F0E8D5;
+      border: 2px solid #F0E8D5;
+      border-radius: 10px;
+      padding: 6px 12px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 2px 2px 0px #F0E8D5;
+      z-index: 20;
+      transition: transform 0.1s ease, background 0.1s ease, color 0.1s ease;
+    }
+
+    .reset-galaxy-btn:hover {
+      background: #F0E8D5;
+      color: #000000;
     }
 
     .galaxy-radar {
@@ -410,6 +433,11 @@
 
       <div class="galaxy-board" id="galaxyBoard">
         
+        <!-- Tasto Reset in alto a sinistra -->
+        <button class="reset-galaxy-btn" id="resetBtn" title="Riporta la galassia al centro">
+          <i class="fa-solid fa-rotate-right"></i> Reset
+        </button>
+
         <div class="galaxy-canvas-world" id="galaxyWorld">
           <div class="shooting-comet-1">☄️</div>
           <div class="shooting-comet-2">🛸</div>
@@ -427,11 +455,11 @@
           <a href="https://it.wikipedia.org" data-name="Comet Star" data-desc="Esplora le meraviglie della conoscenza in italiano." class="cosmic-sticker-link anim-pulse" style="top: 480px; left: 1250px; animation-delay: 0.3s;">☄️</a>
         </div>
 
-        <!-- Popup Modale per i dettagli del pianeta -->
+        <!-- Popup Modale per i dettagli -->
         <div class="planet-modal" id="planetModal">
           <div class="modal-content">
             <div class="modal-icon" id="modalIcon">🪐</div>
-            <div class="modal-title" id="modalTitle">Nome Pianeta</div>
+            <div class="modal-title" id="modalTitle">Nome Elemento</div>
             <div class="modal-desc" id="modalDesc">Descrizione del sito di questa persona.</div>
             <div class="modal-actions">
               <a href="#" id="modalVisitLink" target="_blank" class="modal-visit-btn">Visita</a>
@@ -446,7 +474,7 @@
         </div>
 
         <div class="galaxy-controls">
-          <button class="control-btn" id="randomBtn" title="Inquadra un pianeta casuale (Random)">
+          <button class="control-btn" id="randomBtn" title="Inquadra un elemento casuale (Random)">
             <i class="fa-solid fa-dice"></i>
           </button>
           <button class="control-btn" id="zoomOutBtn" title="Zoom Out (-)">
@@ -465,7 +493,7 @@
       <div class="space-intro">
         <span>Welcome to the Cosmic Club! This is an open cosmic canvas for everyone. Send me your custom pixel art, star, planet, UFO, rocket, or astronaut, and I will place it floating around here.</span>
         <span>To join the galaxy, head over to the <a href="https://cosmic-s.atabook.org/" target="_blank">Guestbook</a> and send your creation!</span>
-        <div class="galaxy-counter" id="galaxyCounter">🌟 Pianeti attivi nella galassia: 0</div>
+        <div class="galaxy-counter" id="galaxyCounter">🌟 Elementi attivi nella galassia: 0</div>
       </div>
 
     </div>
@@ -503,7 +531,6 @@
       } catch (e) {}
     }
 
-    // Nuovo suono armonico per il dado (più delicato)
     function playDiceSound() {
       try {
         initAudio();
@@ -559,9 +586,8 @@
     let scale = 0.55;
 
     const links = world.querySelectorAll('.cosmic-sticker-link');
-    galaxyCounter.textContent = `🌟 Pianeti attivi nella galassia: ${links.length}`;
+    galaxyCounter.textContent = `🌟 Elementi attivi nella galassia: ${links.length}`;
 
-    // Gestione apertura Popup modale al click sul pianeta
     links.forEach(link => {
       link.addEventListener('click', (e) => {
         e.preventDefault();
@@ -616,7 +642,7 @@
     updateWorldTransform();
 
     board.addEventListener('mousedown', (e) => {
-      if (e.target.closest('.galaxy-controls') || e.target.closest('.galaxy-radar') || e.target.closest('.planet-modal')) return;
+      if (e.target.closest('.galaxy-controls') || e.target.closest('.galaxy-radar') || e.target.closest('.planet-modal') || e.target.closest('.reset-galaxy-btn')) return;
       isDragging = true;
       startX = e.clientX - currentX;
       startY = e.clientY - currentY;
@@ -632,7 +658,7 @@
     window.addEventListener('mouseup', () => { isDragging = false; });
 
     board.addEventListener('touchstart', (e) => {
-      if (e.target.closest('.galaxy-controls') || e.target.closest('.galaxy-radar') || e.target.closest('.planet-modal')) return;
+      if (e.target.closest('.galaxy-controls') || e.target.closest('.galaxy-radar') || e.target.closest('.planet-modal') || e.target.closest('.reset-galaxy-btn')) return;
       isDragging = true;
       startX = e.touches[0].clientX - currentX;
       startY = e.touches[0].clientY - currentY;
@@ -646,6 +672,16 @@
     });
 
     window.addEventListener('touchend', () => { isDragging = false; });
+
+    // Tasto Reset in alto a sinistra
+    const resetBtn = document.getElementById('resetBtn');
+    resetBtn.addEventListener('click', () => {
+      playBeep(450, 'sine', 0.08);
+      currentX = 0;
+      currentY = 0;
+      scale = 0.55;
+      updateWorldTransform(true);
+    });
 
     document.getElementById('zoomInBtn').addEventListener('click', () => {
       playBeep(600, 'sine', 0.06);
@@ -665,7 +701,7 @@
     }, { passive: false });
 
     document.getElementById('randomBtn').addEventListener('click', () => {
-      playDiceSound(); // Suono del dado aggiornato
+      playDiceSound();
       if (links.length > 0) {
         const randomIndex = Math.floor(Math.random() * links.length);
         const targetLink = links[randomIndex];
@@ -704,4 +740,3 @@
 
 </body>
 </html>
-
