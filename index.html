@@ -468,21 +468,39 @@
       opacity: 0.95;
     }
 
+    .command-button-box {
+      grid-column: span 2;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      padding-top: 4px;
+    }
+
+    .command-button-box img {
+      width: 88px;
+      height: 31px;
+      object-fit: contain;
+      border: none;
+      display: block;
+    }
+
     .command-footer {
       display: flex;
       justify-content: flex-end;
+      gap: 10px;
       border-top: 2px dashed rgba(240, 232, 213, 0.3);
       padding-top: 10px;
+      flex-wrap: wrap;
     }
 
     .command-visit-btn {
       background: #F0E8D5;
       color: #000000;
       border: 2px solid #F0E8D5;
-      padding: 8px 18px;
+      padding: 8px 14px;
       border-radius: 10px;
       font-weight: 800;
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       text-decoration: none;
       box-shadow: 2px 2px 0px #F0E8D5;
       transition: transform 0.1s ease;
@@ -498,7 +516,7 @@
         font-size: 2.5rem;
         margin-bottom: 5px;
       }
-      .command-desc-box {
+      .command-desc-box, .command-button-box {
         grid-column: span 1;
       }
     }
@@ -579,17 +597,11 @@
           <div class="shooting-comet-1">☄️</div>
           <div class="shooting-comet-2">🛸</div>
 
-          <a href="https://www.wikipedia.org" data-name="Wikipedia Planet" data-desc="Enciclopedia libera universale della galassia." data-type="Pianeta Archivio" data-sector="Alpha-9" data-speed="42.8 LY/s" class="cosmic-sticker-link anim-float" style="top: 450px; left: 700px; animation-delay: 0s;">🪐</a>
-          <a href="https://neocities.org" data-name="Neocities Rocket" data-desc="Base spaziale per siti web indipendenti e retrò." data-type="Navetta Orbitale" data-sector="Beta-2" data-speed="88.1 LY/s" class="cosmic-sticker-link anim-drift" style="top: 250px; left: 1050px; animation-delay: 1.2s;">🚀</a>
-          <a href="https://archive.org" data-name="Archive UFO" data-desc="La capsula del tempo che conserva la storia di internet." data-type="Sonda Temporale" data-sector="Gamma-5" data-speed="12.4 LY/s" class="cosmic-sticker-link anim-pulse" style="top: 750px; left: 400px; animation-delay: 2.5s;">🛸</a>
-          <a href="https://github.com" data-name="GitHub Star" data-desc="Pianeta dei codici sorgente e degli sviluppatori." data-type="Stella Binaria" data-sector="Delta-1" data-speed="99.9 LY/s" class="cosmic-sticker-link anim-float" style="top: 180px; left: 350px; animation-delay: 0.8s;">⭐</a>
-          <a href="https://developer.mozilla.org" data-name="MDN Astronaut" data-desc="Manuale di sopravvivenza per esploratori del web." data-type="Unità Esplorativa" data-sector="Omega-7" data-speed="05.2 LY/s" class="cosmic-sticker-link anim-drift" style="top: 680px; left: 1150px; animation-delay: 1.8s;">👨‍🚀</a>
-          
-          <a href="https://html.com" data-name="Alien Visitor" data-desc="Un misterioso alieno atterrato da un altro sistema solare." data-type="Entità Extraterrestre" data-sector="X-Zone" data-speed="110.0 LY/s" class="cosmic-sticker-link anim-pulse" style="top: 120px; left: 800px; animation-delay: 0.5s;">👽</a>
-          <a href="https://validator.w3.org" data-name="Saturn Station" data-desc="Stazione di controllo per la purezza del codice." data-type="Avamposto Spaziale" data-sector="Sector-0" data-speed="00.0 LY/s" class="cosmic-sticker-link anim-float" style="top: 580px; left: 250px; animation-delay: 1.5s;">🪐</a>
-          <a href="https://css-tricks.com" data-name="Rocket Express" data-desc="Navetta veloce carica di trucchi grafici celesti." data-type="Vettore Rapido" data-sector="Epsilon-4" data-speed="145.3 LY/s" class="cosmic-sticker-link anim-drift" style="top: 850px; left: 850px; animation-delay: 2.1s;">🚀</a>
-          <a href="https://nekoweb.org" data-name="Star 2" data-desc="Nuova galassia emergente di siti personali." data-type="Proto-Stella" data-sector="Zeta-8" data-speed="33.4 LY/s" class="cosmic-sticker-link anim-float" style="top: 380px; left: 180px; animation-delay: 1.0s;">🌟</a>
-          <a href="https://it.wikipedia.org" data-name="Comet Star" data-desc="Esplora le meraviglie della conoscenza in italiano." data-type="Cometa Errante" data-sector="Theta-3" data-speed="77.6 LY/s" class="cosmic-sticker-link anim-pulse" style="top: 480px; left: 1250px; animation-delay: 0.3s;">☄️</a>
+          <a href="https://www.wikipedia.org" data-name="Wikipedia Planet" data-desc="Enciclopedia libera universale della galassia." data-id="AstroKate" data-date="2026-09-01" data-button="https://neocities.org/button.gif" data-profile="https://cosmic-s.atabook.org/" class="cosmic-sticker-link anim-float" style="top: 450px; left: 700px; animation-delay: 0s;">🪐</a>
+          <a href="https://neocities.org" data-name="Neocities Rocket" data-desc="Base spaziale per siti web indipendenti e retrò." data-id="NetPilot" data-date="2026-09-05" data-button="https://neocities.org/button.gif" data-profile="https://cosmic-s.atabook.org/" class="cosmic-sticker-link anim-drift" style="top: 250px; left: 1050px; animation-delay: 1.2s;">🚀</a>
+          <a href="https://archive.org" data-name="Archive UFO" data-desc="La capsula del tempo che conserva la storia di internet." data-id="TimeGhost" data-date="2026-09-08" data-button="https://neocities.org/button.gif" data-profile="https://cosmic-s.atabook.org/" class="cosmic-sticker-link anim-pulse" style="top: 750px; left: 400px; animation-delay: 2.5s;">🛸</a>
+          <a href="https://github.com" data-name="GitHub Star" data-desc="Pianeta dei codici sorgente e degli sviluppatori." data-id="BinaryStar" data-date="2026-09-10" data-button="https://neocities.org/button.gif" data-profile="https://cosmic-s.atabook.org/" class="cosmic-sticker-link anim-float" style="top: 180px; left: 350px; animation-delay: 0.8s;">⭐</a>
+          <a href="https://developer.mozilla.org" data-name="MDN Astronaut" data-desc="Manuale di sopravvivenza per esploratori del web." data-id="DevNaut" data-date="2026-09-12" data-button="https://neocities.org/button.gif" data-profile="https://cosmic-s.atabook.org/" class="cosmic-sticker-link anim-drift" style="top: 680px; left: 1150px; animation-delay: 1.8s;">👨‍🚀</a>
         </div>
 
         <div class="command-screen" id="commandScreen">
@@ -605,31 +617,28 @@
 
             <div class="command-tech-data">
               <div class="tech-row">
-                <span class="tech-label">CLASSIFICAZIONE:</span>
-                <span class="tech-value" id="techType">---</span>
+                <span class="tech-label">ID REPERTO:</span>
+                <span class="tech-value" id="techId">---</span>
               </div>
               <div class="tech-row">
-                <span class="tech-label">SETTORE:</span>
-                <span class="tech-value" id="techSector">---</span>
-              </div>
-              <div class="tech-row">
-                <span class="tech-label">VELOCITÀ SEGNALE:</span>
-                <span class="tech-value" id="techSpeed">---</span>
-              </div>
-              <div class="tech-row">
-                <span class="tech-label">STATO SCANSIONE:</span>
-                <span class="tech-value" style="color: #4ef073;">COMPLETATA</span>
+                <span class="tech-label">DATA ARCHIVIO:</span>
+                <span class="tech-value" id="techDate">---</span>
               </div>
             </div>
 
             <div class="command-desc-box">
-              <span class="command-subtitle">Rilevamento / Note di bordo</span>
+              <span class="command-subtitle">Log / Bio</span>
               <div class="command-desc" id="commandDesc">Descrizione del sito di questa persona.</div>
+            </div>
+
+            <div class="command-button-box">
+              <img id="commandBannerImg" src="" alt="88x31 button">
             </div>
           </div>
 
           <div class="command-footer">
-            <a href="#" id="commandVisitLink" target="_blank" class="command-visit-btn">Accedi alla frequenza</a>
+            <a href="#" id="commandVisitLink" target="_blank" class="command-visit-btn">🌐 Visita Sito</a>
+            <a href="#" id="commandProfileLink" target="_blank" class="command-visit-btn">👤 Profilo / Mysites</a>
           </div>
         </div>
 
@@ -743,11 +752,12 @@
     const commandTitle = document.getElementById('commandTitle');
     const commandDesc = document.getElementById('commandDesc');
     const commandVisitLink = document.getElementById('commandVisitLink');
+    const commandProfileLink = document.getElementById('commandProfileLink');
+    const commandBannerImg = document.getElementById('commandBannerImg');
     const commandCloseBtn = document.getElementById('commandCloseBtn');
 
-    const techType = document.getElementById('techType');
-    const techSector = document.getElementById('techSector');
-    const techSpeed = document.getElementById('techSpeed');
+    const techId = document.getElementById('techId');
+    const techDate = document.getElementById('techDate');
 
     let isDragging = false;
     let startX, startY;
@@ -793,11 +803,13 @@
         commandTitle.textContent = link.getAttribute('data-name');
         commandDesc.textContent = link.getAttribute('data-desc');
         
-        techType.textContent = link.getAttribute('data-type') || 'Oggetto Sconosciuto';
-        techSector.textContent = link.getAttribute('data-sector') || 'Settore-X';
-        techSpeed.textContent = link.getAttribute('data-speed') || '10.0 LY/s';
+        techId.textContent = link.getAttribute('data-id') || 'UNKNOWN';
+        techDate.textContent = link.getAttribute('data-date') || 'YYYY-MM-DD';
 
         commandVisitLink.href = link.href;
+        commandProfileLink.href = link.getAttribute('data-profile') || '#';
+        commandBannerImg.src = link.getAttribute('data-button') || '';
+
         commandScreen.classList.add('active');
       });
     });
