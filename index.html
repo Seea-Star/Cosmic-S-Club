@@ -53,7 +53,7 @@
       color: #F0E8D5;
     }
 
-    /* Animazione universale di click per TUTTI i pulsanti e interattivi */
+    /* Animazione di click universale per qualsiasi pulsante o input */
     .back-btn, .control-btn, .command-visit-btn, .reset-galaxy-btn, .command-close-btn, .search-bar input {
       transition: transform 0.1s ease, box-shadow 0.1s ease !important;
     }
@@ -331,7 +331,7 @@
       transform: scale(1.05);
     }
 
-    /* Finestra stile "Appartamento / Webring" con piccoli campi personali */
+    /* Schermata Computer di Bordo / Terminale Retro */
     .command-screen {
       position: absolute;
       top: 15px; left: 15px; right: 15px; bottom: 15px;
@@ -363,7 +363,7 @@
       padding-bottom: 8px;
     }
 
-    /* Nome cliccabile che porta al sito dell'utente */
+    /* Nome utente cliccabile che porta al suo sito */
     .command-title-link {
       font-size: 1.15rem;
       font-weight: 800;
@@ -397,46 +397,48 @@
       color: #000000;
     }
 
-    /* Corpo con mini-campi puliti stile scheda utente */
+    /* Corpo in stile terminale con mini blocchi informativi */
     .command-body {
       display: flex;
       flex-direction: column;
       gap: 10px;
       padding: 10px 0;
+      font-family: monospace;
     }
 
-    .info-field {
+    .terminal-field {
       display: flex;
       flex-direction: column;
       gap: 3px;
     }
 
-    .info-label {
+    .terminal-label {
       font-size: 0.65rem;
       letter-spacing: 1px;
       font-weight: 800;
       text-transform: uppercase;
-      opacity: 0.65;
+      opacity: 0.7;
+      font-family: 'Quicksand', sans-serif;
     }
 
-    .info-box {
-      background: rgba(240, 232, 213, 0.06);
-      border: 1px solid rgba(240, 232, 213, 0.3);
-      border-radius: 10px;
-      padding: 8px 12px;
+    .terminal-box {
+      background: rgba(240, 232, 213, 0.05);
+      border: 1px dashed rgba(240, 232, 213, 0.3);
+      border-radius: 8px;
+      padding: 8px 10px;
       font-size: 0.85rem;
       font-weight: 700;
       color: #FFF;
     }
 
-    .info-items-row {
+    .terminal-items {
       display: flex;
       gap: 8px;
-      font-size: 1.3rem;
-      background: rgba(240, 232, 213, 0.06);
-      border: 1px solid rgba(240, 232, 213, 0.3);
-      border-radius: 10px;
-      padding: 8px 12px;
+      font-size: 1.2rem;
+      background: rgba(240, 232, 213, 0.05);
+      border: 1px dashed rgba(240, 232, 213, 0.3);
+      border-radius: 8px;
+      padding: 8px 10px;
     }
 
     .command-footer {
@@ -522,7 +524,7 @@
 
       <div class="search-bar">
         <i class="fa-solid fa-magnifying-glass"></i>
-        <input type="text" id="galaxySearchInput" placeholder="Cerca un utente, un hobby o un oggetto...">
+        <input type="text" id="galaxySearchInput" placeholder="Cerca un utente, un interesse o un oggetto...">
       </div>
 
       <div class="galaxy-board" id="galaxyBoard">
@@ -535,47 +537,42 @@
           <div class="shooting-comet-1">☄️</div>
           <div class="shooting-comet-2">🛸</div>
 
-          <!-- Dati personalizzati per ogni utente (simili alla scheda appartamento) -->
-          <a href="https://www.wikipedia.org" data-name="Star" data-moved="11/09/2025" data-likes="drawing, coding, exploring" data-reason="my old house exploded" data-favorite="it's nice and safe here" data-items="🍀, 💷, 🎒, ☂️" class="cosmic-sticker-link anim-float" style="top: 450px; left: 700px; animation-delay: 0s;">🪐</a>
-          <a href="https://neocities.org" data-name="NeoPilot" data-moved="01/02/2026" data-likes="pixel art, synthwave, html" data-reason="seeking new star systems" data-favorite="the view of the nebula" data-items="🚀, 💾, 🎧" class="cosmic-sticker-link anim-drift" style="top: 250px; left: 1050px; animation-delay: 1.2s;">🚀</a>
-          <a href="https://archive.org" data-name="TimeWanderer" data-moved="15/05/2024" data-likes="retro tech, archiving, books" data-reason="lost in the timeline" data-favorite="finding old digital relics" data-items="🛸, 📼, 📚" class="cosmic-sticker-link anim-pulse" style="top: 750px; left: 400px; animation-delay: 2.5s;">🛸</a>
-          <a href="https://github.com" data-name="CodeStar" data-moved="20/11/2025" data-likes="javascript, open source, tea" data-reason="escaping bugs matrix" data-favorite="clean code compilation" data-items="⭐, 💻, ☕" class="cosmic-sticker-link anim-float" style="top: 180px; left: 350px; animation-delay: 0.8s;">⭐</a>
-          <a href="https://developer.mozilla.org" data-name="Devonaut" data-moved="03/07/2025" data-likes="css tricks, web standards" data-reason="mission to document web" data-favorite="zero gravity debugging" data-items="👨‍🚀, 📜, 🔭" class="cosmic-sticker-link anim-drift" style="top: 680px; left: 1150px; animation-delay: 1.8s;">👨‍🚀</a>
+          <!-- Dati puliti e personalizzati per ogni utente nel terminale -->
+          <a href="https://www.wikipedia.org" data-name="Star" data-status="Online / Attiva" data-interests="drawing, coding, exploring" data-notes="esplorando la galassia digitale" data-items="🍀, 🪐, 🎒" class="cosmic-sticker-link anim-float" style="top: 450px; left: 700px; animation-delay: 0s;">🪐</a>
+          <a href="https://neocities.org" data-name="NeoPilot" data-status="In orbita" data-interests="pixel art, synthwave, html" data-notes="costruendo stazioni web indipendenti" data-items="🚀, 💾, 🎧" class="cosmic-sticker-link anim-drift" style="top: 250px; left: 1050px; animation-delay: 1.2s;">🚀</a>
+          <a href="https://archive.org" data-name="TimeWanderer" data-status="Segnale stabile" data-interests="retro tech, archiving, books" data-notes="conservando vecchie reliquie digitali" data-items="🛸, 📼, 📚" class="cosmic-sticker-link anim-pulse" style="top: 750px; left: 400px; animation-delay: 2.5s;">🛸</a>
+          <a href="https://github.com" data-name="CodeStar" data-status="Compilazione in corso" data-interests="javascript, open source, tea" data-notes="scrivendo codice sotto le stelle" data-items="⭐, 💻, ☕" class="cosmic-sticker-link anim-float" style="top: 180px; left: 350px; animation-delay: 0.8s;">⭐</a>
+          <a href="https://developer.mozilla.org" data-name="Devonaut" data-status="Esplorazione" data-interests="css tricks, web standards" data-notes="documentando i segreti del web" data-items="👨‍🚀, 📜, 🔭" class="cosmic-sticker-link anim-drift" style="top: 680px; left: 1150px; animation-delay: 1.8s;">👨‍🚀</a>
         </div>
 
-        <!-- Finestra della scheda utente personalizzata -->
+        <!-- Finestra Terminale di Bordo -->
         <div class="command-screen" id="commandScreen">
           <div class="command-header">
             <a href="#" id="commandTitleLink" target="_blank" class="command-title-link">NOME UTENTE</a>
-            <button class="command-close-btn" id="commandCloseBtn" title="Chiudi scheda">
+            <button class="command-close-btn" id="commandCloseBtn" title="Chiudi terminale">
               <i class="fa-solid fa-xmark"></i>
             </button>
           </div>
 
           <div class="command-body">
-            <div class="info-field">
-              <span class="info-label">Moved On</span>
-              <div class="info-box" id="infoMoved">--/--/----</div>
+            <div class="terminal-field">
+              <span class="terminal-label">Stato Frequenza</span>
+              <div class="terminal-box" id="infoStatus">---</div>
             </div>
 
-            <div class="info-field">
-              <span class="info-label">Likes</span>
-              <div class="info-box" id="infoLikes">---</div>
+            <div class="terminal-field">
+              <span class="terminal-label">Interessi / Passioni</span>
+              <div class="terminal-box" id="infoInterests">---</div>
             </div>
 
-            <div class="info-field">
-              <span class="info-label">Reason for moving in</span>
-              <div class="info-box" id="infoReason">---</div>
+            <div class="terminal-field">
+              <span class="terminal-label">Note di Bordo</span>
+              <div class="terminal-box" id="infoNotes">---</div>
             </div>
 
-            <div class="info-field">
-              <span class="info-label">Favorite part of living here</span>
-              <div class="info-box" id="infoFavorite">---</div>
-            </div>
-
-            <div class="info-field">
-              <span class="info-label">Items</span>
-              <div class="info-items-row" id="infoItems">🎒 🪐</div>
+            <div class="terminal-field">
+              <span class="terminal-label">Oggetti Personali</span>
+              <div class="terminal-items" id="infoItems">🎒 🪐</div>
             </div>
           </div>
 
@@ -676,10 +673,9 @@
     const commandVisitLink = document.getElementById('commandVisitLink');
     const commandCloseBtn = document.getElementById('commandCloseBtn');
 
-    const infoMoved = document.getElementById('infoMoved');
-    const infoLikes = document.getElementById('infoLikes');
-    const infoReason = document.getElementById('infoReason');
-    const infoFavorite = document.getElementById('infoFavorite');
+    const infoStatus = document.getElementById('infoStatus');
+    const infoInterests = document.getElementById('infoInterests');
+    const infoNotes = document.getElementById('infoNotes');
     const infoItems = document.getElementById('infoItems');
 
     let isDragging = false;
@@ -696,11 +692,11 @@
 
       links.forEach(link => {
         const name = link.getAttribute('data-name').toLowerCase();
-        const likes = link.getAttribute('data-likes').toLowerCase();
+        const interests = link.getAttribute('data-interests').toLowerCase();
 
         if (term === '') {
           link.classList.remove('dimmed', 'highlighted');
-        } else if (name.includes(term) || likes.includes(term)) {
+        } else if (name.includes(term) || interests.includes(term)) {
           link.classList.remove('dimmed');
           link.classList.add('highlighted');
           
@@ -728,10 +724,9 @@
         commandTitleLink.textContent = userName;
         commandTitleLink.href = userUrl;
         
-        infoMoved.textContent = link.getAttribute('data-moved') || '---';
-        infoLikes.textContent = link.getAttribute('data-likes') || '---';
-        infoReason.textContent = link.getAttribute('data-reason') || '---';
-        infoFavorite.textContent = link.getAttribute('data-favorite') || '---';
+        infoStatus.textContent = link.getAttribute('data-status') || 'Attiva';
+        infoInterests.textContent = link.getAttribute('data-interests') || '---';
+        infoNotes.textContent = link.getAttribute('data-notes') || '---';
         infoItems.textContent = link.getAttribute('data-items') || '🪐';
 
         commandVisitLink.href = userUrl;
