@@ -330,7 +330,7 @@
       transform: scale(1.05);
     }
 
-    /* Schermata di comando a tutto schermo (Sostituisce il vecchio popup) */
+    /* Schermata computer di bordo / terminale spaziale */
     .command-screen {
       position: absolute;
       top: 15px; left: 15px; right: 15px; bottom: 15px;
@@ -338,7 +338,7 @@
       border: 2px solid #F0E8D5;
       border-radius: 14px;
       z-index: 100;
-      padding: 25px;
+      padding: 20px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -346,6 +346,7 @@
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.25s ease;
+      overflow-y: auto;
     }
 
     .command-screen.active {
@@ -358,11 +359,11 @@
       justify-content: space-between;
       align-items: center;
       border-bottom: 2px dashed rgba(240, 232, 213, 0.3);
-      padding-bottom: 15px;
+      padding-bottom: 12px;
     }
 
     .command-title {
-      font-size: 1.4rem;
+      font-size: 1.2rem;
       font-weight: 800;
       letter-spacing: 1px;
     }
@@ -372,13 +373,13 @@
       color: #F0E8D5;
       border: 2px solid #F0E8D5;
       border-radius: 10px;
-      width: 36px;
-      height: 36px;
+      width: 34px;
+      height: 34px;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      font-size: 1rem;
+      font-size: 0.9rem;
       box-shadow: 2px 2px 0px #F0E8D5;
       transition: transform 0.1s ease, background 0.1s ease, color 0.1s ease;
     }
@@ -388,27 +389,29 @@
       color: #000000;
     }
 
+    /* Struttura interna del computer (corpo centrale) */
     .command-body {
       display: flex;
-      gap: 30px;
+      flex-direction: row;
+      gap: 20px;
       align-items: center;
       flex: 1;
-      padding: 20px 0;
+      padding: 15px 0;
     }
 
-    /* Il Radar ora fa da visore principale del pianeta */
+    /* Il visore radar posizionato in basso a sinistra nel computer */
     .command-viewer {
-      width: 140px;
-      height: 140px;
-      min-width: 140px;
+      width: 110px;
+      height: 110px;
+      min-width: 110px;
       background: #000000;
       border: 2px solid #F0E8D5;
-      border-radius: 16px;
+      border-radius: 14px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 4.5rem;
-      box-shadow: 4px 4px 0px #F0E8D5;
+      font-size: 3.5rem;
+      box-shadow: 3px 3px 0px #F0E8D5;
       position: relative;
       overflow: hidden;
     }
@@ -417,7 +420,7 @@
       content: '';
       position: absolute;
       width: 100%;
-      height: 4px;
+      height: 3px;
       background: rgba(240, 232, 213, 0.4);
       animation: scanBeam 2s linear infinite;
     }
@@ -430,21 +433,21 @@
     .command-info {
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 8px;
       flex: 1;
     }
 
     .command-subtitle {
-      font-size: 0.8rem;
-      letter-spacing: 2px;
+      font-size: 0.7rem;
+      letter-spacing: 1.5px;
       opacity: 0.7;
       font-weight: 800;
       text-transform: uppercase;
     }
 
     .command-desc {
-      font-size: 1rem;
-      line-height: 1.6;
+      font-size: 0.9rem;
+      line-height: 1.5;
       font-weight: 700;
       opacity: 0.95;
     }
@@ -453,20 +456,42 @@
       display: flex;
       justify-content: flex-end;
       border-top: 2px dashed rgba(240, 232, 213, 0.3);
-      padding-top: 15px;
+      padding-top: 12px;
     }
 
+    /* Pulsante senza icone di pianeti/razzi e con testo pulito da computer */
     .command-visit-btn {
       background: #F0E8D5;
       color: #000000;
       border: 2px solid #F0E8D5;
-      padding: 10px 25px;
+      padding: 10px 20px;
       border-radius: 12px;
       font-weight: 800;
-      font-size: 0.95rem;
+      font-size: 0.85rem;
       text-decoration: none;
       box-shadow: 3px 3px 0px #F0E8D5;
       transition: transform 0.1s ease;
+    }
+
+    /* Media query specifica per telefoni: adatta il computer in verticale */
+    @media (max-width: 600px) {
+      .command-body {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+      }
+      .command-viewer {
+        width: 90px;
+        height: 90px;
+        min-width: 90px;
+        font-size: 2.8rem;
+      }
+      .command-title {
+        font-size: 1rem;
+      }
+      .command-desc {
+        font-size: 0.85rem;
+      }
     }
 
     .galaxy-board:fullscreen {
@@ -559,7 +584,7 @@
           <a href="https://it.wikipedia.org" data-name="Comet Star" data-desc="Esplora le meraviglie della conoscenza in italiano." class="cosmic-sticker-link anim-pulse" style="top: 480px; left: 1250px; animation-delay: 0.3s;">☄️</a>
         </div>
 
-        <!-- Schermata di comando a tutto schermo -->
+        <!-- Schermata computer di bordo / terminale spaziale -->
         <div class="command-screen" id="commandScreen">
           <div class="command-header">
             <div class="command-title" id="commandTitle">TITOLO SEGNALE</div>
@@ -575,7 +600,7 @@
             </div>
           </div>
           <div class="command-footer">
-            <a href="#" id="commandVisitLink" target="_blank" class="command-visit-btn"><i class="fa-solid fa-rocket"></i> Visita Pianeta</a>
+            <a href="#" id="commandVisitLink" target="_blank" class="command-visit-btn">Accedi alla frequenza</a>
           </div>
         </div>
 
