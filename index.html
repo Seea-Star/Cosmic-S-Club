@@ -550,13 +550,6 @@
       text-decoration: underline;
     }
 
-    .galaxy-counter {
-      font-size: 0.85rem;
-      opacity: 0.9;
-      border-top: 1px dashed rgba(240, 232, 213, 0.3);
-      padding-top: 8px;
-    }
-
     .space-footer {
       text-align: center;
       padding: 20px;
@@ -598,11 +591,11 @@
           <div class="shooting-comet-1">☄️</div>
           <img src="ezgif-733e927ae4e467d8.gif" alt="UFO" class="shooting-comet-2">
 
-          <a href="https://www.wikipedia.org" data-name="Wikipedia Planet" data-desc="Enciclopedia libera universale della galassia." data-id="AstroKate" data-date="2026-09-01" data-button="https://neocities.org/button.gif" data-profile="https://cosmic-s.atabook.org/" class="cosmic-sticker-link anim-float" style="top: 450px; left: 700px; animation-delay: 0s;">🪐</a>
-          <a href="https://neocities.org" data-name="Neocities Rocket" data-desc="Base spaziale per siti web indipendenti e retrò." data-id="NetPilot" data-date="2026-09-05" data-button="https://neocities.org/button.gif" data-profile="https://cosmic-s.atabook.org/" class="cosmic-sticker-link anim-drift" style="top: 250px; left: 1050px; animation-delay: 1.2s;">🚀</a>
-          <a href="https://archive.org" data-name="Archive UFO" data-desc="La capsula del tempo che conserva la storia di internet." data-id="TimeGhost" data-date="2026-09-08" data-button="https://neocities.org/button.gif" data-profile="https://cosmic-s.atabook.org/" class="cosmic-sticker-link anim-pulse" style="top: 750px; left: 400px; animation-delay: 2.5s;">🛸</a>
-          <a href="https://github.com" data-name="GitHub Star" data-desc="Pianeta dei codici sorgente e degli sviluppatori." data-id="BinaryStar" data-date="2026-09-10" data-button="https://neocities.org/button.gif" data-profile="https://cosmic-s.atabook.org/" class="cosmic-sticker-link anim-float" style="top: 180px; left: 350px; animation-delay: 0.8s;">⭐</a>
-          <a href="https://developer.mozilla.org" data-name="MDN Astronaut" data-desc="Manuale di sopravvivenza per esploratori del web." data-id="DevNaut" data-date="2026-09-12" data-button="https://neocities.org/button.gif" data-profile="https://cosmic-s.atabook.org/" class="cosmic-sticker-link anim-drift" style="top: 680px; left: 1150px; animation-delay: 1.8s;">👨‍🚀</a>
+          <a href="https://www.wikipedia.org" data-name="Wikipedia Planet" data-desc="Enciclopedia libera universale della galassia." data-id="AstroKate" data-date="2026-09-01" data-button="https://neocities.org/button.gif" data-profile="https://cosmic-s.atabook.org/" class="cosmic-sticker-link anim-float" style="top: 320px; left: 880px; animation-delay: 0s;">🪐</a>
+          <a href="https://neocities.org" data-name="Neocities Rocket" data-desc="Base spaziale per siti web indipendenti e retrò." data-id="NetPilot" data-date="2026-09-05" data-button="https://neocities.org/button.gif" data-profile="https://cosmic-s.atabook.org/" class="cosmic-sticker-link anim-drift" style="top: 150px; left: 420px; animation-delay: 1.2s;">🚀</a>
+          <a href="https://archive.org" data-name="Archive UFO" data-desc="La capsula del tempo che conserva la storia di internet." data-id="TimeGhost" data-date="2026-09-08" data-button="https://neocities.org/button.gif" data-profile="https://cosmic-s.atabook.org/" class="cosmic-sticker-link anim-pulse" style="top: 610px; left: 240px; animation-delay: 2.5s;">🛸</a>
+          <a href="https://github.com" data-name="GitHub Star" data-desc="Pianeta dei codici sorgente e degli sviluppatori." data-id="BinaryStar" data-date="2026-09-10" data-button="https://neocities.org/button.gif" data-profile="https://cosmic-s.atabook.org/" class="cosmic-sticker-link anim-float" style="top: 780px; left: 950px; animation-delay: 0.8s;">⭐</a>
+          <a href="https://developer.mozilla.org" data-name="MDN Astronaut" data-desc="Manuale di sopravvivenza per esploratori del web." data-id="DevNaut" data-date="2026-09-12" data-button="https://neocities.org/button.gif" data-profile="https://cosmic-s.atabook.org/" class="cosmic-sticker-link anim-drift" style="top: 490px; left: 610px; animation-delay: 1.8s;">👨‍🚀</a>
         </div>
 
         <div class="command-screen" id="commandScreen">
@@ -668,14 +661,13 @@
       <div class="space-intro">
         <span>Welcome to the Cosmic Club! This is an open cosmic canvas for everyone. Send me your custom pixel art, star, planet, UFO, rocket, or astronaut, and I will place it floating around here.</span>
         <span>To join the galaxy, head over to the <a href="https://cosmic-s.atabook.org/" target="_blank">Guestbook</a> and send your creation!</span>
-        <div class="galaxy-counter" id="galaxyCounter">🌟 Elementi attivi nella galassia: 0</div>
       </div>
 
     </div>
 
     <div class="space-footer">
       Created by Cosmic-S<br>
-      <a href="https://cosmic-s.atabook.org/" target="_blank">https://cosmic-s.atabook.org/</a>
+      <a href="https://cosmic-seea.neocities.org" target="_blank">https://cosmic-seea.neocities.org</a>
     </div>
 
   </div>
@@ -745,7 +737,6 @@
     const board = document.getElementById('galaxyBoard');
     const world = document.getElementById('galaxyWorld');
     const radarBlip = document.getElementById('radarBlip');
-    const galaxyCounter = document.getElementById('galaxyCounter');
     const searchInput = document.getElementById('galaxySearchInput');
     
     const commandScreen = document.getElementById('commandScreen');
@@ -767,7 +758,6 @@
     let scale = 0.55;
 
     const links = world.querySelectorAll('.cosmic-sticker-link');
-    galaxyCounter.textContent = `🌟 Elementi attivi nella galassia: ${links.length}`;
 
     searchInput.addEventListener('input', (e) => {
       const term = e.target.value.toLowerCase().trim();
