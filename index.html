@@ -1,867 +1,302 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>COSMIC-S - Cosmic Club</title>
+  <title>COSMIC-S // TERMINAL_V2</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
 
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      background-color: #000000;
-      color: #F0E8D5;
-      font-family: 'Quicksand', sans-serif;
-      padding: 30px 10px;
+      background-color: #050805;
+      color: #00FF66;
+      font-family: 'Share Tech Mono', monospace;
+      padding: 20px;
       display: flex;
       justify-content: center;
       min-height: 100vh;
+      text-transform: uppercase;
     }
 
-    .site-wrapper {
-      max-width: 900px;
+    .terminal-frame {
+      max-width: 950px;
       width: 100%;
+      border: 3px double #00FF66;
+      background: #000000;
+      box-shadow: 0 0 20px rgba(0, 255, 102, 0.2);
+      padding: 20px;
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 15px;
+      position: relative;
     }
 
-    .top-banner {
-      background-color: #000000;
-      background-image: 
-        linear-gradient(rgba(240, 232, 213, 0.18) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(240, 232, 213, 0.18) 1px, transparent 1px);
-      background-size: 20px 20px;
-      border: 2px solid #F0E8D5;
-      border-radius: 20px;
-      padding: 12px 25px;
+    /* Effetto scanline sullo schermo */
+    .terminal-frame::before {
+      content: " ";
+      display: block;
+      position: absolute;
+      top: 0; left: 0; bottom: 0; right: 0;
+      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+      background-size: 100% 4px;
+      z-index: 50;
+      pointer-events: none;
+    }
+
+    .terminal-header {
+      border-bottom: 2px dashed #00FF66;
+      padding-bottom: 10px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      box-shadow: 4px 4px 0px #F0E8D5;
+      font-size: 1.2rem;
     }
 
-    .top-banner h1 { 
-      font-size: 2rem; 
-      font-weight: 800; 
-      letter-spacing: 2px; 
-      color: #F0E8D5;
+    .terminal-screen-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 15px;
     }
 
-    /* Animazione di click universale per qualsiasi pulsante o input */
-    .back-btn, .control-btn, .command-visit-btn, .reset-galaxy-btn, .command-close-btn, .search-bar input {
-      transition: transform 0.1s ease, box-shadow 0.1s ease !important;
+    @media (max-width: 768px) {
+      .terminal-screen-grid { grid-template-columns: 1fr; }
     }
 
-    .back-btn:active, .control-btn:active, .command-visit-btn:active, .reset-galaxy-btn:active, .command-close-btn:active, .search-bar input:focus {
-      transform: translate(2px, 2px) !important;
-      box-shadow: 0px 0px 0px #F0E8D5 !important;
-    }
-
-    .back-btn {
-      background: #F0E8D5;
-      color: #000000;
-      border: 2px solid #F0E8D5;
-      padding: 8px 14px;
-      border-radius: 12px;
-      font-weight: 800;
-      font-size: 0.75rem;
-      text-decoration: none;
-      box-shadow: 2px 2px 0px #F0E8D5;
-    }
-
-    .space-container {
-      background-color: #000000;
-      background-image: 
-        linear-gradient(rgba(240, 232, 213, 0.18) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(240, 232, 213, 0.18) 1px, transparent 1px);
-      background-size: 20px 20px;
-      border: 2px solid #F0E8D5;
-      border-radius: 20px;
-      padding: 30px;
-      box-shadow: 6px 6px 0px #F0E8D5;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-
-    .search-bar {
+    /* Radar / Monitor Circolare */
+    .radar-monitor {
+      width: 100%;
+      height: 340px;
+      border: 2px solid #00FF66;
+      border-radius: 50%;
       position: relative;
-      width: 100%;
-    }
-
-    .search-bar input {
-      width: 100%;
-      background: #000000;
-      border: 2px solid #F0E8D5;
-      border-radius: 14px;
-      padding: 12px 15px 12px 45px;
-      color: #F0E8D5;
-      font-family: 'Quicksand', sans-serif;
-      font-weight: 700;
-      font-size: 0.95rem;
-      box-shadow: 4px 4px 0px #F0E8D5;
-      outline: none;
-    }
-
-    .search-bar input::placeholder {
-      color: rgba(240, 232, 213, 0.5);
-    }
-
-    .search-bar i {
-      position: absolute;
-      left: 16px;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 1.1rem;
-      color: #F0E8D5;
-      opacity: 0.8;
-    }
-
-    .galaxy-board {
-      width: 100%;
-      height: 450px;
-      border: 2px solid #F0E8D5;
-      border-radius: 16px;
-      position: relative;
-      background-color: #000000;
-      overflow: hidden;
-      box-shadow: 4px 4px 0px #F0E8D5;
-      cursor: grab;
-    }
-
-    .galaxy-board:active {
-      cursor: grabbing;
-    }
-
-    .galaxy-canvas-world {
-      position: absolute;
-      width: 1400px;
-      height: 1000px;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      transform-origin: center center;
-      user-select: none;
-      background-color: #000000;
-      background-image: 
-        radial-gradient(white 1.3px, transparent 1.3px),
-        radial-gradient(rgba(240,232,213,0.7) 1px, transparent 1px),
-        radial-gradient(white 0.7px, transparent 0.7px);
-      background-size: 110px 110px, 160px 160px, 75px 75px;
-      background-position: 0 0, 50px 80px, 25px 35px;
-      animation: bgPulse 8s ease-in-out infinite alternate;
-      transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-    }
-
-    @keyframes bgPulse {
-      0% { filter: brightness(0.9); }
-      100% { filter: brightness(1.2); }
-    }
-
-    .cosmic-sticker-link {
-      position: absolute;
-      display: inline-block;
-      font-size: 2.2rem;
-      filter: drop-shadow(2px 2px 0px #F0E8D5);
-      text-decoration: none;
-      transition: transform 0.2s ease, filter 0.2s ease, opacity 0.3s ease;
-      z-index: 10;
-      cursor: pointer;
-    }
-
-    .cosmic-sticker-link:hover {
-      transform: scale(1.3) translateY(-4px);
-      filter: drop-shadow(0px 0px 10px #F0E8D5);
-    }
-
-    .cosmic-sticker-link.dimmed {
-      opacity: 0.2;
-      filter: grayscale(100%) drop-shadow(1px 1px 0px rgba(240,232,213,0.2));
-    }
-
-    .cosmic-sticker-link.highlighted {
-      transform: scale(1.4);
-      filter: drop-shadow(0px 0px 14px #FFF);
-    }
-
-    .shooting-comet-1 {
-      position: absolute;
-      font-size: 1.6rem;
-      pointer-events: none;
-      animation: shootComet1 14s linear infinite;
-      z-index: 5;
-    }
-    @keyframes shootComet1 {
-      0% { top: -40px; left: -40px; opacity: 0; }
-      10% { opacity: 1; }
-      90% { opacity: 1; }
-      100% { top: 1040px; left: 1440px; opacity: 0; }
-    }
-
-    .shooting-comet-2 {
-      position: absolute;
-      font-size: 1.5rem;
-      pointer-events: none;
-      animation: shootComet2 18s linear infinite;
-      animation-delay: 5s;
-      z-index: 5;
-    }
-    @keyframes shootComet2 {
-      0% { top: 1040px; left: -40px; opacity: 0; }
-      10% { opacity: 1; }
-      90% { opacity: 1; }
-      100% { top: -40px; left: 1440px; opacity: 0; }
-    }
-
-    .anim-float { animation: float 4s ease-in-out infinite; }
-    @keyframes float {
-      0% { transform: translateY(0px); }
-      50% { transform: translateY(-10px); }
-      100% { transform: translateY(0px); }
-    }
-
-    .anim-drift { animation: drift 6s ease-in-out infinite; }
-    @keyframes drift {
-      0% { transform: translateX(0px) translateY(0px); }
-      50% { transform: translateX(12px) translateY(-6px); }
-      100% { transform: translateX(0px) translateY(0px); }
-    }
-
-    .anim-pulse { animation: pulseAnim 3.5s ease-in-out infinite; }
-    @keyframes pulseAnim {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.15); }
-      100% { transform: scale(1); }
-    }
-
-    .reset-galaxy-btn {
-      position: absolute;
-      top: 15px;
-      left: 15px;
-      background: #000000;
-      color: #F0E8D5;
-      border: 2px solid #F0E8D5;
-      border-radius: 10px;
-      width: 38px;
-      height: 38px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.9rem;
-      cursor: pointer;
-      box-shadow: 2px 2px 0px #F0E8D5;
-      z-index: 20;
-    }
-
-    .reset-galaxy-btn:hover {
-      background: #F0E8D5;
-      color: #000000;
-    }
-
-    .galaxy-radar {
-      position: absolute;
-      bottom: 15px;
-      left: 15px;
-      width: 90px;
-      height: 90px;
-      background: rgba(0, 0, 0, 0.85);
-      border: 2px solid #F0E8D5;
-      border-radius: 12px;
-      box-shadow: 2px 2px 0px #F0E8D5;
-      z-index: 20;
+      background: radial-gradient(circle, #001103 0%, #000000 80%);
       overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
+      box-shadow: inset 0 0 30px rgba(0, 255, 102, 0.4);
     }
 
-    .radar-grid {
+    .radar-grid-lines {
       position: absolute;
       width: 100%;
       height: 100%;
       background-image: 
-        linear-gradient(rgba(240, 232, 213, 0.15) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(240, 232, 213, 0.15) 1px, transparent 1px);
-      background-size: 15px 15px;
-    }
-
-    .radar-blip {
-      position: absolute;
-      width: 6px;
-      height: 6px;
-      background-color: #F0E8D5;
+        linear-gradient(rgba(0, 255, 102, 0.15) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 102, 0.15) 1px, transparent 1px);
+      background-size: 40px 40px;
       border-radius: 50%;
-      box-shadow: 0 0 4px #F0E8D5;
-      transform: translate(-50%, -50%);
     }
 
-    .galaxy-controls {
+    .radar-sweep {
       position: absolute;
-      bottom: 15px;
-      right: 15px;
-      display: flex;
-      gap: 8px;
-      z-index: 20;
+      width: 50%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #00FF66);
+      top: 50%;
+      left: 50%;
+      transform-origin: left center;
+      animation: sweep 4s linear infinite;
     }
 
-    .control-btn {
-      background: #000000;
-      color: #F0E8D5;
-      border: 2px solid #F0E8D5;
-      border-radius: 10px;
-      width: 40px;
-      height: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    @keyframes sweep {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .radar-node {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: #00FF66;
+      border-radius: 50%;
       cursor: pointer;
-      font-size: 1rem;
-      box-shadow: 2px 2px 0px #F0E8D5;
+      box-shadow: 0 0 8px #00FF66;
+      transition: transform 0.2s;
+      z-index: 10;
     }
 
-    .control-btn:hover {
-      background: #F0E8D5;
-      color: #000000;
-      transform: scale(1.05);
+    .radar-node:hover {
+      transform: scale(1.8);
+      background: #FFFFFF;
     }
 
-    /* Schermata Computer di Bordo / Terminale Retro */
-    .command-screen {
-      position: absolute;
-      top: 15px; left: 15px; right: 15px; bottom: 15px;
-      background: #000000;
-      border: 2px solid #F0E8D5;
-      border-radius: 14px;
-      z-index: 100;
-      padding: 16px;
+    /* Console di Log / Dati stile terminale verde */
+    .console-panel {
+      border: 1px solid #00FF66;
+      padding: 15px;
+      background: rgba(0, 255, 102, 0.03);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      box-shadow: 6px 6px 0px #F0E8D5;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.25s ease;
-      overflow-y: auto;
-    }
-
-    .command-screen.active {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .command-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 2px dashed rgba(240, 232, 213, 0.3);
-      padding-bottom: 8px;
-    }
-
-    /* Nome utente cliccabile che porta al suo sito */
-    .command-title-link {
-      font-size: 1.15rem;
-      font-weight: 800;
-      letter-spacing: 1px;
-      color: #F0E8D5;
-      text-decoration: underline;
-      cursor: pointer;
-    }
-    .command-title-link:hover {
-      color: #FFF;
-      text-shadow: 0 0 8px #F0E8D5;
-    }
-
-    .command-close-btn {
-      background: #000000;
-      color: #F0E8D5;
-      border: 2px solid #F0E8D5;
-      border-radius: 10px;
-      width: 30px;
-      height: 30px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      font-size: 0.85rem;
-      box-shadow: 2px 2px 0px #F0E8D5;
-    }
-
-    .command-close-btn:hover {
-      background: #F0E8D5;
-      color: #000000;
-    }
-
-    /* Corpo in stile terminale con mini blocchi informativi */
-    .command-body {
-      display: flex;
-      flex-direction: column;
       gap: 10px;
-      padding: 10px 0;
-      font-family: monospace;
+      min-height: 340px;
     }
 
-    .terminal-field {
+    .console-logs {
       display: flex;
       flex-direction: column;
-      gap: 3px;
+      gap: 8px;
+      font-size: 0.9rem;
     }
 
-    .terminal-label {
-      font-size: 0.65rem;
-      letter-spacing: 1px;
-      font-weight: 800;
-      text-transform: uppercase;
+    .log-line {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      border-left: 2px solid #00FF66;
+      padding-left: 8px;
+    }
+
+    .log-label {
+      font-size: 0.75rem;
       opacity: 0.7;
-      font-family: 'Quicksand', sans-serif;
     }
 
-    .terminal-box {
-      background: rgba(240, 232, 213, 0.05);
-      border: 1px dashed rgba(240, 232, 213, 0.3);
-      border-radius: 8px;
-      padding: 8px 10px;
-      font-size: 0.85rem;
-      font-weight: 700;
+    .log-value {
+      font-size: 0.95rem;
       color: #FFF;
     }
 
-    .terminal-items {
+    .terminal-input-bar {
       display: flex;
-      gap: 8px;
-      font-size: 1.2rem;
-      background: rgba(240, 232, 213, 0.05);
-      border: 1px dashed rgba(240, 232, 213, 0.3);
-      border-radius: 8px;
-      padding: 8px 10px;
-    }
-
-    .command-footer {
-      display: flex;
-      justify-content: flex-end;
-      border-top: 2px dashed rgba(240, 232, 213, 0.3);
+      gap: 10px;
+      border-top: 1px dashed #00FF66;
       padding-top: 10px;
     }
 
-    .command-visit-btn {
-      background: #F0E8D5;
-      color: #000000;
-      border: 2px solid #F0E8D5;
-      padding: 8px 16px;
-      border-radius: 10px;
-      font-weight: 800;
-      font-size: 0.8rem;
-      text-decoration: none;
-      box-shadow: 2px 2px 0px #F0E8D5;
+    .terminal-input-bar input {
+      width: 100%;
+      background: #000;
+      border: 1px solid #00FF66;
+      color: #00FF66;
+      padding: 8px;
+      font-family: 'Share Tech Mono', monospace;
+      outline: none;
     }
 
-    .galaxy-board:fullscreen {
-      width: 100vw;
-      height: 100vh;
+    .terminal-btn {
+      background: #00FF66;
+      color: #000;
       border: none;
-      border-radius: 0;
-      box-shadow: none;
-    }
-
-    .space-intro {
-      font-size: 0.95rem;
-      line-height: 1.6;
-      font-weight: 700;
-      color: #F0E8D5;
-      background: rgba(0, 0, 0, 0.85);
-      padding: 15px;
-      border-radius: 12px;
-      border: 1px solid #F0E8D5;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .space-intro a {
-      color: #F0E8D5;
+      padding: 0 15px;
+      font-family: 'Share Tech Mono', monospace;
       font-weight: bold;
-      text-decoration: underline;
+      cursor: pointer;
     }
 
-    .galaxy-counter {
-      font-size: 0.85rem;
-      opacity: 0.9;
-      border-top: 1px dashed rgba(240, 232, 213, 0.3);
+    .terminal-btn:hover {
+      background: #FFF;
+    }
+
+    .status-footer {
+      font-size: 0.8rem;
+      border-top: 2px double #00FF66;
       padding-top: 8px;
+      display: flex;
+      justify-content: space-between;
     }
 
-    .space-footer {
-      text-align: center;
-      padding: 20px;
-      font-size: 13px;
-      opacity: 0.8;
-      border-top: 1px dashed rgba(240, 232, 213, 0.3);
-      margin-top: 10px;
-    }
-
-    .space-footer a {
-      color: #F0E8D5;
-      text-decoration: underline;
-      font-weight: bold;
-    }
+    a { color: inherit; text-decoration: none; }
   </style>
 </head>
 <body>
 
-  <div class="site-wrapper">
+  <div class="terminal-frame">
+    
+    <div class="terminal-header">
+      <span>// COSMIC_SYS_v2.0</span>
+      <span>[STATUS: ONLINE]</span>
+    </div>
 
-    <header class="top-banner">
-      <h1>COSMIC CLUB</h1>
-      <a href="https://seea-star.github.io/Cosmic-S-Home/" class="back-btn"><i class="fa-solid fa-chevron-left"></i> HOME</a>
-    </header>
-
-    <div class="space-container">
-
-      <div class="search-bar">
-        <i class="fa-solid fa-magnifying-glass"></i>
-        <input type="text" id="galaxySearchInput" placeholder="Cerca un utente, un interesse o un oggetto...">
-      </div>
-
-      <div class="galaxy-board" id="galaxyBoard">
+    <div class="terminal-screen-grid">
+      
+      <!-- Schermo Radar Centrale -->
+      <div class="radar-monitor" id="radarScreen">
+        <div class="radar-grid-lines"></div>
+        <div class="radar-sweep"></div>
         
-        <button class="reset-galaxy-btn" id="resetBtn" title="Centra la galassia">
-          <i class="fa-solid fa-rotate-right"></i>
-        </button>
-
-        <div class="galaxy-canvas-world" id="galaxyWorld">
-          <div class="shooting-comet-1">☄️</div>
-          <div class="shooting-comet-2">🛸</div>
-
-          <!-- Dati puliti e personalizzati per ogni utente nel terminale -->
-          <a href="https://www.wikipedia.org" data-name="Star" data-status="Online / Attiva" data-interests="drawing, coding, exploring" data-notes="esplorando la galassia digitale" data-items="🍀, 🪐, 🎒" class="cosmic-sticker-link anim-float" style="top: 450px; left: 700px; animation-delay: 0s;">🪐</a>
-          <a href="https://neocities.org" data-name="NeoPilot" data-status="In orbita" data-interests="pixel art, synthwave, html" data-notes="costruendo stazioni web indipendenti" data-items="🚀, 💾, 🎧" class="cosmic-sticker-link anim-drift" style="top: 250px; left: 1050px; animation-delay: 1.2s;">🚀</a>
-          <a href="https://archive.org" data-name="TimeWanderer" data-status="Segnale stabile" data-interests="retro tech, archiving, books" data-notes="conservando vecchie reliquie digitali" data-items="🛸, 📼, 📚" class="cosmic-sticker-link anim-pulse" style="top: 750px; left: 400px; animation-delay: 2.5s;">🛸</a>
-          <a href="https://github.com" data-name="CodeStar" data-status="Compilazione in corso" data-interests="javascript, open source, tea" data-notes="scrivendo codice sotto le stelle" data-items="⭐, 💻, ☕" class="cosmic-sticker-link anim-float" style="top: 180px; left: 350px; animation-delay: 0.8s;">⭐</a>
-          <a href="https://developer.mozilla.org" data-name="Devonaut" data-status="Esplorazione" data-interests="css tricks, web standards" data-notes="documentando i segreti del web" data-items="👨‍🚀, 📜, 🔭" class="cosmic-sticker-link anim-drift" style="top: 680px; left: 1150px; animation-delay: 1.8s;">👨‍🚀</a>
-        </div>
-
-        <!-- Finestra Terminale di Bordo -->
-        <div class="command-screen" id="commandScreen">
-          <div class="command-header">
-            <a href="#" id="commandTitleLink" target="_blank" class="command-title-link">NOME UTENTE</a>
-            <button class="command-close-btn" id="commandCloseBtn" title="Chiudi terminale">
-              <i class="fa-solid fa-xmark"></i>
-            </button>
-          </div>
-
-          <div class="command-body">
-            <div class="terminal-field">
-              <span class="terminal-label">Stato Frequenza</span>
-              <div class="terminal-box" id="infoStatus">---</div>
-            </div>
-
-            <div class="terminal-field">
-              <span class="terminal-label">Interessi / Passioni</span>
-              <div class="terminal-box" id="infoInterests">---</div>
-            </div>
-
-            <div class="terminal-field">
-              <span class="terminal-label">Note di Bordo</span>
-              <div class="terminal-box" id="infoNotes">---</div>
-            </div>
-
-            <div class="terminal-field">
-              <span class="terminal-label">Oggetti Personali</span>
-              <div class="terminal-items" id="infoItems">🎒 🪐</div>
-            </div>
-          </div>
-
-          <div class="command-footer">
-            <a href="#" id="commandVisitLink" target="_blank" class="command-visit-btn">Visita il sito <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-          </div>
-        </div>
-
-        <div class="galaxy-radar" id="galaxyRadar">
-          <div class="radar-grid"></div>
-          <div class="radar-blip" id="radarBlip"></div>
-        </div>
-
-        <div class="galaxy-controls">
-          <button class="control-btn" id="randomBtn" title="Inquadra un elemento casuale">
-            <i class="fa-solid fa-dice"></i>
-          </button>
-          <button class="control-btn" id="zoomOutBtn" title="Zoom Out">
-            <i class="fa-solid fa-minus"></i>
-          </button>
-          <button class="control-btn" id="zoomInBtn" title="Zoom In">
-            <i class="fa-solid fa-plus"></i>
-          </button>
-          <button class="control-btn" id="fullscreenBtn" title="Fullscreen">
-            <i class="fa-solid fa-expand" id="fullscreenIcon"></i>
-          </button>
-        </div>
-
+        <!-- Nodi radar posizionati con coordinate percentuali -->
+        <div class="radar-node" style="top: 30%; left: 40%;" 
+             data-name="STARLINK_01" data-freq="142.5 MHz" data-status="STABILE" data-link="https://www.wikipedia.org"></div>
+        <div class="radar-node" style="top: 60%; left: 70%;" 
+             data-name="NEO_PULSAR" data-freq="89.2 MHz" data-status="IN ORBITA" data-link="https://neocities.org"></div>
+        <div class="radar-node" style="top: 75%; left: 30%;" 
+             data-name="TIME_WANDERER" data-freq="210.0 MHz" data-status="SEGNALE DEBOLE" data-link="https://archive.org"></div>
       </div>
 
-      <div class="space-intro">
-        <span>Welcome to the Cosmic Club! This is an open cosmic canvas for everyone. Send me your custom pixel art, star, planet, UFO, rocket, or astronaut, and I will place it floating around here.</span>
-        <span>To join the galaxy, head over to the <a href="https://cosmic-s.atabook.org/" target="_blank">Guestbook</a> and send your creation!</span>
-        <div class="galaxy-counter" id="galaxyCounter">🌟 Elementi attivi nella galassia: 0</div>
+      <!-- Pannello Dati / Log a destra -->
+      <div class="console-panel">
+        <div class="console-logs" id="consoleLogs">
+          <div class="log-line">
+            <span class="log-label">> SELEZIONA UN NODO RADAR O CLICCA SOTTO</span>
+            <span class="log-value">Pronto per la scansione...</span>
+          </div>
+          <div class="log-line">
+            <span class="log-label">> FREQUENZA ATTIVA</span>
+            <span class="log-value">---</span>
+          </div>
+          <div class="log-line">
+            <span class="log-label">> TELEMETRIA / NOTE</span>
+            <span class="log-value">Nessun utente selezionato.</span>
+          </div>
+        </div>
+
+        <div id="visitContainer" style="display:none; margin-top: 10px;">
+          <a href="#" id="visitLink" target="_blank" style="display:block; background:#00FF66; color:#000; text-align:center; padding:6px; font-weight:bold;">[ ACCEDI AL LINK UTENTE ]</a>
+        </div>
+
+        <div class="terminal-input-bar">
+          <input type="text" id="terminalInput" placeholder="Cerca ID nel sistema...">
+          <button class="terminal-btn" id="searchBtn">QUERY</button>
+        </div>
       </div>
 
     </div>
 
-    <div class="space-footer">
-      Created by Cosmic-S<br>
-      <a href="https://cosmic-s.atabook.org/" target="_blank">https://cosmic-s.atabook.org/</a>
+    <div class="status-footer">
+      <span>SECTOR: 138E/12</span>
+      <a href="https://seea-star.github.io/Cosmic-S-Home/" style="text-decoration: underline;">[ TORNA ALLA HOME ]</a>
     </div>
 
   </div>
 
   <script>
-    let audioCtx = null;
+    const nodes = document.querySelectorAll('.radar-node');
+    const logValueNode = document.getElementById('consoleLogs');
+    const visitContainer = document.getElementById('visitContainer');
+    const visitLink = document.getElementById('visitLink');
 
-    function initAudio() {
-      if (!audioCtx) {
-        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      }
-    }
+    nodes.forEach(node => {
+      node.addEventListener('click', () => {
+        const name = node.getAttribute('data-name');
+        const freq = node.getAttribute('data-freq');
+        const status = node.getAttribute('data-status');
+        const url = node.getAttribute('data-link');
 
-    function playBeep(freq = 440, type = 'sine', duration = 0.08) {
-      try {
-        initAudio();
-        if (audioCtx.state === 'suspended') audioCtx.resume();
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
-        osc.type = type;
-        osc.frequency.value = freq;
-        gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
-        osc.connect(gain);
-        gain.connect(audioCtx.destination);
-        osc.start();
-        osc.stop(audioCtx.currentTime + duration);
-      } catch (e) {}
-    }
+        logValueNode.innerHTML = `
+          <div class="log-line">
+            <span class="log-label">> NODO TARGET</span>
+            <span class="log-value">${name}</span>
+          </div>
+          <div class="log-line">
+            <span class="log-label">> FREQUENZA</span>
+            <span class="log-value">${freq}</span>
+          </div>
+          <div class="log-line">
+            <span class="log-label">> STATO SEGNALE</span>
+            <span class="log-value">${status}</span>
+          </div>
+        `;
 
-    function playDiceSound() {
-      try {
-        initAudio();
-        if (audioCtx.state === 'suspended') audioCtx.resume();
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
-        osc.type = 'triangle';
-        osc.frequency.setValueAtTime(587.33, audioCtx.currentTime);
-        osc.frequency.setValueAtTime(880, audioCtx.currentTime + 0.06);
-        gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.2);
-        osc.connect(gain);
-        gain.connect(audioCtx.destination);
-        osc.start();
-        osc.stop(audioCtx.currentTime + 0.2);
-      } catch (e) {}
-    }
-
-    const board = document.getElementById('galaxyBoard');
-    const world = document.getElementById('galaxyWorld');
-    const radarBlip = document.getElementById('radarBlip');
-    const galaxyCounter = document.getElementById('galaxyCounter');
-    const searchInput = document.getElementById('galaxySearchInput');
-    
-    const commandScreen = document.getElementById('commandScreen');
-    const commandTitleLink = document.getElementById('commandTitleLink');
-    const commandVisitLink = document.getElementById('commandVisitLink');
-    const commandCloseBtn = document.getElementById('commandCloseBtn');
-
-    const infoStatus = document.getElementById('infoStatus');
-    const infoInterests = document.getElementById('infoInterests');
-    const infoNotes = document.getElementById('infoNotes');
-    const infoItems = document.getElementById('infoItems');
-
-    let isDragging = false;
-    let startX, startY;
-    let currentX = 0;
-    let currentY = 0;
-    let scale = 0.55;
-
-    const links = world.querySelectorAll('.cosmic-sticker-link');
-    galaxyCounter.textContent = `🌟 Elementi attivi nella galassia: ${links.length}`;
-
-    searchInput.addEventListener('input', (e) => {
-      const term = e.target.value.toLowerCase().trim();
-
-      links.forEach(link => {
-        const name = link.getAttribute('data-name').toLowerCase();
-        const interests = link.getAttribute('data-interests').toLowerCase();
-
-        if (term === '') {
-          link.classList.remove('dimmed', 'highlighted');
-        } else if (name.includes(term) || interests.includes(term)) {
-          link.classList.remove('dimmed');
-          link.classList.add('highlighted');
-          
-          const targetTop = parseFloat(link.style.top);
-          const targetLeft = parseFloat(link.style.left);
-          currentX = -(targetLeft - 700);
-          currentY = -(targetTop - 500);
-          scale = 1.1;
-          updateWorldTransform(true);
-        } else {
-          link.classList.add('dimmed');
-          link.classList.remove('highlighted');
-        }
+        visitLink.href = url;
+        visitContainer.style.display = 'block';
       });
-    });
-
-    links.forEach(link => {
-      link.addEventListener('click', (e) => {
-        e.preventDefault();
-        playBeep(520, 'sine', 0.1);
-        
-        const userUrl = link.href;
-        const userName = link.getAttribute('data-name');
-
-        commandTitleLink.textContent = userName;
-        commandTitleLink.href = userUrl;
-        
-        infoStatus.textContent = link.getAttribute('data-status') || 'Attiva';
-        infoInterests.textContent = link.getAttribute('data-interests') || '---';
-        infoNotes.textContent = link.getAttribute('data-notes') || '---';
-        infoItems.textContent = link.getAttribute('data-items') || '🪐';
-
-        commandVisitLink.href = userUrl;
-        commandScreen.classList.add('active');
-      });
-    });
-
-    commandCloseBtn.addEventListener('click', () => {
-      playBeep(300, 'sine', 0.06);
-      commandScreen.classList.remove('active');
-    });
-
-    function clamp(val, min, max) {
-      return Math.max(min, Math.min(max, val));
-    }
-
-    function updateWorldTransform(withTransition = false) {
-      const maxDragX = 400;
-      const maxDragY = 300;
-
-      currentX = clamp(currentX, -maxDragX, maxDragX);
-      currentY = clamp(currentY, -maxDragY, maxDragY);
-
-      if (withTransition) {
-        world.style.transition = 'transform 0.6s cubic-bezier(0.25, 1, 0.5, 1)';
-      } else {
-        world.style.transition = 'none';
-      }
-
-      world.style.transform = `translate(calc(-50% + ${currentX}px), calc(-50% + ${currentY}px)) scale(${scale})`;
-
-      const blipX = 45 - (currentX / maxDragX) * 35;
-      const blipY = 45 - (currentY / maxDragY) * 35;
-      
-      radarBlip.style.left = `${blipX}px`;
-      radarBlip.style.top = `${blipY}px`;
-    }
-
-    updateWorldTransform();
-
-    board.addEventListener('mousedown', (e) => {
-      if (e.target.closest('.galaxy-controls') || e.target.closest('.galaxy-radar') || e.target.closest('.command-screen') || e.target.closest('.reset-galaxy-btn')) return;
-      isDragging = true;
-      startX = e.clientX - currentX;
-      startY = e.clientY - currentY;
-    });
-
-    window.addEventListener('mousemove', (e) => {
-      if (!isDragging) return;
-      currentX = e.clientX - startX;
-      currentY = e.clientY - startY;
-      updateWorldTransform(false);
-    });
-
-    window.addEventListener('mouseup', () => { isDragging = false; });
-
-    board.addEventListener('touchstart', (e) => {
-      if (e.target.closest('.galaxy-controls') || e.target.closest('.galaxy-radar') || e.target.closest('.command-screen') || e.target.closest('.reset-galaxy-btn')) return;
-      isDragging = true;
-      startX = e.touches[0].clientX - currentX;
-      startY = e.touches[0].clientY - currentY;
-    });
-
-    window.addEventListener('touchmove', (e) => {
-      if (!isDragging) return;
-      currentX = e.touches[0].clientX - startX;
-      currentY = e.touches[0].clientY - startY;
-      updateWorldTransform(false);
-    });
-
-    window.addEventListener('touchend', () => { isDragging = false; });
-
-    const resetBtn = document.getElementById('resetBtn');
-    resetBtn.addEventListener('click', () => {
-      playBeep(450, 'sine', 0.08);
-      currentX = 0;
-      currentY = 0;
-      scale = 0.55;
-      searchInput.value = '';
-      links.forEach(l => l.classList.remove('dimmed', 'highlighted'));
-      updateWorldTransform(true);
-    });
-
-    document.getElementById('zoomInBtn').addEventListener('click', () => {
-      playBeep(600, 'sine', 0.06);
-      if (scale < 2.0) { scale += 0.25; updateWorldTransform(false); }
-    });
-
-    document.getElementById('zoomOutBtn').addEventListener('click', () => {
-      playBeep(300, 'sine', 0.06);
-      if (scale > 0.4) { scale -= 0.25; updateWorldTransform(false); }
-    });
-
-    board.addEventListener('wheel', (e) => {
-      e.preventDefault();
-      if (e.deltaY < 0 && scale < 2.0) scale += 0.1;
-      else if (e.deltaY > 0 && scale > 0.4) scale -= 0.1;
-      updateWorldTransform(false);
-    }, { passive: false });
-
-    document.getElementById('randomBtn').addEventListener('click', () => {
-      playDiceSound();
-      if (links.length > 0) {
-        const randomIndex = Math.floor(Math.random() * links.length);
-        const targetLink = links[randomIndex];
-        const targetTop = parseFloat(targetLink.style.top);
-        const targetLeft = parseFloat(targetLink.style.left);
-
-        currentX = -(targetLeft - 700);
-        currentY = -(targetTop - 500);
-        scale = 1.2;
-        updateWorldTransform(true);
-      }
-    });
-
-    const fullscreenBtn = document.getElementById('fullscreenBtn');
-    const fullscreenIcon = document.getElementById('fullscreenIcon');
-
-    fullscreenBtn.addEventListener('click', () => {
-      playBeep(500, 'sine', 0.08);
-      if (!document.fullscreenElement) {
-        board.requestFullscreen().catch(err => { alert(`Errore fullscreen: ${err.message}`); });
-      } else {
-        document.exitFullscreen();
-      }
-    });
-
-    document.addEventListener('fullscreenchange', () => {
-      if (document.fullscreenElement) {
-        fullscreenIcon.classList.remove('fa-expand');
-        fullscreenIcon.classList.add('fa-compress');
-      } else {
-        fullscreenIcon.classList.remove('fa-compress');
-        fullscreenIcon.classList.add('fa-expand');
-      }
     });
   </script>
 
