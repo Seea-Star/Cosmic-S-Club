@@ -135,6 +135,21 @@
       filter: drop-shadow(0px 0px 10px #F0E8D5);
     }
 
+    /* Cometa speciale in movimento continuo */
+    .shooting-comet {
+      position: absolute;
+      font-size: 1.8rem;
+      pointer-events: none;
+      animation: shootComet 12s linear infinite;
+      z-index: 5;
+    }
+    @keyframes shootComet {
+      0% { top: -50px; left: -50px; opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { top: 1050px; left: 1450px; opacity: 0; }
+    }
+
     .anim-float {
       animation: float 4s ease-in-out infinite;
     }
@@ -248,12 +263,22 @@
       padding: 15px;
       border-radius: 12px;
       border: 1px solid #F0E8D5;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
     }
 
     .space-intro a {
       color: #F0E8D5;
       font-weight: bold;
       text-decoration: underline;
+    }
+
+    .galaxy-counter {
+      font-size: 0.85rem;
+      opacity: 0.9;
+      border-top: 1px dashed rgba(240, 232, 213, 0.3);
+      padding-top: 8px;
     }
 
     .space-footer {
@@ -286,7 +311,10 @@
       <div class="galaxy-board" id="galaxyBoard">
         
         <div class="galaxy-canvas-world" id="galaxyWorld">
-          <!-- Pianeti con link reali funzionanti -->
+          <!-- Cometa in movimento -->
+          <div class="shooting-comet">☄️</div>
+
+          <!-- Pianeti con link reali funzionanti e titoli -->
           <a href="https://www.wikipedia.org" target="_blank" class="cosmic-sticker-link anim-float" style="top: 450px; left: 700px; animation-delay: 0s;" title="Wikipedia Planet">🪐</a>
           <a href="https://neocities.org" target="_blank" class="cosmic-sticker-link anim-drift" style="top: 250px; left: 1050px; animation-delay: 1.2s;" title="Neocities Rocket">🚀</a>
           <a href="https://archive.org" target="_blank" class="cosmic-sticker-link anim-pulse" style="top: 750px; left: 400px; animation-delay: 2.5s;" title="Archive UFO">🛸</a>
@@ -297,7 +325,7 @@
           <a href="https://validator.w3.org" target="_blank" class="cosmic-sticker-link anim-float" style="top: 580px; left: 250px; animation-delay: 1.5s;" title="Saturn">🪐</a>
           <a href="https://css-tricks.com" target="_blank" class="cosmic-sticker-link anim-drift" style="top: 850px; left: 850px; animation-delay: 2.1s;" title="Rocket 2">🚀</a>
           <a href="https://nekoweb.org" target="_blank" class="cosmic-sticker-link anim-float" style="top: 380px; left: 180px; animation-delay: 1.0s;" title="Star 2">🌟</a>
-          <a href="https://it.wikipedia.org" target="_blank" class="cosmic-sticker-link anim-pulse" style="top: 480px; left: 1250px; animation-delay: 0.3s;" title="Comet">☄️</a>
+          <a href="https://it.wikipedia.org" target="_blank" class="cosmic-sticker-link anim-pulse" style="top: 480px; left: 1250px; animation-delay: 0.3s;" title="Comet Star">☄️</a>
         </div>
 
         <!-- Mini Radar in basso a sinistra -->
@@ -310,6 +338,9 @@
         <div class="galaxy-controls">
           <button class="control-btn" id="randomBtn" title="Inquadra un pianeta casuale (Random)">
             <i class="fa-solid fa-dice"></i>
+          </button>
+          <button class="control-btn" id="resetBtn" title="Centra la galassia (Home)">
+            <i class="fa-solid fa-house"></i>
           </button>
           <button class="control-btn" id="zoomOutBtn" title="Zoom Out (-)">
             <i class="fa-solid fa-minus"></i>
@@ -325,9 +356,9 @@
       </div>
 
       <div class="space-intro">
-        Welcome to the Cosmic Club! This is an open cosmic canvas for everyone. Send me your custom pixel art, star, planet, UFO, rocket, or astronaut, and I will place it floating around here. 
-        <br><br>
-        To join the galaxy, head over to the <a href="https://cosmic-s.atabook.org/" target="_blank">Guestbook</a> and send your creation!
+        <span>Welcome to the Cosmic Club! This is an open cosmic canvas for everyone. Send me your custom pixel art, star, planet, UFO, rocket, or astronaut, and I will place it floating around here.</span>
+        <span>To join the galaxy, head over to the <a href="https://cosmic-s.atabook.org/" target="_blank">Guestbook</a> and send your creation!</span>
+        <div class="galaxy-counter" id="galaxyCounter">🌟 Pianeti attivi nella galassia: 0</div>
       </div>
 
     </div>
@@ -343,12 +374,17 @@
     const board = document.getElementById('galaxyBoard');
     const world = document.getElementById('galaxyWorld');
     const radarBlip = document.getElementById('radarBlip');
+    const galaxyCounter = document.getElementById('galaxyCounter');
 
     let isDragging = false;
     let startX, startY;
     let currentX = 0;
     let currentY = 0;
     let scale = 0.55;
+
+    // Aggiorna dinamicamente il contatore dei pianeti
+    const links = world.querySelectorAll('.cosmic-sticker-link');
+    galaxyCounter.textContent = `🌟 Pianeti attivi nella galassia: ${links.length}`;
 
     function clamp(val, min, max) {
       return Math.max(min, Math.min(max, val));
@@ -416,6 +452,7 @@
 
     const zoomInBtn = document.getElementById('zoomInBtn');
     const zoomOutBtn = document.getElementById('zoomOutBtn');
+    const resetBtn = document.getElementById('resetBtn');
 
     zoomInBtn.addEventListener('click', () => {
       if (scale < 2.0) {
@@ -431,6 +468,14 @@
       }
     });
 
+    // Pulsante Reset Vista (🏠)
+    resetBtn.addEventListener('click', () => {
+      currentX = 0;
+      currentY = 0;
+      scale = 0.55;
+      updateWorldTransform(true);
+    });
+
     board.addEventListener('wheel', (e) => {
       e.preventDefault();
       if (e.deltaY < 0 && scale < 2.0) {
@@ -441,9 +486,9 @@
       updateWorldTransform(false);
     }, { passive: false });
 
+    // Pulsante Random (🎲)
     const randomBtn = document.getElementById('randomBtn');
     randomBtn.addEventListener('click', () => {
-      const links = world.querySelectorAll('.cosmic-sticker-link');
       if (links.length > 0) {
         const randomIndex = Math.floor(Math.random() * links.length);
         const targetLink = links[randomIndex];
