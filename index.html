@@ -7,7 +7,7 @@
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Quicksand:wght@600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
@@ -53,6 +53,16 @@
       color: #F0E8D5;
     }
 
+    /* Animazione di click universale per qualsiasi pulsante o input */
+    .back-btn, .control-btn, .command-visit-btn, .reset-galaxy-btn, .command-close-btn, .search-bar input {
+      transition: transform 0.1s ease, box-shadow 0.1s ease !important;
+    }
+
+    .back-btn:active, .control-btn:active, .command-visit-btn:active, .reset-galaxy-btn:active, .command-close-btn:active, .search-bar input:focus {
+      transform: translate(2px, 2px) !important;
+      box-shadow: 0px 0px 0px #F0E8D5 !important;
+    }
+
     .back-btn {
       background: #F0E8D5;
       color: #000000;
@@ -63,12 +73,6 @@
       font-size: 0.75rem;
       text-decoration: none;
       box-shadow: 2px 2px 0px #F0E8D5;
-      transition: transform 0.1s ease;
-    }
-
-    .back-btn:active, .control-btn:active, .action-btn:active, .reset-galaxy-btn:active, .search-bar input:focus {
-      transform: translate(2px, 2px) !important;
-      box-shadow: 0px 0px 0px #F0E8D5 !important;
     }
 
     .space-container {
@@ -135,14 +139,6 @@
       cursor: grabbing;
     }
 
-    .galaxy-board:fullscreen {
-      width: 100vw;
-      height: 100vh;
-      border: none;
-      border-radius: 0;
-      box-shadow: none;
-    }
-
     .galaxy-canvas-world {
       position: absolute;
       width: 1400px;
@@ -159,30 +155,29 @@
         radial-gradient(white 0.7px, transparent 0.7px);
       background-size: 110px 110px, 160px 160px, 75px 75px;
       background-position: 0 0, 50px 80px, 25px 35px;
+      animation: bgPulse 8s ease-in-out infinite alternate;
       transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    @keyframes bgPulse {
+      0% { filter: brightness(0.9); }
+      100% { filter: brightness(1.2); }
     }
 
     .cosmic-sticker-link {
       position: absolute;
       display: inline-block;
-      width: 55px;
-      height: 55px;
+      font-size: 2.2rem;
+      filter: drop-shadow(2px 2px 0px #F0E8D5);
       text-decoration: none;
       transition: transform 0.2s ease, filter 0.2s ease, opacity 0.3s ease;
       z-index: 10;
       cursor: pointer;
-      filter: drop-shadow(2px 2px 0px #F0E8D5);
-    }
-
-    .cosmic-sticker-link img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
     }
 
     .cosmic-sticker-link:hover {
-      transform: scale(1.35) translateY(-4px);
-      filter: drop-shadow(0px 0px 12px #F0E8D5);
+      transform: scale(1.3) translateY(-4px);
+      filter: drop-shadow(0px 0px 10px #F0E8D5);
     }
 
     .cosmic-sticker-link.dimmed {
@@ -192,7 +187,36 @@
 
     .cosmic-sticker-link.highlighted {
       transform: scale(1.4);
-      filter: drop-shadow(0px 0px 16px #FFF);
+      filter: drop-shadow(0px 0px 14px #FFF);
+    }
+
+    .shooting-comet-1 {
+      position: absolute;
+      font-size: 1.6rem;
+      pointer-events: none;
+      animation: shootComet1 14s linear infinite;
+      z-index: 5;
+    }
+    @keyframes shootComet1 {
+      0% { top: -40px; left: -40px; opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { top: 1040px; left: 1440px; opacity: 0; }
+    }
+
+    .shooting-comet-2 {
+      position: absolute;
+      font-size: 1.5rem;
+      pointer-events: none;
+      animation: shootComet2 18s linear infinite;
+      animation-delay: 5s;
+      z-index: 5;
+    }
+    @keyframes shootComet2 {
+      0% { top: 1040px; left: -40px; opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { top: -40px; left: 1440px; opacity: 0; }
     }
 
     .anim-float { animation: float 4s ease-in-out infinite; }
@@ -207,6 +231,13 @@
       0% { transform: translateX(0px) translateY(0px); }
       50% { transform: translateX(12px) translateY(-6px); }
       100% { transform: translateX(0px) translateY(0px); }
+    }
+
+    .anim-pulse { animation: pulseAnim 3.5s ease-in-out infinite; }
+    @keyframes pulseAnim {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.15); }
+      100% { transform: scale(1); }
     }
 
     .reset-galaxy-btn {
@@ -228,7 +259,10 @@
       z-index: 20;
     }
 
-    .reset-galaxy-btn:hover { background: #F0E8D5; color: #000000; }
+    .reset-galaxy-btn:hover {
+      background: #F0E8D5;
+      color: #000000;
+    }
 
     .galaxy-radar {
       position: absolute;
@@ -291,9 +325,13 @@
       box-shadow: 2px 2px 0px #F0E8D5;
     }
 
-    .control-btn:hover { background: #F0E8D5; color: #000000; }
+    .control-btn:hover {
+      background: #F0E8D5;
+      color: #000000;
+      transform: scale(1.05);
+    }
 
-    /* Command Screen & Scanner Effect */
+    /* Schermata Computer di Bordo / Terminale Retro */
     .command-screen {
       position: absolute;
       top: 15px; left: 15px; right: 15px; bottom: 15px;
@@ -301,7 +339,7 @@
       border: 2px solid #F0E8D5;
       border-radius: 14px;
       z-index: 100;
-      padding: 20px;
+      padding: 16px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -321,182 +359,114 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-bottom: 2px dashed rgba(240, 232, 213, 0.4);
-      padding-bottom: 10px;
+      border-bottom: 2px dashed rgba(240, 232, 213, 0.3);
+      padding-bottom: 8px;
     }
 
-    .command-title {
-      font-size: 1.1rem;
+    /* Nome utente cliccabile che porta al suo sito */
+    .command-title-link {
+      font-size: 1.15rem;
       font-weight: 800;
       letter-spacing: 1px;
-      font-family: 'Share Tech Mono', monospace;
+      color: #F0E8D5;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+    .command-title-link:hover {
+      color: #FFF;
+      text-shadow: 0 0 8px #F0E8D5;
     }
 
     .command-close-btn {
       background: #000000;
       color: #F0E8D5;
       border: 2px solid #F0E8D5;
-      border-radius: 8px;
+      border-radius: 10px;
       width: 30px;
       height: 30px;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
+      font-size: 0.85rem;
       box-shadow: 2px 2px 0px #F0E8D5;
     }
-    .command-close-btn:hover { background: #F0E8D5; color: #000000; }
 
-    .command-body {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      padding: 12px 0;
-    }
-
-    .command-top-info {
-      display: flex;
-      gap: 16px;
-      align-items: center;
-    }
-
-    .command-viewer {
-      width: 90px;
-      height: 90px;
-      background: rgba(240, 232, 213, 0.03);
-      border: 2px solid #F0E8D5;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 3px 3px 0px #F0E8D5;
-      flex-shrink: 0;
-      position: relative;
-      overflow: hidden;
-      padding: 8px;
-    }
-
-    .command-viewer img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      transition: filter 0.3s ease;
-    }
-
-    .scanner-beam {
-      position: absolute;
-      top: 0; left: 0; width: 100%; height: 3px;
-      background: #FFF;
-      box-shadow: 0 0 10px #FFF, 0 0 20px #F0E8D5;
-      opacity: 0;
-      pointer-events: none;
-    }
-
-    .command-screen.scanning .scanner-beam {
-      animation: scanEffect 1.2s ease-in-out forwards;
-    }
-
-    @keyframes scanEffect {
-      0% { top: 0%; opacity: 1; }
-      50% { opacity: 1; }
-      100% { top: 100%; opacity: 0; }
-    }
-
-    .command-screen.scanning .command-viewer img {
-      filter: brightness(0.2) sepia(1) hue-rotate(150deg);
-    }
-
-    .explorer-details {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .explorer-name {
-      font-size: 1.3rem;
-      font-weight: 800;
-      color: #FFF;
-    }
-
-    .explorer-desc {
-      font-size: 0.9rem;
-      line-height: 1.4;
-      font-weight: 700;
-      opacity: 0.9;
-      background: rgba(240, 232, 213, 0.05);
-      border: 1px solid rgba(240, 232, 213, 0.2);
-      padding: 10px;
-      border-radius: 10px;
-    }
-
-    .button-88x31-section {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      align-items: flex-start;
-      background: rgba(240, 232, 213, 0.05);
-      border: 1px dashed rgba(240, 232, 213, 0.4);
-      padding: 10px;
-      border-radius: 10px;
-    }
-
-    .section-label {
-      font-size: 0.7rem;
-      font-family: 'Share Tech Mono', monospace;
-      letter-spacing: 1px;
-      opacity: 0.7;
-    }
-
-    .banner-88x31-slot {
-      width: 88px;
-      height: 31px;
-      border: 1px solid #F0E8D5;
-      background: #111;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
-
-    .banner-88x31-slot img {
-      width: 100%;
-      height: 100%;
-      object-fit: fill;
-    }
-
-    .command-footer {
-      display: flex;
-      gap: 10px;
-      border-top: 2px dashed rgba(240, 232, 213, 0.4);
-      padding-top: 12px;
-    }
-
-    .action-btn {
-      flex: 1;
-      background: #000000;
-      color: #F0E8D5;
-      border: 2px solid #F0E8D5;
-      padding: 9px 10px;
-      border-radius: 10px;
-      font-weight: 800;
-      font-size: 0.75rem;
-      text-align: center;
-      text-decoration: none;
-      box-shadow: 2px 2px 0px #F0E8D5;
-      transition: background 0.1s ease, color 0.1s ease;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-    }
-
-    .action-btn.primary {
+    .command-close-btn:hover {
       background: #F0E8D5;
       color: #000000;
     }
 
-    .action-btn:hover { background: #F0E8D5; color: #000000; }
-    .action-btn.primary:hover { background: #000000; color: #F0E8D5; }
+    /* Corpo in stile terminale con mini blocchi informativi */
+    .command-body {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 10px 0;
+      font-family: monospace;
+    }
+
+    .terminal-field {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .terminal-label {
+      font-size: 0.65rem;
+      letter-spacing: 1px;
+      font-weight: 800;
+      text-transform: uppercase;
+      opacity: 0.7;
+      font-family: 'Quicksand', sans-serif;
+    }
+
+    .terminal-box {
+      background: rgba(240, 232, 213, 0.05);
+      border: 1px dashed rgba(240, 232, 213, 0.3);
+      border-radius: 8px;
+      padding: 8px 10px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #FFF;
+    }
+
+    .terminal-items {
+      display: flex;
+      gap: 8px;
+      font-size: 1.2rem;
+      background: rgba(240, 232, 213, 0.05);
+      border: 1px dashed rgba(240, 232, 213, 0.3);
+      border-radius: 8px;
+      padding: 8px 10px;
+    }
+
+    .command-footer {
+      display: flex;
+      justify-content: flex-end;
+      border-top: 2px dashed rgba(240, 232, 213, 0.3);
+      padding-top: 10px;
+    }
+
+    .command-visit-btn {
+      background: #F0E8D5;
+      color: #000000;
+      border: 2px solid #F0E8D5;
+      padding: 8px 16px;
+      border-radius: 10px;
+      font-weight: 800;
+      font-size: 0.8rem;
+      text-decoration: none;
+      box-shadow: 2px 2px 0px #F0E8D5;
+    }
+
+    .galaxy-board:fullscreen {
+      width: 100vw;
+      height: 100vh;
+      border: none;
+      border-radius: 0;
+      box-shadow: none;
+    }
 
     .space-intro {
       font-size: 0.95rem;
@@ -512,10 +482,33 @@
       gap: 10px;
     }
 
-    .space-intro a { color: #F0E8D5; font-weight: bold; text-decoration: underline; }
-    .galaxy-counter { font-size: 0.85rem; opacity: 0.9; border-top: 1px dashed rgba(240, 232, 213, 0.3); padding-top: 8px; }
-    .space-footer { text-align: center; padding: 20px; font-size: 13px; opacity: 0.8; border-top: 1px dashed rgba(240, 232, 213, 0.3); margin-top: 10px; }
-    .space-footer a { color: #F0E8D5; text-decoration: underline; font-weight: bold; }
+    .space-intro a {
+      color: #F0E8D5;
+      font-weight: bold;
+      text-decoration: underline;
+    }
+
+    .galaxy-counter {
+      font-size: 0.85rem;
+      opacity: 0.9;
+      border-top: 1px dashed rgba(240, 232, 213, 0.3);
+      padding-top: 8px;
+    }
+
+    .space-footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 13px;
+      opacity: 0.8;
+      border-top: 1px dashed rgba(240, 232, 213, 0.3);
+      margin-top: 10px;
+    }
+
+    .space-footer a {
+      color: #F0E8D5;
+      text-decoration: underline;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
@@ -531,65 +524,60 @@
 
       <div class="search-bar">
         <i class="fa-solid fa-magnifying-glass"></i>
-        <input type="text" id="galaxySearchInput" placeholder="Search explorer or description across the galaxy...">
+        <input type="text" id="galaxySearchInput" placeholder="Cerca un utente, un interesse o un oggetto...">
       </div>
 
       <div class="galaxy-board" id="galaxyBoard">
         
-        <button class="reset-galaxy-btn" id="resetBtn" title="Center Galaxy">
+        <button class="reset-galaxy-btn" id="resetBtn" title="Centra la galassia">
           <i class="fa-solid fa-rotate-right"></i>
         </button>
 
         <div class="galaxy-canvas-world" id="galaxyWorld">
-          
-          <a href="#" 
-             data-name="Cosmic-S HQ" 
-             data-img="tuo-pianeta.png" 
-             data-btn="tuo-bottone-88x31.png"
-             data-neocities="https://neocities.org" 
-             data-website="https://seea-star.github.io/Cosmic-S-Home/" 
-             data-desc="The main headquarters of the galactic club. A small cozy corner of space dedicated to indie web creators." 
-             class="cosmic-sticker-link anim-float" style="top: 450px; left: 700px;">
-            <img src="tuo-pianeta.png" alt="Planet">
-          </a>
+          <div class="shooting-comet-1">☄️</div>
+          <div class="shooting-comet-2">🛸</div>
 
+          <!-- Dati puliti e personalizzati per ogni utente nel terminale -->
+          <a href="https://www.wikipedia.org" data-name="Star" data-status="Online / Attiva" data-interests="drawing, coding, exploring" data-notes="esplorando la galassia digitale" data-items="🍀, 🪐, 🎒" class="cosmic-sticker-link anim-float" style="top: 450px; left: 700px; animation-delay: 0s;">🪐</a>
+          <a href="https://neocities.org" data-name="NeoPilot" data-status="In orbita" data-interests="pixel art, synthwave, html" data-notes="costruendo stazioni web indipendenti" data-items="🚀, 💾, 🎧" class="cosmic-sticker-link anim-drift" style="top: 250px; left: 1050px; animation-delay: 1.2s;">🚀</a>
+          <a href="https://archive.org" data-name="TimeWanderer" data-status="Segnale stabile" data-interests="retro tech, archiving, books" data-notes="conservando vecchie reliquie digitali" data-items="🛸, 📼, 📚" class="cosmic-sticker-link anim-pulse" style="top: 750px; left: 400px; animation-delay: 2.5s;">🛸</a>
+          <a href="https://github.com" data-name="CodeStar" data-status="Compilazione in corso" data-interests="javascript, open source, tea" data-notes="scrivendo codice sotto le stelle" data-items="⭐, 💻, ☕" class="cosmic-sticker-link anim-float" style="top: 180px; left: 350px; animation-delay: 0.8s;">⭐</a>
+          <a href="https://developer.mozilla.org" data-name="Devonaut" data-status="Esplorazione" data-interests="css tricks, web standards" data-notes="documentando i segreti del web" data-items="👨‍🚀, 📜, 🔭" class="cosmic-sticker-link anim-drift" style="top: 680px; left: 1150px; animation-delay: 1.8s;">👨‍🚀</a>
         </div>
 
+        <!-- Finestra Terminale di Bordo -->
         <div class="command-screen" id="commandScreen">
           <div class="command-header">
-            <div class="command-title">EXPLORER SCANNER // DATA</div>
-            <button class="command-close-btn" id="commandCloseBtn" title="Close">
+            <a href="#" id="commandTitleLink" target="_blank" class="command-title-link">NOME UTENTE</a>
+            <button class="command-close-btn" id="commandCloseBtn" title="Chiudi terminale">
               <i class="fa-solid fa-xmark"></i>
             </button>
           </div>
 
           <div class="command-body">
-            <div class="command-top-info">
-              <div class="command-viewer" id="commandViewer">
-                <div class="scanner-beam"></div>
-              </div>
-              <div class="explorer-details">
-                <div class="explorer-name" id="explorerName">---</div>
-              </div>
+            <div class="terminal-field">
+              <span class="terminal-label">Stato Frequenza</span>
+              <div class="terminal-box" id="infoStatus">---</div>
             </div>
 
-            <div class="explorer-desc" id="explorerDesc">
-              No description provided.
+            <div class="terminal-field">
+              <span class="terminal-label">Interessi / Passioni</span>
+              <div class="terminal-box" id="infoInterests">---</div>
             </div>
 
-            <div class="button-88x31-section">
-              <span class="section-label">VISITOR 88X31 BUTTON</span>
-              <div class="banner-88x31-slot" id="bannerSlot"></div>
+            <div class="terminal-field">
+              <span class="terminal-label">Note di Bordo</span>
+              <div class="terminal-box" id="infoNotes">---</div>
+            </div>
+
+            <div class="terminal-field">
+              <span class="terminal-label">Oggetti Personali</span>
+              <div class="terminal-items" id="infoItems">🎒 🪐</div>
             </div>
           </div>
 
           <div class="command-footer">
-            <a href="#" id="neocitiesBtn" target="_blank" class="action-btn">
-              <i class="fa-solid fa-satellite"></i> NEOCITIES
-            </a>
-            <a href="#" id="websiteBtn" target="_blank" class="action-btn primary">
-              <i class="fa-solid fa-globe"><span> VISIT WEBSITE</span></i>
-            </a>
+            <a href="#" id="commandVisitLink" target="_blank" class="command-visit-btn">Visita il sito <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
           </div>
         </div>
 
@@ -599,7 +587,7 @@
         </div>
 
         <div class="galaxy-controls">
-          <button class="control-btn" id="randomBtn" title="Random Explorer">
+          <button class="control-btn" id="randomBtn" title="Inquadra un elemento casuale">
             <i class="fa-solid fa-dice"></i>
           </button>
           <button class="control-btn" id="zoomOutBtn" title="Zoom Out">
@@ -616,8 +604,9 @@
       </div>
 
       <div class="space-intro">
-        <span>Welcome to the Cosmic Club! An open space for all web explorers. Send your planet image, your 88x31 button, your links and description through the <a href="https://cosmic-s.atabook.org/" target="_blank">Guestbook</a> or Google Forms to join the galaxy!</span>
-        <div class="galaxy-counter" id="galaxyCounter">🌟 Active elements in galaxy: 0</div>
+        <span>Welcome to the Cosmic Club! This is an open cosmic canvas for everyone. Send me your custom pixel art, star, planet, UFO, rocket, or astronaut, and I will place it floating around here.</span>
+        <span>To join the galaxy, head over to the <a href="https://cosmic-s.atabook.org/" target="_blank">Guestbook</a> and send your creation!</span>
+        <div class="galaxy-counter" id="galaxyCounter">🌟 Elementi attivi nella galassia: 0</div>
       </div>
 
     </div>
@@ -673,24 +662,6 @@
       } catch (e) {}
     }
 
-    function playWarpSound() {
-      try {
-        initAudio();
-        if (audioCtx.state === 'suspended') audioCtx.resume();
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
-        osc.type = 'triangle';
-        osc.frequency.setValueAtTime(150, audioCtx.currentTime);
-        osc.frequency.exponentialRampToValueAtTime(800, audioCtx.currentTime + 0.3);
-        gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.3);
-        osc.connect(gain);
-        gain.connect(audioCtx.destination);
-        osc.start();
-        osc.stop(audioCtx.currentTime + 0.3);
-      } catch (e) {}
-    }
-
     const board = document.getElementById('galaxyBoard');
     const world = document.getElementById('galaxyWorld');
     const radarBlip = document.getElementById('radarBlip');
@@ -698,13 +669,14 @@
     const searchInput = document.getElementById('galaxySearchInput');
     
     const commandScreen = document.getElementById('commandScreen');
-    const commandViewer = document.getElementById('commandViewer');
-    const explorerName = document.getElementById('explorerName');
-    const explorerDesc = document.getElementById('explorerDesc');
-    const bannerSlot = document.getElementById('bannerSlot');
-    const neocitiesBtn = document.getElementById('neocitiesBtn');
-    const websiteBtn = document.getElementById('websiteBtn');
+    const commandTitleLink = document.getElementById('commandTitleLink');
+    const commandVisitLink = document.getElementById('commandVisitLink');
     const commandCloseBtn = document.getElementById('commandCloseBtn');
+
+    const infoStatus = document.getElementById('infoStatus');
+    const infoInterests = document.getElementById('infoInterests');
+    const infoNotes = document.getElementById('infoNotes');
+    const infoItems = document.getElementById('infoItems');
 
     let isDragging = false;
     let startX, startY;
@@ -713,21 +685,25 @@
     let scale = 0.55;
 
     const links = world.querySelectorAll('.cosmic-sticker-link');
-    galaxyCounter.textContent = `🌟 Active elements in galaxy: ${links.length}`;
+    galaxyCounter.textContent = `🌟 Elementi attivi nella galassia: ${links.length}`;
 
     searchInput.addEventListener('input', (e) => {
       const term = e.target.value.toLowerCase().trim();
+
       links.forEach(link => {
         const name = link.getAttribute('data-name').toLowerCase();
-        const desc = link.getAttribute('data-desc').toLowerCase();
+        const interests = link.getAttribute('data-interests').toLowerCase();
 
         if (term === '') {
           link.classList.remove('dimmed', 'highlighted');
-        } else if (name.includes(term) || desc.includes(term)) {
+        } else if (name.includes(term) || interests.includes(term)) {
           link.classList.remove('dimmed');
           link.classList.add('highlighted');
-          currentX = -(parseFloat(link.style.left) - 700);
-          currentY = -(parseFloat(link.style.top) - 500);
+          
+          const targetTop = parseFloat(link.style.top);
+          const targetLeft = parseFloat(link.style.left);
+          currentX = -(targetLeft - 700);
+          currentY = -(targetTop - 500);
           scale = 1.1;
           updateWorldTransform(true);
         } else {
@@ -740,49 +716,53 @@
     links.forEach(link => {
       link.addEventListener('click', (e) => {
         e.preventDefault();
-        playWarpSound();
+        playBeep(520, 'sine', 0.1);
         
-        const imgEl = link.querySelector('img');
-        const imgSrc = imgEl ? imgEl.src : '';
-        const btnSrc = link.getAttribute('data-btn');
+        const userUrl = link.href;
+        const userName = link.getAttribute('data-name');
+
+        commandTitleLink.textContent = userName;
+        commandTitleLink.href = userUrl;
         
-        commandViewer.querySelector('img')?.remove();
-        if (imgSrc) {
-          const newImg = document.createElement('img');
-          newImg.src = imgSrc;
-          commandViewer.appendChild(newImg);
-        }
+        infoStatus.textContent = link.getAttribute('data-status') || 'Attiva';
+        infoInterests.textContent = link.getAttribute('data-interests') || '---';
+        infoNotes.textContent = link.getAttribute('data-notes') || '---';
+        infoItems.textContent = link.getAttribute('data-items') || '🪐';
 
-        bannerSlot.innerHTML = btnSrc ? `<img src="${btnSrc}" alt="88x31 Button">` : '<span style="font-size:9px; opacity:0.5;">NO BUTTON</span>';
-
-        explorerName.textContent = link.getAttribute('data-name');
-        explorerDesc.textContent = link.getAttribute('data-desc');
-        
-        neocitiesBtn.href = link.getAttribute('data-neocities');
-        websiteBtn.href = link.getAttribute('data-website');
-
-        commandScreen.classList.remove('scanning');
+        commandVisitLink.href = userUrl;
         commandScreen.classList.add('active');
-        void commandScreen.offsetWidth;
-        commandScreen.classList.add('scanning');
       });
     });
 
     commandCloseBtn.addEventListener('click', () => {
       playBeep(300, 'sine', 0.06);
-      commandScreen.classList.remove('active', 'scanning');
+      commandScreen.classList.remove('active');
     });
 
-    function clamp(val, min, max) { return Math.max(min, Math.min(max, val)); }
+    function clamp(val, min, max) {
+      return Math.max(min, Math.min(max, val));
+    }
 
     function updateWorldTransform(withTransition = false) {
-      currentX = clamp(currentX, -400, 400);
-      currentY = clamp(currentY, -300, 300);
-      world.style.transition = withTransition ? 'transform 0.6s cubic-bezier(0.25, 1, 0.5, 1)' : 'none';
+      const maxDragX = 400;
+      const maxDragY = 300;
+
+      currentX = clamp(currentX, -maxDragX, maxDragX);
+      currentY = clamp(currentY, -maxDragY, maxDragY);
+
+      if (withTransition) {
+        world.style.transition = 'transform 0.6s cubic-bezier(0.25, 1, 0.5, 1)';
+      } else {
+        world.style.transition = 'none';
+      }
+
       world.style.transform = `translate(calc(-50% + ${currentX}px), calc(-50% + ${currentY}px)) scale(${scale})`;
+
+      const blipX = 45 - (currentX / maxDragX) * 35;
+      const blipY = 45 - (currentY / maxDragY) * 35;
       
-      radarBlip.style.left = `${45 - (currentX / 400) * 35}px`;
-      radarBlip.style.top = `${45 - (currentY / 300) * 35}px`;
+      radarBlip.style.left = `${blipX}px`;
+      radarBlip.style.top = `${blipY}px`;
     }
 
     updateWorldTransform();
@@ -803,16 +783,28 @@
 
     window.addEventListener('mouseup', () => { isDragging = false; });
 
-    board.addEventListener('wheel', (e) => {
-      e.preventDefault();
-      if (e.deltaY < 0 && scale < 2.0) scale += 0.1;
-      else if (e.deltaY > 0 && scale > 0.4) scale -= 0.1;
-      updateWorldTransform(false);
-    }, { passive: false });
+    board.addEventListener('touchstart', (e) => {
+      if (e.target.closest('.galaxy-controls') || e.target.closest('.galaxy-radar') || e.target.closest('.command-screen') || e.target.closest('.reset-galaxy-btn')) return;
+      isDragging = true;
+      startX = e.touches[0].clientX - currentX;
+      startY = e.touches[0].clientY - currentY;
+    });
 
-    document.getElementById('resetBtn').addEventListener('click', () => {
+    window.addEventListener('touchmove', (e) => {
+      if (!isDragging) return;
+      currentX = e.touches[0].clientX - startX;
+      currentY = e.touches[0].clientY - startY;
+      updateWorldTransform(false);
+    });
+
+    window.addEventListener('touchend', () => { isDragging = false; });
+
+    const resetBtn = document.getElementById('resetBtn');
+    resetBtn.addEventListener('click', () => {
       playBeep(450, 'sine', 0.08);
-      currentX = 0; currentY = 0; scale = 0.55;
+      currentX = 0;
+      currentY = 0;
+      scale = 0.55;
       searchInput.value = '';
       links.forEach(l => l.classList.remove('dimmed', 'highlighted'));
       updateWorldTransform(true);
@@ -828,12 +820,23 @@
       if (scale > 0.4) { scale -= 0.25; updateWorldTransform(false); }
     });
 
+    board.addEventListener('wheel', (e) => {
+      e.preventDefault();
+      if (e.deltaY < 0 && scale < 2.0) scale += 0.1;
+      else if (e.deltaY > 0 && scale > 0.4) scale -= 0.1;
+      updateWorldTransform(false);
+    }, { passive: false });
+
     document.getElementById('randomBtn').addEventListener('click', () => {
       playDiceSound();
       if (links.length > 0) {
-        const target = links[Math.floor(Math.random() * links.length)];
-        currentX = -(parseFloat(target.style.left) - 700);
-        currentY = -(parseFloat(target.style.top) - 500);
+        const randomIndex = Math.floor(Math.random() * links.length);
+        const targetLink = links[randomIndex];
+        const targetTop = parseFloat(targetLink.style.top);
+        const targetLeft = parseFloat(targetLink.style.left);
+
+        currentX = -(targetLeft - 700);
+        currentY = -(targetTop - 500);
         scale = 1.2;
         updateWorldTransform(true);
       }
@@ -845,7 +848,7 @@
     fullscreenBtn.addEventListener('click', () => {
       playBeep(500, 'sine', 0.08);
       if (!document.fullscreenElement) {
-        board.requestFullscreen().catch(err => { alert(`Fullscreen error: ${err.message}`); });
+        board.requestFullscreen().catch(err => { alert(`Errore fullscreen: ${err.message}`); });
       } else {
         document.exitFullscreen();
       }
