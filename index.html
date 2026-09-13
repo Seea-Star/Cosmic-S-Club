@@ -70,7 +70,7 @@
       transform: translateY(-1px);
     }
 
-    .back-btn:active, .control-btn:active {
+    .back-btn:active, .control-btn:active, .modal-visit-btn:active {
       transform: translate(2px, 2px) !important;
       box-shadow: 0px 0px 0px #F0E8D5 !important;
     }
@@ -139,6 +139,7 @@
       text-decoration: none;
       transition: transform 0.2s ease, filter 0.2s ease;
       z-index: 10;
+      cursor: pointer;
     }
 
     .cosmic-sticker-link:hover {
@@ -175,27 +176,21 @@
       100% { top: -40px; left: 1440px; opacity: 0; }
     }
 
-    .anim-float {
-      animation: float 4s ease-in-out infinite;
-    }
+    .anim-float { animation: float 4s ease-in-out infinite; }
     @keyframes float {
       0% { transform: translateY(0px); }
       50% { transform: translateY(-10px); }
       100% { transform: translateY(0px); }
     }
 
-    .anim-drift {
-      animation: drift 6s ease-in-out infinite;
-    }
+    .anim-drift { animation: drift 6s ease-in-out infinite; }
     @keyframes drift {
       0% { transform: translateX(0px) translateY(0px); }
       50% { transform: translateX(12px) translateY(-6px); }
       100% { transform: translateX(0px) translateY(0px); }
     }
 
-    .anim-pulse {
-      animation: pulseAnim 3.5s ease-in-out infinite;
-    }
+    .anim-pulse { animation: pulseAnim 3.5s ease-in-out infinite; }
     @keyframes pulseAnim {
       0% { transform: scale(1); }
       50% { transform: scale(1.15); }
@@ -270,6 +265,87 @@
       transform: scale(1.05);
     }
 
+    /* Stile Popup Modale */
+    .planet-modal {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(3px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+
+    .planet-modal.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-content {
+      background: #000000;
+      border: 2px solid #F0E8D5;
+      border-radius: 16px;
+      padding: 25px;
+      width: 320px;
+      max-width: 90%;
+      box-shadow: 6px 6px 0px #F0E8D5;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      text-align: center;
+      position: relative;
+    }
+
+    .modal-icon {
+      font-size: 3rem;
+    }
+
+    .modal-title {
+      font-size: 1.2rem;
+      font-weight: 800;
+    }
+
+    .modal-desc {
+      font-size: 0.85rem;
+      opacity: 0.9;
+      line-height: 1.4;
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 5px;
+    }
+
+    .modal-visit-btn {
+      flex: 1;
+      background: #F0E8D5;
+      color: #000000;
+      border: 2px solid #F0E8D5;
+      padding: 10px;
+      border-radius: 10px;
+      font-weight: 800;
+      text-decoration: none;
+      box-shadow: 2px 2px 0px #F0E8D5;
+      transition: transform 0.1s ease;
+    }
+
+    .modal-close-btn {
+      background: #000000;
+      color: #F0E8D5;
+      border: 2px solid #F0E8D5;
+      padding: 10px 15px;
+      border-radius: 10px;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 2px 2px 0px #F0E8D5;
+      transition: transform 0.1s ease;
+    }
+
     .galaxy-board:fullscreen {
       width: 100vw;
       height: 100vh;
@@ -338,17 +414,30 @@
           <div class="shooting-comet-1">☄️</div>
           <div class="shooting-comet-2">🛸</div>
 
-          <a href="https://www.wikipedia.org" target="_blank" class="cosmic-sticker-link anim-float" style="top: 450px; left: 700px; animation-delay: 0s;" title="Wikipedia Planet">🪐</a>
-          <a href="https://neocities.org" target="_blank" class="cosmic-sticker-link anim-drift" style="top: 250px; left: 1050px; animation-delay: 1.2s;" title="Neocities Rocket">🚀</a>
-          <a href="https://archive.org" target="_blank" class="cosmic-sticker-link anim-pulse" style="top: 750px; left: 400px; animation-delay: 2.5s;" title="Archive UFO">🛸</a>
-          <a href="https://github.com" target="_blank" class="cosmic-sticker-link anim-float" style="top: 180px; left: 350px; animation-delay: 0.8s;" title="GitHub Star">⭐</a>
-          <a href="https://developer.mozilla.org" target="_blank" class="cosmic-sticker-link anim-drift" style="top: 680px; left: 1150px; animation-delay: 1.8s;" title="MDN Astronaut">👨‍🚀</a>
+          <a href="https://www.wikipedia.org" data-name="Wikipedia Planet" data-desc="Enciclopedia libera universale della galassia." class="cosmic-sticker-link anim-float" style="top: 450px; left: 700px; animation-delay: 0s;">🪐</a>
+          <a href="https://neocities.org" data-name="Neocities Rocket" data-desc="Base spaziale per siti web indipendenti e retrò." class="cosmic-sticker-link anim-drift" style="top: 250px; left: 1050px; animation-delay: 1.2s;">🚀</a>
+          <a href="https://archive.org" data-name="Archive UFO" data-desc="La capsula del tempo che conserva la storia di internet." class="cosmic-sticker-link anim-pulse" style="top: 750px; left: 400px; animation-delay: 2.5s;">🛸</a>
+          <a href="https://github.com" data-name="GitHub Star" data-desc="Pianeta dei codici sorgente e degli sviluppatori." class="cosmic-sticker-link anim-float" style="top: 180px; left: 350px; animation-delay: 0.8s;">⭐</a>
+          <a href="https://developer.mozilla.org" data-name="MDN Astronaut" data-desc="Manuale di sopravvivenza per esploratori del web." class="cosmic-sticker-link anim-drift" style="top: 680px; left: 1150px; animation-delay: 1.8s;">👨‍🚀</a>
           
-          <a href="https://html.com" target="_blank" class="cosmic-sticker-link anim-pulse" style="top: 120px; left: 800px; animation-delay: 0.5s;" title="Alien">👽</a>
-          <a href="https://validator.w3.org" target="_blank" class="cosmic-sticker-link anim-float" style="top: 580px; left: 250px; animation-delay: 1.5s;" title="Saturn">🪐</a>
-          <a href="https://css-tricks.com" target="_blank" class="cosmic-sticker-link anim-drift" style="top: 850px; left: 850px; animation-delay: 2.1s;" title="Rocket 2">🚀</a>
-          <a href="https://nekoweb.org" target="_blank" class="cosmic-sticker-link anim-float" style="top: 380px; left: 180px; animation-delay: 1.0s;" title="Star 2">🌟</a>
-          <a href="https://it.wikipedia.org" target="_blank" class="cosmic-sticker-link anim-pulse" style="top: 480px; left: 1250px; animation-delay: 0.3s;" title="Comet Star">☄️</a>
+          <a href="https://html.com" data-name="Alien Visitor" data-desc="Un misterioso alieno atterrato da un altro sistema solare." class="cosmic-sticker-link anim-pulse" style="top: 120px; left: 800px; animation-delay: 0.5s;">👽</a>
+          <a href="https://validator.w3.org" data-name="Saturn Station" data-desc="Stazione di controllo per la purezza del codice." class="cosmic-sticker-link anim-float" style="top: 580px; left: 250px; animation-delay: 1.5s;">🪐</a>
+          <a href="https://css-tricks.com" data-name="Rocket Express" data-desc="Navetta veloce carica di trucchi grafici celesti." class="cosmic-sticker-link anim-drift" style="top: 850px; left: 850px; animation-delay: 2.1s;">🚀</a>
+          <a href="https://nekoweb.org" data-name="Star 2" data-desc="Nuova galassia emergente di siti personali." class="cosmic-sticker-link anim-float" style="top: 380px; left: 180px; animation-delay: 1.0s;">🌟</a>
+          <a href="https://it.wikipedia.org" data-name="Comet Star" data-desc="Esplora le meraviglie della conoscenza in italiano." class="cosmic-sticker-link anim-pulse" style="top: 480px; left: 1250px; animation-delay: 0.3s;">☄️</a>
+        </div>
+
+        <!-- Popup Modale per i dettagli del pianeta -->
+        <div class="planet-modal" id="planetModal">
+          <div class="modal-content">
+            <div class="modal-icon" id="modalIcon">🪐</div>
+            <div class="modal-title" id="modalTitle">Nome Pianeta</div>
+            <div class="modal-desc" id="modalDesc">Descrizione del sito di questa persona.</div>
+            <div class="modal-actions">
+              <a href="#" id="modalVisitLink" target="_blank" class="modal-visit-btn">Visita</a>
+              <button class="modal-close-btn" id="modalCloseBtn">Chiudi</button>
+            </div>
+          </div>
         </div>
 
         <div class="galaxy-radar" id="galaxyRadar">
@@ -389,7 +478,6 @@
   </div>
 
   <script>
-    // Sintetizzatore audio retrò (Web Audio API)
     let audioCtx = null;
 
     function initAudio() {
@@ -401,46 +489,52 @@
     function playBeep(freq = 440, type = 'sine', duration = 0.08) {
       try {
         initAudio();
-        if (audioCtx.state === 'suspended') {
-          audioCtx.resume();
-        }
+        if (audioCtx.state === 'suspended') audioCtx.resume();
         const osc = audioCtx.createOscillator();
         const gain = audioCtx.createGain();
         osc.type = type;
         osc.frequency.value = freq;
-        
         gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
         gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
-
         osc.connect(gain);
         gain.connect(audioCtx.destination);
-
         osc.start();
         osc.stop(audioCtx.currentTime + duration);
-      } catch (e) {
-        // Ignora se l'audio non è permesso dal browser prima di un'interazione
-      }
+      } catch (e) {}
+    }
+
+    // Nuovo suono armonico per il dado (più delicato)
+    function playDiceSound() {
+      try {
+        initAudio();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(587.33, audioCtx.currentTime);
+        osc.frequency.setValueAtTime(880, audioCtx.currentTime + 0.06);
+        gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.2);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.2);
+      } catch (e) {}
     }
 
     function playWarpSound() {
       try {
         initAudio();
-        if (audioCtx.state === 'suspended') {
-          audioCtx.resume();
-        }
+        if (audioCtx.state === 'suspended') audioCtx.resume();
         const osc = audioCtx.createOscillator();
         const gain = audioCtx.createGain();
         osc.type = 'triangle';
-        
         osc.frequency.setValueAtTime(150, audioCtx.currentTime);
         osc.frequency.exponentialRampToValueAtTime(800, audioCtx.currentTime + 0.3);
-
         gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
         gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.3);
-
         osc.connect(gain);
         gain.connect(audioCtx.destination);
-
         osc.start();
         osc.stop(audioCtx.currentTime + 0.3);
       } catch (e) {}
@@ -450,6 +544,13 @@
     const world = document.getElementById('galaxyWorld');
     const radarBlip = document.getElementById('radarBlip');
     const galaxyCounter = document.getElementById('galaxyCounter');
+    
+    const planetModal = document.getElementById('planetModal');
+    const modalIcon = document.getElementById('modalIcon');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalDesc = document.getElementById('modalDesc');
+    const modalVisitLink = document.getElementById('modalVisitLink');
+    const modalCloseBtn = document.getElementById('modalCloseBtn');
 
     let isDragging = false;
     let startX, startY;
@@ -460,11 +561,30 @@
     const links = world.querySelectorAll('.cosmic-sticker-link');
     galaxyCounter.textContent = `🌟 Pianeti attivi nella galassia: ${links.length}`;
 
-    // Aggiunge il suono quando si clicca sui pianeti per aprire il sito
+    // Gestione apertura Popup modale al click sul pianeta
     links.forEach(link => {
-      link.addEventListener('click', () => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
         playWarpSound();
+        
+        modalIcon.textContent = link.textContent;
+        modalTitle.textContent = link.getAttribute('data-name');
+        modalDesc.textContent = link.getAttribute('data-desc');
+        modalVisitLink.href = link.href;
+        
+        planetModal.classList.add('active');
       });
+    });
+
+    modalCloseBtn.addEventListener('click', () => {
+      playBeep(300, 'sine', 0.06);
+      planetModal.classList.remove('active');
+    });
+
+    planetModal.addEventListener('click', (e) => {
+      if (e.target === planetModal) {
+        planetModal.classList.remove('active');
+      }
     });
 
     function clamp(val, min, max) {
@@ -496,7 +616,7 @@
     updateWorldTransform();
 
     board.addEventListener('mousedown', (e) => {
-      if (e.target.closest('.galaxy-controls') || e.target.closest('.galaxy-radar')) return;
+      if (e.target.closest('.galaxy-controls') || e.target.closest('.galaxy-radar') || e.target.closest('.planet-modal')) return;
       isDragging = true;
       startX = e.clientX - currentX;
       startY = e.clientY - currentY;
@@ -509,12 +629,10 @@
       updateWorldTransform(false);
     });
 
-    window.addEventListener('mouseup', () => {
-      isDragging = false;
-    });
+    window.addEventListener('mouseup', () => { isDragging = false; });
 
     board.addEventListener('touchstart', (e) => {
-      if (e.target.closest('.galaxy-controls') || e.target.closest('.galaxy-radar')) return;
+      if (e.target.closest('.galaxy-controls') || e.target.closest('.galaxy-radar') || e.target.closest('.planet-modal')) return;
       isDragging = true;
       startX = e.touches[0].clientX - currentX;
       startY = e.touches[0].clientY - currentY;
@@ -527,53 +645,36 @@
       updateWorldTransform(false);
     });
 
-    window.addEventListener('touchend', () => {
-      isDragging = false;
-    });
+    window.addEventListener('touchend', () => { isDragging = false; });
 
-    const zoomInBtn = document.getElementById('zoomInBtn');
-    const zoomOutBtn = document.getElementById('zoomOutBtn');
-
-    zoomInBtn.addEventListener('click', () => {
+    document.getElementById('zoomInBtn').addEventListener('click', () => {
       playBeep(600, 'sine', 0.06);
-      if (scale < 2.0) {
-        scale += 0.25;
-        updateWorldTransform(false);
-      }
+      if (scale < 2.0) { scale += 0.25; updateWorldTransform(false); }
     });
 
-    zoomOutBtn.addEventListener('click', () => {
+    document.getElementById('zoomOutBtn').addEventListener('click', () => {
       playBeep(300, 'sine', 0.06);
-      if (scale > 0.4) {
-        scale -= 0.25;
-        updateWorldTransform(false);
-      }
+      if (scale > 0.4) { scale -= 0.25; updateWorldTransform(false); }
     });
 
     board.addEventListener('wheel', (e) => {
       e.preventDefault();
-      if (e.deltaY < 0 && scale < 2.0) {
-        scale += 0.1;
-      } else if (e.deltaY > 0 && scale > 0.4) {
-        scale -= 0.1;
-      }
+      if (e.deltaY < 0 && scale < 2.0) scale += 0.1;
+      else if (e.deltaY > 0 && scale > 0.4) scale -= 0.1;
       updateWorldTransform(false);
     }, { passive: false });
 
-    const randomBtn = document.getElementById('randomBtn');
-    randomBtn.addEventListener('click', () => {
-      playBeep(800, 'square', 0.1);
+    document.getElementById('randomBtn').addEventListener('click', () => {
+      playDiceSound(); // Suono del dado aggiornato
       if (links.length > 0) {
         const randomIndex = Math.floor(Math.random() * links.length);
         const targetLink = links[randomIndex];
-
         const targetTop = parseFloat(targetLink.style.top);
         const targetLeft = parseFloat(targetLink.style.left);
 
         currentX = -(targetLeft - 700);
         currentY = -(targetTop - 500);
         scale = 1.2;
-
         updateWorldTransform(true);
       }
     });
@@ -584,9 +685,7 @@
     fullscreenBtn.addEventListener('click', () => {
       playBeep(500, 'sine', 0.08);
       if (!document.fullscreenElement) {
-        board.requestFullscreen().catch(err => {
-          alert(`Error attempting to enable fullscreen mode: ${err.message}`);
-        });
+        board.requestFullscreen().catch(err => { alert(`Errore fullscreen: ${err.message}`); });
       } else {
         document.exitFullscreen();
       }
