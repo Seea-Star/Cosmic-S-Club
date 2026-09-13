@@ -66,7 +66,7 @@
       transition: transform 0.1s ease;
     }
 
-    .back-btn:active, .control-btn:active, .modal-visit-btn:active, .reset-galaxy-btn:active, .search-bar input:focus {
+    .back-btn:active, .control-btn:active, .command-visit-btn:active, .reset-galaxy-btn:active, .search-bar input:focus {
       transform: translate(2px, 2px) !important;
       box-shadow: 0px 0px 0px #F0E8D5 !important;
     }
@@ -86,7 +86,6 @@
       gap: 20px;
     }
 
-    /* Barra di Ricerca */
     .search-bar {
       position: relative;
       width: 100%;
@@ -178,7 +177,6 @@
       filter: drop-shadow(0px 0px 10px #F0E8D5);
     }
 
-    /* Effetto quando un elemento viene cercato/filtrato */
     .cosmic-sticker-link.dimmed {
       opacity: 0.2;
       filter: grayscale(100%) drop-shadow(1px 1px 0px rgba(240,232,213,0.2));
@@ -239,7 +237,6 @@
       100% { transform: scale(1); }
     }
 
-    /* Tasto Reset solo con icona in alto a sinistra */
     .reset-galaxy-btn {
       position: absolute;
       top: 15px;
@@ -333,84 +330,142 @@
       transform: scale(1.05);
     }
 
-    /* Stile Popup Modale */
-    .planet-modal {
+    /* Schermata di comando a tutto schermo (Sostituisce il vecchio popup) */
+    .command-screen {
       position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.75);
-      backdrop-filter: blur(3px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      top: 15px; left: 15px; right: 15px; bottom: 15px;
+      background: #000000;
+      border: 2px solid #F0E8D5;
+      border-radius: 14px;
       z-index: 100;
+      padding: 25px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 6px 6px 0px #F0E8D5;
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.2s ease;
+      transition: opacity 0.25s ease;
     }
 
-    .planet-modal.active {
+    .command-screen.active {
       opacity: 1;
       pointer-events: auto;
     }
 
-    .modal-content {
-      background: #000000;
-      border: 2px solid #F0E8D5;
-      border-radius: 16px;
-      padding: 25px;
-      width: 320px;
-      max-width: 90%;
-      box-shadow: 6px 6px 0px #F0E8D5;
+    .command-header {
       display: flex;
-      flex-direction: column;
-      gap: 15px;
-      text-align: center;
-      position: relative;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px dashed rgba(240, 232, 213, 0.3);
+      padding-bottom: 15px;
     }
 
-    .modal-icon {
-      font-size: 3rem;
-    }
-
-    .modal-title {
-      font-size: 1.2rem;
+    .command-title {
+      font-size: 1.4rem;
       font-weight: 800;
+      letter-spacing: 1px;
     }
 
-    .modal-desc {
-      font-size: 0.85rem;
-      opacity: 0.9;
-      line-height: 1.4;
-    }
-
-    .modal-actions {
-      display: flex;
-      gap: 10px;
-      margin-top: 5px;
-    }
-
-    .modal-visit-btn {
-      flex: 1;
-      background: #F0E8D5;
-      color: #000000;
-      border: 2px solid #F0E8D5;
-      padding: 10px;
-      border-radius: 10px;
-      font-weight: 800;
-      text-decoration: none;
-      box-shadow: 2px 2px 0px #F0E8D5;
-      transition: transform 0.1s ease;
-    }
-
-    .modal-close-btn {
+    .command-close-btn {
       background: #000000;
       color: #F0E8D5;
       border: 2px solid #F0E8D5;
-      padding: 10px 15px;
       border-radius: 10px;
-      font-weight: 800;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       cursor: pointer;
+      font-size: 1rem;
       box-shadow: 2px 2px 0px #F0E8D5;
+      transition: transform 0.1s ease, background 0.1s ease, color 0.1s ease;
+    }
+
+    .command-close-btn:hover {
+      background: #F0E8D5;
+      color: #000000;
+    }
+
+    .command-body {
+      display: flex;
+      gap: 30px;
+      align-items: center;
+      flex: 1;
+      padding: 20px 0;
+    }
+
+    /* Il Radar ora fa da visore principale del pianeta */
+    .command-viewer {
+      width: 140px;
+      height: 140px;
+      min-width: 140px;
+      background: #000000;
+      border: 2px solid #F0E8D5;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4.5rem;
+      box-shadow: 4px 4px 0px #F0E8D5;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .command-viewer::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 4px;
+      background: rgba(240, 232, 213, 0.4);
+      animation: scanBeam 2s linear infinite;
+    }
+
+    @keyframes scanBeam {
+      0% { top: 0%; }
+      100% { top: 100%; }
+    }
+
+    .command-info {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      flex: 1;
+    }
+
+    .command-subtitle {
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      opacity: 0.7;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .command-desc {
+      font-size: 1rem;
+      line-height: 1.6;
+      font-weight: 700;
+      opacity: 0.95;
+    }
+
+    .command-footer {
+      display: flex;
+      justify-content: flex-end;
+      border-top: 2px dashed rgba(240, 232, 213, 0.3);
+      padding-top: 15px;
+    }
+
+    .command-visit-btn {
+      background: #F0E8D5;
+      color: #000000;
+      border: 2px solid #F0E8D5;
+      padding: 10px 25px;
+      border-radius: 12px;
+      font-weight: 800;
+      font-size: 0.95rem;
+      text-decoration: none;
+      box-shadow: 3px 3px 0px #F0E8D5;
       transition: transform 0.1s ease;
     }
 
@@ -476,7 +531,6 @@
 
     <div class="space-container">
 
-      <!-- Barra di ricerca -->
       <div class="search-bar">
         <i class="fa-solid fa-magnifying-glass"></i>
         <input type="text" id="galaxySearchInput" placeholder="Cerca un elemento, un nome o una descrizione nella galassia...">
@@ -484,7 +538,6 @@
 
       <div class="galaxy-board" id="galaxyBoard">
         
-        <!-- Tasto Reset (solo icona) -->
         <button class="reset-galaxy-btn" id="resetBtn" title="Centra la galassia">
           <i class="fa-solid fa-rotate-right"></i>
         </button>
@@ -506,16 +559,23 @@
           <a href="https://it.wikipedia.org" data-name="Comet Star" data-desc="Esplora le meraviglie della conoscenza in italiano." class="cosmic-sticker-link anim-pulse" style="top: 480px; left: 1250px; animation-delay: 0.3s;">☄️</a>
         </div>
 
-        <!-- Popup Modale per i dettagli -->
-        <div class="planet-modal" id="planetModal">
-          <div class="modal-content">
-            <div class="modal-icon" id="modalIcon">🪐</div>
-            <div class="modal-title" id="modalTitle">Nome Elemento</div>
-            <div class="modal-desc" id="modalDesc">Descrizione del sito di questa persona.</div>
-            <div class="modal-actions">
-              <a href="#" id="modalVisitLink" target="_blank" class="modal-visit-btn">Visita</a>
-              <button class="modal-close-btn" id="modalCloseBtn">Chiudi</button>
+        <!-- Schermata di comando a tutto schermo -->
+        <div class="command-screen" id="commandScreen">
+          <div class="command-header">
+            <div class="command-title" id="commandTitle">TITOLO SEGNALE</div>
+            <button class="command-close-btn" id="commandCloseBtn" title="Chiudi schermo">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+          <div class="command-body">
+            <div class="command-viewer" id="commandViewer">🪐</div>
+            <div class="command-info">
+              <span class="command-subtitle">Rilevamento Coordinate / Scansione attiva</span>
+              <div class="command-desc" id="commandDesc">Descrizione del sito di questa persona.</div>
             </div>
+          </div>
+          <div class="command-footer">
+            <a href="#" id="commandVisitLink" target="_blank" class="command-visit-btn"><i class="fa-solid fa-rocket"></i> Visita Pianeta</a>
           </div>
         </div>
 
@@ -624,12 +684,12 @@
     const galaxyCounter = document.getElementById('galaxyCounter');
     const searchInput = document.getElementById('galaxySearchInput');
     
-    const planetModal = document.getElementById('planetModal');
-    const modalIcon = document.getElementById('modalIcon');
-    const modalTitle = document.getElementById('modalTitle');
-    const modalDesc = document.getElementById('modalDesc');
-    const modalVisitLink = document.getElementById('modalVisitLink');
-    const modalCloseBtn = document.getElementById('modalCloseBtn');
+    const commandScreen = document.getElementById('commandScreen');
+    const commandViewer = document.getElementById('commandViewer');
+    const commandTitle = document.getElementById('commandTitle');
+    const commandDesc = document.getElementById('commandDesc');
+    const commandVisitLink = document.getElementById('commandVisitLink');
+    const commandCloseBtn = document.getElementById('commandCloseBtn');
 
     let isDragging = false;
     let startX, startY;
@@ -640,7 +700,6 @@
     const links = world.querySelectorAll('.cosmic-sticker-link');
     galaxyCounter.textContent = `🌟 Elementi attivi nella galassia: ${links.length}`;
 
-    // Funzionalità di Ricerca in tempo reale
     searchInput.addEventListener('input', (e) => {
       const term = e.target.value.toLowerCase().trim();
 
@@ -654,7 +713,6 @@
           link.classList.remove('dimmed');
           link.classList.add('highlighted');
           
-          // Se l'utente scrive qualcosa e trova un corrispettivo, sposta la visuale lì sopra
           const targetTop = parseFloat(link.style.top);
           const targetLeft = parseFloat(link.style.left);
           currentX = -(targetLeft - 700);
@@ -673,24 +731,18 @@
         e.preventDefault();
         playWarpSound();
         
-        modalIcon.textContent = link.textContent;
-        modalTitle.textContent = link.getAttribute('data-name');
-        modalDesc.textContent = link.getAttribute('data-desc');
-        modalVisitLink.href = link.href;
+        commandViewer.textContent = link.textContent;
+        commandTitle.textContent = link.getAttribute('data-name');
+        commandDesc.textContent = link.getAttribute('data-desc');
+        commandVisitLink.href = link.href;
         
-        planetModal.classList.add('active');
+        commandScreen.classList.add('active');
       });
     });
 
-    modalCloseBtn.addEventListener('click', () => {
+    commandCloseBtn.addEventListener('click', () => {
       playBeep(300, 'sine', 0.06);
-      planetModal.classList.remove('active');
-    });
-
-    planetModal.addEventListener('click', (e) => {
-      if (e.target === planetModal) {
-        planetModal.classList.remove('active');
-      }
+      commandScreen.classList.remove('active');
     });
 
     function clamp(val, min, max) {
@@ -722,7 +774,7 @@
     updateWorldTransform();
 
     board.addEventListener('mousedown', (e) => {
-      if (e.target.closest('.galaxy-controls') || e.target.closest('.galaxy-radar') || e.target.closest('.planet-modal') || e.target.closest('.reset-galaxy-btn')) return;
+      if (e.target.closest('.galaxy-controls') || e.target.closest('.galaxy-radar') || e.target.closest('.command-screen') || e.target.closest('.reset-galaxy-btn')) return;
       isDragging = true;
       startX = e.clientX - currentX;
       startY = e.clientY - currentY;
@@ -738,7 +790,7 @@
     window.addEventListener('mouseup', () => { isDragging = false; });
 
     board.addEventListener('touchstart', (e) => {
-      if (e.target.closest('.galaxy-controls') || e.target.closest('.galaxy-radar') || e.target.closest('.planet-modal') || e.target.closest('.reset-galaxy-btn')) return;
+      if (e.target.closest('.galaxy-controls') || e.target.closest('.galaxy-radar') || e.target.closest('.command-screen') || e.target.closest('.reset-galaxy-btn')) return;
       isDragging = true;
       startX = e.touches[0].clientX - currentX;
       startY = e.touches[0].clientY - currentY;
