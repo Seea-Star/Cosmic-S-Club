@@ -330,26 +330,24 @@
       transform: scale(1.05);
     }
 
-    /* Command Screen / Retro Terminal Monitor (Amber/Green CRT Vibe) */
+    /* Command Screen / Cream Monochromatic Theme */
     .command-screen {
       position: absolute;
       top: 15px; left: 15px; right: 15px; bottom: 15px;
-      background: #030805;
-      border: 2px solid #00FF66;
+      background: #000000;
+      border: 2px solid #F0E8D5;
       border-radius: 14px;
       z-index: 100;
       padding: 18px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      box-shadow: 6px 6px 0px #00FF66;
+      box-shadow: 6px 6px 0px #F0E8D5;
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.25s ease;
       overflow-y: auto;
-      color: #00FF66;
-      font-family: 'Share Tech Mono', monospace;
-      text-transform: uppercase;
+      color: #F0E8D5;
     }
 
     .command-screen.active {
@@ -357,23 +355,11 @@
       pointer-events: auto;
     }
 
-    /* CRT Scanline Effect inside Command Screen */
-    .command-screen::before {
-      content: " ";
-      display: block;
-      position: absolute;
-      top: 0; left: 0; bottom: 0; right: 0;
-      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.3) 50%);
-      background-size: 100% 4px;
-      z-index: 50;
-      pointer-events: none;
-    }
-
     .command-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-bottom: 2px dashed rgba(0, 255, 102, 0.4);
+      border-bottom: 2px dashed rgba(240, 232, 213, 0.4);
       padding-bottom: 10px;
       z-index: 60;
     }
@@ -385,9 +371,9 @@
     }
 
     .command-close-btn {
-      background: #030805;
-      color: #00FF66;
-      border: 2px solid #00FF66;
+      background: #000000;
+      color: #F0E8D5;
+      border: 2px solid #F0E8D5;
       border-radius: 8px;
       width: 32px;
       height: 32px;
@@ -396,12 +382,12 @@
       justify-content: center;
       cursor: pointer;
       font-size: 0.85rem;
-      box-shadow: 2px 2px 0px #00FF66;
+      box-shadow: 2px 2px 0px #F0E8D5;
       transition: transform 0.1s ease, background 0.1s ease, color 0.1s ease;
     }
 
     .command-close-btn:hover {
-      background: #00FF66;
+      background: #F0E8D5;
       color: #000000;
     }
 
@@ -414,34 +400,19 @@
       z-index: 60;
     }
 
-    /* Scanned Element Viewer Box */
     .command-viewer {
       width: 100px;
       height: 100px;
       background: #000000;
-      border: 2px solid #00FF66;
+      border: 2px solid #F0E8D5;
       border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 3rem;
-      box-shadow: 3px 3px 0px #00FF66;
+      box-shadow: 3px 3px 0px #F0E8D5;
       position: relative;
       overflow: hidden;
-    }
-
-    .command-viewer::after {
-      content: '';
-      position: absolute;
-      width: 100%;
-      height: 3px;
-      background: rgba(0, 255, 102, 0.6);
-      animation: scanBeam 2s linear infinite;
-    }
-
-    @keyframes scanBeam {
-      0% { top: 0%; }
-      100% { top: 100%; }
     }
 
     .command-tech-data {
@@ -449,8 +420,8 @@
       flex-direction: column;
       gap: 6px;
       font-size: 0.8rem;
-      background: rgba(0, 255, 102, 0.05);
-      border: 1px dashed rgba(0, 255, 102, 0.3);
+      background: rgba(240, 232, 213, 0.05);
+      border: 1px dashed rgba(240, 232, 213, 0.3);
       padding: 10px;
       border-radius: 10px;
     }
@@ -458,7 +429,7 @@
     .tech-row {
       display: flex;
       justify-content: space-between;
-      border-bottom: 1px dotted rgba(0, 255, 102, 0.2);
+      border-bottom: 1px dotted rgba(240, 232, 213, 0.2);
       padding-bottom: 3px;
     }
 
@@ -479,7 +450,7 @@
       flex-direction: column;
       gap: 4px;
       background: rgba(0, 0, 0, 0.6);
-      border: 1px solid rgba(0, 255, 102, 0.3);
+      border: 1px solid rgba(240, 232, 213, 0.3);
       padding: 8px 10px;
       border-radius: 8px;
     }
@@ -502,23 +473,22 @@
     .command-footer {
       display: flex;
       justify-content: flex-end;
-      border-top: 2px dashed rgba(0, 255, 102, 0.4);
+      border-top: 2px dashed rgba(240, 232, 213, 0.4);
       padding-top: 10px;
       z-index: 60;
     }
 
     .command-visit-btn {
-      background: #00FF66;
+      background: #F0E8D5;
       color: #000000;
-      border: 2px solid #00FF66;
+      border: 2px solid #F0E8D5;
       padding: 8px 18px;
       border-radius: 10px;
       font-weight: 800;
       font-size: 0.8rem;
       text-decoration: none;
-      box-shadow: 2px 2px 0px #00FF66;
+      box-shadow: 2px 2px 0px #F0E8D5;
       transition: transform 0.1s ease;
-      font-family: 'Share Tech Mono', monospace;
     }
 
     @media (max-width: 600px) {
@@ -593,19 +563,19 @@
 
     <header class="top-banner">
       <h1>COSMIC CLUB</h1>
-      <a href="https://seea-star.github.io/Cosmic-S-Home/" class="back-btn"><i class="fa-solid fa-chevron-left"></i> HOME</a>
+      <a href="https://seea-star.github.io/Cosmic-S-Home/" class="back-btn"><i class="fa-solid fa-chevron-left">EN</i> HOME</a>
     </header>
 
     <div class="space-container">
 
       <div class="search-bar">
         <i class="fa-solid fa-magnifying-glass"></i>
-        <input type="text" id="galaxySearchInput" placeholder="Search an element, name, or description in the galaxy...">
+        <input type="text" id="galaxySearchInput" placeholder="Cerca un esploratore, pianeta o descrizione nella galassia...">
       </div>
 
       <div class="galaxy-board" id="galaxyBoard">
         
-        <button class="reset-galaxy-btn" id="resetBtn" title="Center Galaxy">
+        <button class="reset-galaxy-btn" id="resetBtn" title="Centra Galassia">
           <i class="fa-solid fa-rotate-right"></i>
         </button>
 
@@ -613,61 +583,47 @@
           <div class="shooting-comet-1">☄️</div>
           <div class="shooting-comet-2">🛸</div>
 
-          <a href="https://www.wikipedia.org" data-name="Wikipedia Planet" data-desc="Free universal encyclopedia of the galaxy." data-type="Archive Planet" data-sector="Alpha-9" data-speed="42.8 LY/s" class="cosmic-sticker-link anim-float" style="top: 450px; left: 700px; animation-delay: 0s;">🪐</a>
-          <a href="https://neocities.org" data-name="Neocities Rocket" data-desc="Space base for independent and retro web sites." data-type="Orbital Shuttle" data-sector="Beta-2" data-speed="88.1 LY/s" class="cosmic-sticker-link anim-drift" style="top: 250px; left: 1050px; animation-delay: 1.2s;">🚀</a>
-          <a href="https://archive.org" data-name="Archive UFO" data-desc="The time capsule preserving internet history." data-type="Time Probe" data-sector="Gamma-5" data-speed="12.4 LY/s" class="cosmic-sticker-link anim-pulse" style="top: 750px; left: 400px; animation-delay: 2.5s;">🛸</a>
-          <a href="https://github.com" data-name="GitHub Star" data-desc="Planet of source codes and developers." data-type="Binary Star" data-sector="Delta-1" data-speed="99.9 LY/s" class="cosmic-sticker-link anim-float" style="top: 180px; left: 350px; animation-delay: 0.8s;">⭐</a>
-          <a href="https://developer.mozilla.org" data-name="MDN Astronaut" data-desc="Survival manual for web explorers." data-type="Exploration Unit" data-sector="Omega-7" data-speed="05.2 LY/s" class="cosmic-sticker-link anim-drift" style="top: 680px; left: 1150px; animation-delay: 1.8s;">👨‍🚀</a>
-          
-          <a href="https://html.com" data-name="Alien Visitor" data-desc="A mysterious alien landed from another solar system." data-type="Extraterrestrial Entity" data-sector="X-Zone" data-speed="110.0 LY/s" class="cosmic-sticker-link anim-pulse" style="top: 120px; left: 800px; animation-delay: 0.5s;">👽</a>
-          <a href="https://validator.w3.org" data-name="Saturn Station" data-desc="Control station for code purity." data-type="Space Outpost" data-sector="Sector-0" data-speed="00.0 LY/s" class="cosmic-sticker-link anim-float" style="top: 580px; left: 250px; animation-delay: 1.5s;">🪐</a>
-          <a href="https://css-tricks.com" data-name="Rocket Express" data-desc="Fast shuttle loaded with celestial graphic tricks." data-type="Fast Vector" data-sector="Epsilon-4" data-speed="145.3 LY/s" class="cosmic-sticker-link anim-drift" style="top: 850px; left: 850px; animation-delay: 2.1s;">🚀</a>
-          <a href="https://nekoweb.org" data-name="Star 2" data-desc="Emerging new galaxy of personal sites." data-type="Proto-Star" data-sector="Zeta-8" data-speed="33.4 LY/s" class="cosmic-sticker-link anim-float" style="top: 380px; left: 180px; animation-delay: 1.0s;">🌟</a>
-          <a href="https://it.wikipedia.org" data-name="Comet Star" data-desc="Explore the wonders of knowledge in Italian." data-type="Wandering Comet" data-sector="Theta-3" data-speed="77.6 LY/s" class="cosmic-sticker-link anim-pulse" style="top: 480px; left: 1250px; animation-delay: 0.3s;">☄️</a>
+          <!-- Esempi reali con opzioni personalizzabili dall'utente (Nome Esploratore, Ruolo/Stato, Link, Descrizione) -->
+          <a href="https://github.com" data-name="Cosmic-S" data-role="Fondatore / Admin" data-status="Esplorando lo spazio profondo 🚀" data-desc="Il quartier generale del club galattico. Benvenuti nella mia base spaziale!" class="cosmic-sticker-link anim-float" style="top: 450px; left: 700px; animation-delay: 0s;">🪐</a>
+          <a href="https://neocities.org" data-name="AstroStellar" data-role="Visitatore Esterno" data-status="Costruendo portali web retrò" data-desc="Un pianeta dedicato ai siti web indipendenti e alla creatività pura." class="cosmic-sticker-link anim-drift" style="top: 250px; left: 1050px; animation-delay: 1.2s;">🚀</a>
+          <a href="https://developer.mozilla.org" data-name="NebulaCoder" data-role="Cadetto 1° Classe" data-status="Decodificando stringhe aliene" data-desc="Appassionato di codice e di vecchi design in stile pixel art." class="cosmic-sticker-link anim-pulse" style="top: 750px; left: 400px; animation-delay: 2.5s;">🛸</a>
         </div>
 
-        <!-- On-Board Computer Terminal Screen -->
+        <!-- Finestra Informativa della Scheda (Stile Crema coerente) -->
         <div class="command-screen" id="commandScreen">
           <div class="command-header">
-            <div class="command-title" id="commandTitle">SIGNAL TITLE</div>
-            <button class="command-close-btn" id="commandCloseBtn" title="Close screen">
+            <div class="command-title" id="commandTitle">SCHEDA ESPLORATORE</div>
+            <button class="command-close-btn" id="commandCloseBtn" title="Chiudi">
               <i class="fa-solid fa-xmark"></i>
             </button>
           </div>
 
           <div class="command-body">
-            <!-- Scanned Viewer Box -->
             <div class="command-viewer" id="commandViewer">🪐</div>
 
-            <!-- Computer Technical Data Panel -->
             <div class="command-tech-data">
               <div class="tech-row">
-                <span class="tech-label">CLASSIFICATION:</span>
-                <span class="tech-value" id="techType">---</span>
+                <span class="tech-label">RUOLO / TITOLO:</span>
+                <span class="tech-value" id="techRole">---</span>
               </div>
               <div class="tech-row">
-                <span class="tech-label">SECTOR:</span>
-                <span class="tech-value" id="techSector">---</span>
+                <span class="tech-label">STATO ATTUALE:</span>
+                <span class="tech-value" id="techStatus">---</span>
               </div>
               <div class="tech-row">
-                <span class="tech-label">SIGNAL SPEED:</span>
-                <span class="tech-value" id="techSpeed">---</span>
-              </div>
-              <div class="tech-row">
-                <span class="tech-label">SCAN STATUS:</span>
-                <span class="tech-value" style="color: #00FF66;">COMPLETED</span>
+                <span class="tech-label">FREQUENZA:</span>
+                <span class="tech-value" style="color: #F0E8D5;">ATTIVA</span>
               </div>
             </div>
 
-            <!-- Description Box -->
             <div class="command-desc-box">
-              <span class="command-subtitle">Telemetry / Board Notes</span>
-              <div class="command-desc" id="commandDesc">Description of this user's site.</div>
+              <span class="command-subtitle">DIARIO DI BORDO / DESCRIZIONE</span>
+              <div class="command-desc" id="commandDesc">Nessuna descrizione inserita.</div>
             </div>
           </div>
 
           <div class="command-footer">
-            <a href="#" id="commandVisitLink" target="_blank" class="command-visit-btn">[ ACCESS FREQUENCY ]</a>
+            <a href="#" id="commandVisitLink" target="_blank" class="command-visit-btn">VISITA FREQUENZA &rarr;</a>
           </div>
         </div>
 
@@ -677,16 +633,16 @@
         </div>
 
         <div class="galaxy-controls">
-          <button class="control-btn" id="randomBtn" title="Frame a random element">
+          <button class="control-btn" id="randomBtn" title="Inquadra elemento casuale">
             <i class="fa-solid fa-dice"></i>
           </button>
-          <button class="control-btn" id="zoomOutBtn" title="Zoom Out">
+          <button class="control-btn" id="zoomOutBtn" title="Riduci Zoom">
             <i class="fa-solid fa-minus"></i>
           </button>
-          <button class="control-btn" id="zoomInBtn" title="Zoom In">
+          <button class="control-btn" id="zoomInBtn" title="Aumenta Zoom">
             <i class="fa-solid fa-plus"></i>
           </button>
-          <button class="control-btn" id="fullscreenBtn" title="Fullscreen">
+          <button class="control-btn" id="fullscreenBtn" title="Schermo Intero">
             <i class="fa-solid fa-expand" id="fullscreenIcon"></i>
           </button>
         </div>
@@ -694,15 +650,14 @@
       </div>
 
       <div class="space-intro">
-        <span>Welcome to the Cosmic Club! This is an open cosmic canvas for everyone. Send me your custom pixel art, star, planet, UFO, rocket, or astronaut, and I will place it floating around here.</span>
-        <span>To join the galaxy, head over to the <a href="https://cosmic-s.atabook.org/" target="_blank">Guestbook</a> and send your creation!</span>
-        <div class="galaxy-counter" id="galaxyCounter">🌟 Active elements in galaxy: 0</div>
+        <span>Benvenuto nel Cosmic Club! Uno spazio aperto a tutti gli esploratori del web. Mandami il tuo simbolo (pianeta, razzo, UFO o astronauta), il tuo link e le informazioni personali tramite il <a href="https://cosmic-s.atabook.org/" target="_blank">Guestbook</a> o Google Moduli per aggiungerti alla galassia!</span>
+        <div class="galaxy-counter" id="galaxyCounter">🌟 Elementi attivi nella galassia: 0</div>
       </div>
 
     </div>
 
     <div class="space-footer">
-      Created by Cosmic-S<br>
+      Creato da Cosmic-S<br>
       <a href="https://cosmic-s.atabook.org/" target="_blank">https://cosmic-s.atabook.org/</a>
     </div>
 
@@ -783,9 +738,8 @@
     const commandVisitLink = document.getElementById('commandVisitLink');
     const commandCloseBtn = document.getElementById('commandCloseBtn');
 
-    const techType = document.getElementById('techType');
-    const techSector = document.getElementById('techSector');
-    const techSpeed = document.getElementById('techSpeed');
+    const techRole = document.getElementById('techRole');
+    const techStatus = document.getElementById('techStatus');
 
     let isDragging = false;
     let startX, startY;
@@ -794,7 +748,7 @@
     let scale = 0.55;
 
     const links = world.querySelectorAll('.cosmic-sticker-link');
-    galaxyCounter.textContent = `🌟 Active elements in galaxy: ${links.length}`;
+    galaxyCounter.textContent = `🌟 Elementi attivi nella galassia: ${links.length}`;
 
     searchInput.addEventListener('input', (e) => {
       const term = e.target.value.toLowerCase().trim();
@@ -802,10 +756,11 @@
       links.forEach(link => {
         const name = link.getAttribute('data-name').toLowerCase();
         const desc = link.getAttribute('data-desc').toLowerCase();
+        const role = link.getAttribute('data-role').toLowerCase();
 
         if (term === '') {
           link.classList.remove('dimmed', 'highlighted');
-        } else if (name.includes(term) || desc.includes(term)) {
+        } else if (name.includes(term) || desc.includes(term) || role.includes(term)) {
           link.classList.remove('dimmed');
           link.classList.add('highlighted');
           
@@ -831,9 +786,8 @@
         commandTitle.textContent = link.getAttribute('data-name');
         commandDesc.textContent = link.getAttribute('data-desc');
         
-        techType.textContent = link.getAttribute('data-type') || 'Unknown Object';
-        techSector.textContent = link.getAttribute('data-sector') || 'Sector-X';
-        techSpeed.textContent = link.getAttribute('data-speed') || '10.0 LY/s';
+        techRole.textContent = link.getAttribute('data-role') || 'Esploratore';
+        techStatus.textContent = link.getAttribute('data-status') || 'In viaggio';
 
         commandVisitLink.href = link.href;
         commandScreen.classList.add('active');
@@ -973,4 +927,3 @@
 
 </body>
 </html>
-
