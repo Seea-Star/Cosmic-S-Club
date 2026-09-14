@@ -195,66 +195,20 @@
       100% { top: 1040px; left: 1440px; opacity: 0; }
     }
 
-    /* Animazione aggiornata per la seconda cometa/UFO */
     .shooting-comet-2 {
       position: absolute;
       width: 48px;
       height: auto;
       pointer-events: none;
-      animation: shootCometDynamic 24s ease-in-out infinite;
-      animation-delay: 2s;
+      animation: shootComet2 18s linear infinite;
+      animation-delay: 5s;
       z-index: 5;
     }
-
-    @keyframes shootCometDynamic {
-      /* Fase 1: Parte da in basso a sinistra e sale verso in alto a destra ruotando e fluttuando */
-      0% { 
-        top: 1040px; 
-        left: -50px; 
-        transform: rotate(0deg) translateY(0px) scale(0.8); 
-        opacity: 0; 
-      }
-      5% { opacity: 1; }
-      20% { 
-        transform: rotate(120deg) translateY(-25px) scale(1.1); 
-      }
-      40% { 
-        transform: rotate(260deg) translateY(20px) scale(0.9); 
-      }
-      45% { 
-        top: -60px; 
-        left: 1450px; 
-        transform: rotate(360deg) translateY(0px) scale(1); 
-        opacity: 0; 
-      }
-
-      /* Pausa fuori dallo schermo */
-      50% { 
-        top: -60px; 
-        left: 200px; 
-        transform: rotate(0deg); 
-        opacity: 0; 
-      }
-
-      /* Fase 2: Rientra dall'alto a sinistra e va verso il basso a destra con rotta diversa */
-      55% { opacity: 1; }
-      70% { 
-        transform: rotate(-140deg) translateY(-18px) scale(1.15); 
-      }
-      85% { 
-        transform: rotate(-280deg) translateY(15px) scale(0.95); 
-      }
-      95% { 
-        top: 1050px; 
-        left: 1200px; 
-        transform: rotate(-360deg) translateY(0px) scale(1); 
-        opacity: 0; 
-      }
-      100% { 
-        top: 1040px; 
-        left: -50px; 
-        opacity: 0; 
-      }
+    @keyframes shootComet2 {
+      0% { top: 1040px; left: -40px; opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { top: -40px; left: 1440px; opacity: 0; }
     }
 
     .anim-float { animation: float 4s ease-in-out infinite; }
@@ -271,7 +225,7 @@
       100% { transform: translateX(0px) translateY(0px); }
     }
 
-    /* Movimento aggiornato per l'Oracolo (UFO / Archive) */
+    /* Animazione personalizzata e dinamica per l'Oracolo */
     .anim-pulse { animation: oracleMotion 5s ease-in-out infinite; }
     @keyframes oracleMotion {
       0% { transform: scale(1) rotate(0deg) translateY(0px); }
@@ -584,14 +538,18 @@
 
         <div class="galaxy-canvas-world" id="galaxyWorld">
           <div class="shooting-comet-1">☄️</div>
-          <img src="Senza titolo 14_20260914191623.png" alt="UFO" class="shooting-comet-2">
+          <img src="ezgif-733e927ae4e467d8.gif" alt="UFO" class="shooting-comet-2">
 
           <a href="https://cosmic-seea.neocities.org/" target="_blank" data-name="Cosmic-S" data-desc="Cosmic-S official space site." data-tags="cosmic, retro, neocities" data-id="CosmicS" data-date="2026-09-14" data-button="https://cosmic-seea.neocities.org/button.gif" data-img="Senza titolo 13_20260914185659.png" class="cosmic-sticker-link anim-float" style="top: 320px; left: 880px; animation-delay: 0s;">
             <img src="Senza titolo 13_20260914185659.png" alt="Cosmic-S" class="sticker-img">
           </a>
 
           <a href="https://neocities.org" data-name="Neocities Rocket" data-desc="Space base for independent retro web sites." data-tags="y2k, retro, web host" data-id="NetPilot" data-date="2026-09-05" data-button="https://neocities.org/button.gif" data-profile="https://cosmic-s.atabook.org/" class="cosmic-sticker-link anim-drift" style="top: 150px; left: 420px; animation-delay: 1.2s;">🚀</a>
-          <a href="https://archive.org" data-name="Archive UFO" data-desc="The time capsule preserving internet history." data-tags="history, archive, retro" data-id="TimeGhost" data-date="2026-09-08" data-button="https://neocities.org/button.gif" data-profile="https://cosmic-s.atabook.org/" class="cosmic-sticker-link anim-pulse" style="top: 610px; left: 240px; animation-delay: 2.5s;">🛸</a>
+          
+          <a href="https://archive.org" data-name="Archive UFO" data-desc="The time capsule preserving internet history." data-tags="history, archive, retro" data-id="TimeGhost" data-date="2026-09-08" data-button="https://neocities.org/button.gif" data-img="Senza titolo 14_20260914191623.png" data-profile="https://cosmic-s.atabook.org/" class="cosmic-sticker-link anim-pulse" style="top: 610px; left: 240px; animation-delay: 2.5s;">
+            <img src="Senza titolo 14_20260914191623.png" alt="Archive UFO" class="sticker-img">
+          </a>
+
           <a href="https://github.com" data-name="GitHub Star" data-desc="The planet of source code and web developers." data-tags="code, dev, git" data-id="BinaryStar" data-date="2026-09-10" data-button="https://neocities.org/button.gif" data-profile="https://cosmic-s.atabook.org/" class="cosmic-sticker-link anim-float" style="top: 780px; left: 950px; animation-delay: 0.8s;">⭐</a>
           <a href="https://developer.mozilla.org" data-name="MDN Astronaut" data-desc="Survival manual for web space explorers." data-tags="docs, html, css, js" data-id="DevNaut" data-date="2026-09-12" data-button="https://neocities.org/button.gif" data-profile="https://cosmic-s.atabook.org/" class="cosmic-sticker-link anim-drift" style="top: 490px; left: 610px; animation-delay: 1.8s;">👨‍🚀</a>
         </div>
@@ -608,8 +566,7 @@
             <div class="command-viewer" id="commandViewer">🪐</div>
 
             <div class="command-tags" id="commandTags">
-              <!-- Tag inseriti dinamicamente via JS -->
-            </div>
+              </div>
 
             <div class="command-button-box">
               <a href="#" id="commandVisitLink" target="_blank">
