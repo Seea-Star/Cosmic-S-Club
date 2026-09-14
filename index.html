@@ -531,7 +531,7 @@
       display: none;
       flex-direction: column;
       gap: 12px;
-      padding: 16px;
+      padding: 18px;
       background: rgba(225, 218, 185, 0.05);
       border: 1px dashed rgba(225, 218, 185, 0.4);
       border-radius: 10px;
@@ -552,37 +552,56 @@
       padding-left: 20px;
       display: flex;
       flex-direction: column;
-      gap: 6px;
+      gap: 8px;
+    }
+
+    .join-details-box li {
+      line-height: 1.5;
+    }
+
+    .sub-list {
+      margin-top: 4px;
+      padding-left: 18px !important;
+      list-style-type: circle;
     }
 
     .form-cta-btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
+      gap: 10px;
       background: #E1DAB9;
       color: #000000;
       text-decoration: none !important;
       font-weight: 800;
-      padding: 12px 20px;
-      border-radius: 8px;
+      font-size: 0.95rem;
+      padding: 12px 22px;
+      border-radius: 10px;
       border: 2px solid #E1DAB9;
       box-shadow: 3px 3px 0px #FFFFFF;
-      transition: transform 0.1s ease;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
       align-self: flex-start;
-      margin-top: 8px;
+      margin-top: 10px;
+      margin-bottom: 6px;
+      cursor: pointer;
     }
 
     .form-cta-btn:hover {
-      transform: scale(1.03);
+      transform: translateY(-2px);
+      box-shadow: 4px 4px 0px #FFFFFF;
+    }
+
+    .form-cta-btn:active {
+      transform: translate(2px, 2px);
+      box-shadow: 1px 1px 0px #FFFFFF;
     }
 
     .contact-subtext {
       font-size: 0.88rem;
       opacity: 0.9;
       border-top: 1px dashed rgba(225, 218, 185, 0.3);
-      padding-top: 10px;
-      margin-top: 4px;
+      padding-top: 12px;
+      margin-top: 6px;
     }
 
     .space-footer {
@@ -613,7 +632,7 @@
 
       <div class="search-bar">
         <i class="fa-solid fa-magnifying-glass"></i>
-        <input type="text" id="galaxySearchInput" placeholder="Search by site name, user name, or tag...">
+        <input type="text" id="galaxySearchInput" placeholder="Search by site name or tag...">
       </div>
 
       <div class="galaxy-board" id="galaxyBoard">
@@ -685,36 +704,38 @@
       </div>
 
       <div class="space-intro">
-        <span>Welcome to the Cosmic Club! This is an open interactive canvas for web space explorers. Join the galaxy and let your custom artwork float around in space!</span>
+        <span>Welcome to the Cosmic Club! This is an interactive canvas for web space explorers. Join the space canvas and let your custom artwork float around in space!</span>
         
         <button class="join-toggle-btn" id="joinToggleBtn">
-          <span><i class="fa-solid fa-rocket" style="margin-right: 8px;"></i> HOW TO JOIN THE GALAXY CLUB</span>
+          <span><i class="fa-solid fa-rocket" style="margin-right: 8px;"></i> HOW TO JOIN THE COSMIC CLUB</span>
           <i class="fa-solid fa-chevron-down" id="joinChevron"></i>
         </button>
 
         <div class="join-details-box" id="joinDetailsBox">
-          <p>To put your website into orbit, create your own space-themed symbol and submit your info through our dedicated Google Form!</p>
+          <p>To place your website in orbit, create your own space symbol and send us your information using the dedicated Google Form!</p>
           
-          <p><strong>Requirements & Submission Info:</strong></p>
+          <p><strong>Requirements & Requested Data:</strong></p>
           <ul>
-            <li><strong>Username:</strong> Your name or alias</li>
-            <li><strong>Website URL:</strong> Link to your personal site or blog</li>
-            <li><strong>Custom Symbol / Artwork:</strong> A space-themed icon (planet, star, comet, rocket, UFO, astronaut, space station, alien, or custom cosmic artifact).
-              <br><em>- Dimensions: 200x200 pixels</em>
-              <br><em>- Background: Transparent (PNG / GIF format)</em>
+            <li><strong>Site Name:</strong> The display name of your site to show at the top next to the close button (e.g., <code>Cosmic-S</code>, without the <code>.neocities.org</code> part).</li>
+            <li><strong>Website URL:</strong> Link to your personal website or blog.</li>
+            <li><strong>Custom Symbol / Artwork:</strong> Create your own space-themed drawing or symbol (planet, star, comet, rocket, UFO, astronaut, alien, etc.).
+              <ul class="sub-list">
+                <li>Size: <strong>200x200 pixels</strong></li>
+                <li>Background: <strong>Transparent (PNG or GIF format)</strong></li>
+              </ul>
             </li>
-            <li><strong>Artwork Link & Upload:</strong> Please attach the image file directly in the form AND provide the direct URL of the image hosted on your website.</li>
-            <li><strong>Tags:</strong> Descriptive keywords for search (e.g. <code>#art, #retro, #blog</code>)</li>
-            <li><strong>88x31 Button Code / Link:</strong> Your site's banner button URL</li>
+            <li><strong>Artwork Upload & Link:</strong> Please attach your image directly in the form AND provide the direct link (URL) of the image hosted on your site.</li>
+            <li><strong>Tags:</strong> Descriptive keywords for search (e.g., <code>#art, #retro, #blog</code>).</li>
+            <li><strong>88x31 Button HTML Code:</strong> The full HTML code for your site's 88x31 banner button (e.g., <code>&lt;a href="..."&gt;&lt;img src="..." /&gt;&lt;/a&gt;</code>).</li>
           </ul>
 
           <a href="YOUR_GOOGLE_FORM_LINK_HERE" target="_blank" class="form-cta-btn">
-            <i class="fa-solid fa-paper-plane"></i> Submit Your Site (Google Form)
+            <i class="fa-solid fa-paper-plane"></i> Submit via Google Form
           </a>
 
           <div class="contact-subtext">
             <span>Need help or have questions? Email me at: <a href="mailto:Seea-star@proton.me">Seea-star@proton.me</a></span><br>
-            <span>Or leave a message on the <a href="https://cosmic-s.atabook.org/" target="_blank">Guestbook</a> to say hi or chat!</span>
+            <span>Or leave a message on the <a href="https://cosmic-s.atabook.org/" target="_blank">Guestbook</a> to chat!</span>
           </div>
         </div>
       </div>
@@ -1000,7 +1021,6 @@
       }
     });
 
-    /* Toggle per la sezione How to Join */
     const joinToggleBtn = document.getElementById('joinToggleBtn');
     const joinDetailsBox = document.getElementById('joinDetailsBox');
     const joinChevron = document.getElementById('joinChevron');
