@@ -195,20 +195,66 @@
       100% { top: 1040px; left: 1440px; opacity: 0; }
     }
 
+    /* Animazione aggiornata per la seconda cometa/UFO */
     .shooting-comet-2 {
       position: absolute;
       width: 48px;
       height: auto;
       pointer-events: none;
-      animation: shootComet2 18s linear infinite;
-      animation-delay: 5s;
+      animation: shootCometDynamic 24s ease-in-out infinite;
+      animation-delay: 2s;
       z-index: 5;
     }
-    @keyframes shootComet2 {
-      0% { top: 1040px; left: -40px; opacity: 0; }
-      10% { opacity: 1; }
-      90% { opacity: 1; }
-      100% { top: -40px; left: 1440px; opacity: 0; }
+
+    @keyframes shootCometDynamic {
+      /* Fase 1: Parte da in basso a sinistra e sale verso in alto a destra ruotando e fluttuando */
+      0% { 
+        top: 1040px; 
+        left: -50px; 
+        transform: rotate(0deg) translateY(0px) scale(0.8); 
+        opacity: 0; 
+      }
+      5% { opacity: 1; }
+      20% { 
+        transform: rotate(120deg) translateY(-25px) scale(1.1); 
+      }
+      40% { 
+        transform: rotate(260deg) translateY(20px) scale(0.9); 
+      }
+      45% { 
+        top: -60px; 
+        left: 1450px; 
+        transform: rotate(360deg) translateY(0px) scale(1); 
+        opacity: 0; 
+      }
+
+      /* Pausa fuori dallo schermo */
+      50% { 
+        top: -60px; 
+        left: 200px; 
+        transform: rotate(0deg); 
+        opacity: 0; 
+      }
+
+      /* Fase 2: Rientra dall'alto a sinistra e va verso il basso a destra con rotta diversa */
+      55% { opacity: 1; }
+      70% { 
+        transform: rotate(-140deg) translateY(-18px) scale(1.15); 
+      }
+      85% { 
+        transform: rotate(-280deg) translateY(15px) scale(0.95); 
+      }
+      95% { 
+        top: 1050px; 
+        left: 1200px; 
+        transform: rotate(-360deg) translateY(0px) scale(1); 
+        opacity: 0; 
+      }
+      100% { 
+        top: 1040px; 
+        left: -50px; 
+        opacity: 0; 
+      }
     }
 
     .anim-float { animation: float 4s ease-in-out infinite; }
@@ -225,11 +271,14 @@
       100% { transform: translateX(0px) translateY(0px); }
     }
 
-    .anim-pulse { animation: pulseAnim 3.5s ease-in-out infinite; }
-    @keyframes pulseAnim {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.15); }
-      100% { transform: scale(1); }
+    /* Movimento aggiornato per l'Oracolo (UFO / Archive) */
+    .anim-pulse { animation: oracleMotion 5s ease-in-out infinite; }
+    @keyframes oracleMotion {
+      0% { transform: scale(1) rotate(0deg) translateY(0px); }
+      25% { transform: scale(1.1) rotate(8deg) translateY(-6px); }
+      50% { transform: scale(1.05) rotate(-6deg) translateY(-12px); }
+      75% { transform: scale(1.15) rotate(4deg) translateY(-4px); }
+      100% { transform: scale(1) rotate(0deg) translateY(0px); }
     }
 
     .reset-galaxy-btn {
@@ -535,7 +584,7 @@
 
         <div class="galaxy-canvas-world" id="galaxyWorld">
           <div class="shooting-comet-1">☄️</div>
-          <img src="ezgif-733e927ae4e467d8.gif" alt="UFO" class="shooting-comet-2">
+          <img src="Senza titolo 14_20260914191623.png" alt="UFO" class="shooting-comet-2">
 
           <a href="https://cosmic-seea.neocities.org/" target="_blank" data-name="Cosmic-S" data-desc="Cosmic-S official space site." data-tags="cosmic, retro, neocities" data-id="CosmicS" data-date="2026-09-14" data-button="https://cosmic-seea.neocities.org/button.gif" data-img="Senza titolo 13_20260914185659.png" class="cosmic-sticker-link anim-float" style="top: 320px; left: 880px; animation-delay: 0s;">
             <img src="Senza titolo 13_20260914185659.png" alt="Cosmic-S" class="sticker-img">
@@ -559,7 +608,8 @@
             <div class="command-viewer" id="commandViewer">🪐</div>
 
             <div class="command-tags" id="commandTags">
-              </div>
+              <!-- Tag inseriti dinamicamente via JS -->
+            </div>
 
             <div class="command-button-box">
               <a href="#" id="commandVisitLink" target="_blank">
