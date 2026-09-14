@@ -159,6 +159,13 @@
       cursor: pointer;
     }
 
+    .cosmic-sticker-link img.sticker-img {
+      width: 48px;
+      height: auto;
+      display: block;
+      pointer-events: none;
+    }
+
     .cosmic-sticker-link:hover {
       transform: scale(1.3) translateY(-4px);
       filter: drop-shadow(0px 0px 10px #E1DAB9);
@@ -318,7 +325,7 @@
       transform: scale(1.05);
     }
 
-    /* --- SCHERMATA DI COMANDO MODIFICATA --- */
+    /* --- SCHERMATA DI COMANDO --- */
     .command-screen {
       position: absolute;
       top: 50%; left: 50%;
@@ -404,6 +411,12 @@
       box-shadow: 3px 3px 0px #E1DAB9;
       position: relative;
       overflow: hidden;
+    }
+
+    .command-viewer img {
+      max-width: 70%;
+      max-height: 70%;
+      object-fit: contain;
     }
 
     .command-viewer::after {
@@ -524,7 +537,10 @@
           <div class="shooting-comet-1">☄️</div>
           <img src="ezgif-733e927ae4e467d8.gif" alt="UFO" class="shooting-comet-2">
 
-          <a href="https://www.wikipedia.org" data-name="Wikipedia Planet" data-desc="The universal free encyclopedia of the galaxy." data-tags="wiki, encyclopedia, info" data-id="AstroKate" data-date="2026-09-01" data-button="https://neocities.org/button.gif" data-profile="https://cosmic-s.atabook.org/" class="cosmic-sticker-link anim-float" style="top: 320px; left: 880px; animation-delay: 0s;">🪐</a>
+          <a href="https://cosmic-seea.neocities.org/" target="_blank" data-name="Cosmic-S" data-desc="Cosmic-S official space site." data-tags="cosmic, retro, neocities" data-id="CosmicS" data-date="2026-09-14" data-button="https://cosmic-seea.neocities.org/button.gif" data-img="Senza titolo 13_20260914185659.png" class="cosmic-sticker-link anim-float" style="top: 320px; left: 880px; animation-delay: 0s;">
+            <img src="Senza titolo 13_20260914185659.png" alt="Cosmic-S" class="sticker-img">
+          </a>
+
           <a href="https://neocities.org" data-name="Neocities Rocket" data-desc="Space base for independent retro web sites." data-tags="y2k, retro, web host" data-id="NetPilot" data-date="2026-09-05" data-button="https://neocities.org/button.gif" data-profile="https://cosmic-s.atabook.org/" class="cosmic-sticker-link anim-drift" style="top: 150px; left: 420px; animation-delay: 1.2s;">🚀</a>
           <a href="https://archive.org" data-name="Archive UFO" data-desc="The time capsule preserving internet history." data-tags="history, archive, retro" data-id="TimeGhost" data-date="2026-09-08" data-button="https://neocities.org/button.gif" data-profile="https://cosmic-s.atabook.org/" class="cosmic-sticker-link anim-pulse" style="top: 610px; left: 240px; animation-delay: 2.5s;">🛸</a>
           <a href="https://github.com" data-name="GitHub Star" data-desc="The planet of source code and web developers." data-tags="code, dev, git" data-id="BinaryStar" data-date="2026-09-10" data-button="https://neocities.org/button.gif" data-profile="https://cosmic-s.atabook.org/" class="cosmic-sticker-link anim-float" style="top: 780px; left: 950px; animation-delay: 0.8s;">⭐</a>
@@ -704,10 +720,15 @@
         e.preventDefault();
         playWarpSound();
         
-        commandViewer.textContent = link.textContent;
+        const customImg = link.getAttribute('data-img');
+        if (customImg) {
+          commandViewer.innerHTML = `<img src="${customImg}" alt="${link.getAttribute('data-name')}">`;
+        } else {
+          commandViewer.textContent = link.textContent;
+        }
+
         commandTitle.textContent = link.getAttribute('data-name');
 
-        // Generazione dinamica dei Tag
         const rawTags = link.getAttribute('data-tags');
         commandTags.innerHTML = '';
         if (rawTags) {
