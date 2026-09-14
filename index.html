@@ -566,34 +566,35 @@
     }
 
     .form-cta-btn {
+      background: #000000;
+      color: #E1DAB9;
+      border: 2px solid #E1DAB9;
+      border-radius: 10px;
+      padding: 10px 16px;
+      font-family: 'Quicksand', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-decoration: none !important;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
-      background: #E1DAB9;
-      color: #000000;
-      text-decoration: none !important;
-      font-weight: 800;
-      font-size: 0.95rem;
-      padding: 12px 22px;
-      border-radius: 10px;
-      border: 2px solid #E1DAB9;
-      box-shadow: 3px 3px 0px #FFFFFF;
-      transition: transform 0.15s ease, box-shadow 0.15s ease;
-      align-self: flex-start;
+      box-shadow: 3px 3px 0px #E1DAB9;
+      transition: background 0.2s ease, color 0.2s ease, transform 0.1s ease;
       margin-top: 10px;
       margin-bottom: 6px;
+      align-self: flex-start;
       cursor: pointer;
     }
 
     .form-cta-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 4px 4px 0px #FFFFFF;
+      background: #E1DAB9;
+      color: #000000;
     }
 
     .form-cta-btn:active {
       transform: translate(2px, 2px);
-      box-shadow: 1px 1px 0px #FFFFFF;
+      box-shadow: 1px 1px 0px #E1DAB9;
     }
 
     code {
@@ -738,7 +739,7 @@
           </ul>
 
           <a href="YOUR_GOOGLE_FORM_LINK_HERE" target="_blank" class="form-cta-btn">
-            <i class="fa-solid fa-paper-plane"></i> Submit via Google Form
+            <span><i class="fa-solid fa-paper-plane" style="margin-right: 8px;"></i> Submit via Google Form</span>
           </a>
 
           <div class="contact-subtext">
