@@ -665,18 +665,19 @@
 
     .code-textarea {
       width: 100%;
-      height: 110px;
+      height: 180px;
       background: #000000;
       color: #E1DAB9;
       border: 2px solid #E1DAB9;
       border-radius: 10px;
       padding: 10px;
       font-family: monospace;
-      font-size: 0.8rem;
-      resize: none;
+      font-size: 0.78rem;
+      resize: vertical;
       box-shadow: 2px 2px 0px #E1DAB9;
       outline: none;
       cursor: pointer;
+      white-space: pre;
     }
 
     /* PULSANTE PER COPIARE IL CODICE */
@@ -1263,17 +1264,56 @@
       }
     });
 
-    // SCRIPT GENERATORE LIVE WIDGET CUSTOM
+    // SCRIPT GENERATORE LIVE WIDGET CUSTOM (FORMATTATO PULITO)
     const customSymbolInput = document.getElementById('customSymbolInput');
     const widgetCustomImg = document.getElementById('widgetCustomImg');
     const customWidgetCode = document.getElementById('customWidgetCode');
     const widgetLivePreview = document.getElementById('widgetLivePreview');
 
     function updateWidgetGenerator() {
-      const imgUrl = customSymbolInput.value.trim() || 'YOUR_IMAGE_URL_HERE';
+      const imgUrl = customSymbolInput.value.trim() || 'LINK_DELLA_TUA_IMMAGINE_QUI';
       widgetCustomImg.src = imgUrl;
 
-      const generatedHTML = `<a href="https://seea-star.github.io/Cosmic-S-Club/" target="_blank" style="display: flex; align-items: center; justify-content: center; width: 300px; height: 300px; background-color: #000; border: 3px solid #E1DAB9; border-radius: 20px; box-shadow: 6px 6px 0px #E1DAB9; text-decoration: none; background-image: radial-gradient(#FFF 1.3px, transparent 1.3px), radial-gradient(rgba(255,255,255,0.7) 1px, transparent 1px), radial-gradient(#FFF 0.7px, transparent 0.7px); background-size: 110px 110px, 160px 160px, 75px 75px; background-position: 0 0, 50px 80px, 25px 35px;">\n  <img src="${imgUrl}" alt="Cosmic Club Member" style="width: 200px; height: 200px; object-fit: contain; display: block; border: none;">\n</a>`;
+      const generatedHTML = `<style>
+  .cosmic-club-widget {
+    width: 300px;
+    height: 300px;
+    background-color: #000000;
+    border: 3px solid #E1DAB9;
+    border-radius: 20px;
+    box-shadow: 6px 6px 0px #E1DAB9;
+    background-image: 
+      radial-gradient(#FFFFFF 1.3px, transparent 1.3px),
+      radial-gradient(rgba(255,255,255,0.7) 1px, transparent 1px),
+      radial-gradient(#FFFFFF 0.7px, transparent 0.7px);
+    background-size: 110px 110px, 160px 160px, 75px 75px;
+    background-position: 0 0, 50px 80px, 25px 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    box-sizing: border-box;
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+  }
+  .cosmic-club-widget:hover {
+    transform: scale(1.02);
+  }
+  .cosmic-club-widget:active {
+    transform: translate(4px, 4px) scale(1.0);
+    box-shadow: 2px 2px 0px #E1DAB9;
+  }
+  .cosmic-club-widget img {
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+    display: block;
+    pointer-events: none;
+  }
+</style>
+
+<a href="https://seea-star.github.io/Cosmic-S-Club/" target="_blank" class="cosmic-club-widget">
+  <img src="${imgUrl}" alt="Cosmic Club Member">
+</a>`;
 
       customWidgetCode.value = generatedHTML;
     }
@@ -1325,3 +1365,4 @@
 
 </body>
 </html>
+
