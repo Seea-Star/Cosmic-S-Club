@@ -613,6 +613,113 @@
       margin-top: 6px;
     }
 
+    /* STILI GENERATORE WIDGET & BOTTONE */
+    .button-section-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .button-block {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .custom-generator-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      align-items: center;
+      margin-top: 10px;
+    }
+
+    .generator-preview-side {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .generator-controls-side {
+      flex: 1;
+      min-width: 260px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .custom-input-field {
+      width: 100%;
+      background: #000000;
+      border: 2px solid #E1DAB9;
+      border-radius: 10px;
+      padding: 10px 12px;
+      color: #E1DAB9;
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 700;
+      font-size: 0.88rem;
+      box-shadow: 2px 2px 0px #E1DAB9;
+      outline: none;
+    }
+
+    .code-textarea {
+      width: 100%;
+      height: 120px;
+      background: #000000;
+      color: #E1DAB9;
+      border: 2px solid #E1DAB9;
+      border-radius: 10px;
+      padding: 10px;
+      font-family: monospace;
+      font-size: 0.8rem;
+      resize: none;
+      box-shadow: 2px 2px 0px #E1DAB9;
+      outline: none;
+      cursor: pointer;
+    }
+
+    /* WIDGET PERSONALIZZATO 300x300 */
+    .cosmic-club-widget {
+      width: 300px;
+      height: 300px;
+      background-color: #000000;
+      border: 3px solid #E1DAB9;
+      border-radius: 20px;
+      box-shadow: 6px 6px 0px #E1DAB9;
+      
+      background-image: 
+        radial-gradient(#FFFFFF 1.3px, transparent 1.3px),
+        radial-gradient(rgba(255,255,255,0.7) 1px, transparent 1px),
+        radial-gradient(#FFFFFF 0.7px, transparent 0.7px);
+      background-size: 110px 110px, 160px 160px, 75px 75px;
+      background-position: 0 0, 50px 80px, 25px 35px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      box-sizing: border-box;
+      transition: transform 0.1s ease, box-shadow 0.1s ease;
+    }
+
+    .cosmic-club-widget:hover {
+      transform: scale(1.02);
+    }
+
+    .cosmic-club-widget:active {
+      transform: translate(4px, 4px) scale(1.0);
+      box-shadow: 2px 2px 0px #E1DAB9;
+    }
+
+    .cosmic-club-widget img {
+      width: 200px;
+      height: 200px;
+      object-fit: contain;
+      display: block;
+      pointer-events: none;
+    }
+
     .space-footer {
       text-align: center;
       padding: 20px;
@@ -746,6 +853,55 @@
             <span>Have questions or need information? You can contact me via email at <a href="mailto:Seea-star@proton.me">Seea-star@proton.me</a> or leave a message on the <a href="https://cosmic-s.atabook.org/" target="_blank">Guestbook</a>!</span>
           </div>
         </div>
+
+        <button class="join-toggle-btn" id="buttonsToggleBtn">
+          <span><i class="fa-solid fa-link" style="margin-right: 8px;"></i> GET OUR BUTTON / WIDGET</span>
+          <i class="fa-solid fa-chevron-down" id="buttonsChevron"></i>
+        </button>
+
+        <div class="join-details-box" id="buttonsDetailsBox">
+          <div class="button-section-wrapper">
+            
+            <div class="button-block">
+              <p><strong>88x31 Classic Button:</strong></p>
+              <p style="font-size: 0.88rem; opacity: 0.8;">Grab our standard button to put on your site!</p>
+              
+              <div style="display: flex; align-items: center; gap: 12px; margin-top: 4px;">
+                <img src="https://cosmic-seea.neocities.org/button.gif" alt="Cosmic Club Button" style="width: 88px; height: 31px; border: 1px solid #E1DAB9;">
+              </div>
+
+              <textarea readonly class="code-textarea" style="height: 55px; margin-top: 4px;" onclick="this.select()">&lt;a href="https://seea-star.github.io/Cosmic-S-Club/" target="_blank"&gt;&lt;img src="https://cosmic-seea.neocities.org/button.gif" alt="Cosmic Club" width="88" height="31"&gt;&lt;/a&gt;</textarea>
+            </div>
+
+            <hr style="border: none; border-top: 1px dashed rgba(225, 218, 185, 0.3);">
+
+            <div class="button-block">
+              <p><strong>Custom Member Widget (300x300):</strong></p>
+              <p style="font-size: 0.88rem; opacity: 0.8;">Paste the URL of your 200x200 symbol to generate your customized club widget!</p>
+
+              <div class="custom-generator-container">
+                
+                <div class="generator-preview-side">
+                  <a href="https://seea-star.github.io/Cosmic-S-Club/" target="_blank" class="cosmic-club-widget" id="widgetLivePreview">
+                    <img id="widgetCustomImg" src="Senza titolo 13_20260914185659.png" alt="Cosmic Club Member">
+                  </a>
+                  <span style="font-size: 0.75rem; opacity: 0.7; margin-top: 4px;">Live Preview</span>
+                </div>
+
+                <div class="generator-controls-side">
+                  <label style="font-size: 0.85rem; font-weight: 700;">Your Symbol Image URL (200x200):</label>
+                  <input type="text" id="customSymbolInput" class="custom-input-field" placeholder="Paste your image link here..." value="Senza titolo 13_20260914185659.png">
+
+                  <label style="font-size: 0.85rem; font-weight: 700; margin-top: 6px;">Your Custom Code:</label>
+                  <textarea readonly id="customWidgetCode" class="code-textarea" onclick="this.select()"></textarea>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+
       </div>
 
     </div>
@@ -1029,6 +1185,7 @@
       }
     });
 
+    // SCRIPT TOGGLE FIRST BOX (HOW TO JOIN)
     const joinToggleBtn = document.getElementById('joinToggleBtn');
     const joinDetailsBox = document.getElementById('joinDetailsBox');
     const joinChevron = document.getElementById('joinChevron');
@@ -1044,6 +1201,40 @@
         joinChevron.classList.add('fa-chevron-down');
       }
     });
+
+    // SCRIPT TOGGLE SECOND BOX (GET OUR BUTTON / WIDGET)
+    const buttonsToggleBtn = document.getElementById('buttonsToggleBtn');
+    const buttonsDetailsBox = document.getElementById('buttonsDetailsBox');
+    const buttonsChevron = document.getElementById('buttonsChevron');
+
+    buttonsToggleBtn.addEventListener('click', () => {
+      playBeep(400, 'sine', 0.06);
+      buttonsDetailsBox.classList.toggle('active');
+      if (buttonsDetailsBox.classList.contains('active')) {
+        buttonsChevron.classList.remove('fa-chevron-down');
+        buttonsChevron.classList.add('fa-chevron-up');
+      } else {
+        buttonsChevron.classList.remove('fa-chevron-up');
+        buttonsChevron.classList.add('fa-chevron-down');
+      }
+    });
+
+    // SCRIPT GENERATORE LIVE WIDGET CUSTOM
+    const customSymbolInput = document.getElementById('customSymbolInput');
+    const widgetCustomImg = document.getElementById('widgetCustomImg');
+    const customWidgetCode = document.getElementById('customWidgetCode');
+
+    function updateWidgetGenerator() {
+      const imgUrl = customSymbolInput.value.trim() || 'YOUR_IMAGE_URL_HERE';
+      widgetCustomImg.src = imgUrl;
+
+      const generatedHTML = `<a href="https://seea-star.github.io/Cosmic-S-Club/" target="_blank" style="display: flex; align-items: center; justify-content: center; width: 300px; height: 300px; background-color: #000; border: 3px solid #E1DAB9; border-radius: 20px; box-shadow: 6px 6px 0px #E1DAB9; text-decoration: none; background-image: radial-gradient(#FFF 1.3px, transparent 1.3px), radial-gradient(rgba(255,255,255,0.7) 1px, transparent 1px), radial-gradient(#FFF 0.7px, transparent 0.7px); background-size: 110px 110px, 160px 160px, 75px 75px; background-position: 0 0, 50px 80px, 25px 35px;">\n  <img src="${imgUrl}" alt="Cosmic Club Member" style="width: 200px; height: 200px; object-fit: contain; display: block; border: none;">\n</a>`;
+
+      customWidgetCode.value = generatedHTML;
+    }
+
+    customSymbolInput.addEventListener('input', updateWidgetGenerator);
+    updateWidgetGenerator(); // Inizializza subito
   </script>
 
 </body>
