@@ -484,18 +484,105 @@
       font-weight: 700;
       color: #E1DAB9;
       background: rgba(0, 0, 0, 0.85);
-      padding: 15px;
+      padding: 18px;
       border-radius: 12px;
       border: 1px solid #E1DAB9;
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 12px;
     }
 
     .space-intro a {
       color: #E1DAB9;
       font-weight: bold;
       text-decoration: underline;
+    }
+
+    .join-toggle-btn {
+      background: #000000;
+      color: #E1DAB9;
+      border: 2px solid #E1DAB9;
+      border-radius: 10px;
+      padding: 10px 16px;
+      font-family: 'Quicksand', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 3px 3px 0px #E1DAB9;
+      transition: background 0.2s ease, color 0.2s ease, transform 0.1s ease;
+      margin-top: 4px;
+    }
+
+    .join-toggle-btn:hover {
+      background: #E1DAB9;
+      color: #000000;
+    }
+
+    .join-toggle-btn:active {
+      transform: translate(2px, 2px);
+      box-shadow: 1px 1px 0px #E1DAB9;
+    }
+
+    .join-details-box {
+      display: none;
+      flex-direction: column;
+      gap: 12px;
+      padding: 14px;
+      background: rgba(225, 218, 185, 0.05);
+      border: 1px dashed rgba(225, 218, 185, 0.4);
+      border-radius: 10px;
+      margin-top: 6px;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    .join-details-box.active {
+      display: flex;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .join-details-box ul {
+      padding-left: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .form-cta-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: #E1DAB9;
+      color: #000000;
+      text-decoration: none !important;
+      font-weight: 800;
+      padding: 10px 18px;
+      border-radius: 8px;
+      border: 2px solid #E1DAB9;
+      box-shadow: 2px 2px 0px #FFFFFF;
+      transition: transform 0.1s ease;
+      align-self: flex-start;
+      margin-top: 6px;
+    }
+
+    .form-cta-btn:hover {
+      transform: scale(1.03);
+    }
+
+    .contact-subtext {
+      font-size: 0.88rem;
+      opacity: 0.9;
+      border-top: 1px dashed rgba(225, 218, 185, 0.3);
+      padding-top: 10px;
+      margin-top: 4px;
     }
 
     .space-footer {
@@ -598,8 +685,33 @@
       </div>
 
       <div class="space-intro">
-        <span>Welcome to the Cosmic Club! This is an open cosmic canvas for everyone. Send me your custom pixel art, star, planet, UFO, rocket, or astronaut, and I will place it floating around here.</span>
-        <span>To join the galaxy, head over to the <a href="https://cosmic-s.atabook.org/" target="_blank">Guestbook</a> and send your creation!</span>
+        <span>Welcome to the Cosmic Club! This is an open interactive canvas for web space explorers. Join the galaxy and let your custom pixel artwork float around in space!</span>
+        
+        <button class="join-toggle-btn" id="joinToggleBtn">
+          <span><i class="fa-solid fa-rocket" style="margin-right: 8px;"></i> HOW TO JOIN THE GALAXY CLUB</span>
+          <i class="fa-solid fa-chevron-down" id="joinChevron"></i>
+        </button>
+
+        <div class="join-details-box" id="joinDetailsBox">
+          <p>To place your custom creation inside the galaxy, prepare your pixel image according to these specifications:</p>
+          
+          <ul>
+            <li><strong>Format:</strong> PNG or GIF with a transparent background</li>
+            <li><strong>Size:</strong> 200x200px</li>
+            <li><strong>Ideas for creations:</strong> Planets, Stars, UFOs, Rockets, Astronauts, Comets, Space Stations, Meteors, Alien creatures, or custom retro artifacts!</li>
+          </ul>
+
+          <p>Fill out the dedicated submission form below to send your image and site details:</p>
+
+          <a href="YOUR_GOOGLE_FORM_LINK_HERE" target="_blank" class="form-cta-btn">
+            <i class="fa-solid fa-paper-plane"></i> Submit Your Cosmic Sticker (Google Form)
+          </a>
+
+          <div class="contact-subtext">
+            <span>Need help or have questions? Email me at: <a href="mailto:Seea-star@proton.me">Seea-star@proton.me</a></span><br>
+            <span>Or leave a message on the <a href="https://cosmic-s.atabook.org/" target="_blank">Guestbook</a> to say hi or chat!</span>
+          </div>
+        </div>
       </div>
 
     </div>
@@ -880,6 +992,23 @@
       } else {
         fullscreenIcon.classList.remove('fa-compress');
         fullscreenIcon.classList.add('fa-expand');
+      }
+    });
+
+    /* Toggle per la sezione How to Join */
+    const joinToggleBtn = document.getElementById('joinToggleBtn');
+    const joinDetailsBox = document.getElementById('joinDetailsBox');
+    const joinChevron = document.getElementById('joinChevron');
+
+    joinToggleBtn.addEventListener('click', () => {
+      playBeep(400, 'sine', 0.06);
+      joinDetailsBox.classList.toggle('active');
+      if (joinDetailsBox.classList.contains('active')) {
+        joinChevron.classList.remove('fa-chevron-down');
+        joinChevron.classList.add('fa-chevron-up');
+      } else {
+        joinChevron.classList.remove('fa-chevron-up');
+        joinChevron.classList.add('fa-chevron-down');
       }
     });
   </script>
