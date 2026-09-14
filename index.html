@@ -680,7 +680,6 @@
       white-space: pre;
     }
 
-    /* PULSANTE PER COPIARE IL CODICE */
     .copy-code-btn {
       align-self: flex-start;
       background: #000000;
@@ -710,7 +709,7 @@
       box-shadow: 0px 0px 0px #E1DAB9;
     }
 
-    /* WIDGET PERSONALIZZATO 300x300 */
+    /* WIDGET PERSONALIZZATO FLUIDO */
     .cosmic-club-widget {
       width: 300px;
       height: 300px;
@@ -819,7 +818,7 @@
             <div class="command-viewer" id="commandViewer">🪐</div>
 
             <div class="command-tags" id="commandTags">
-              </div>
+            </div>
 
             <div class="command-button-box">
               <a href="#" id="commandVisitLink" target="_blank">
@@ -886,7 +885,6 @@
           </div>
         </div>
 
-        <!-- SECONDO PULSANTE TOGGLE PER I BOTTONI DEL CLUB -->
         <button class="join-toggle-btn" id="buttonsToggleBtn">
           <span><i class="fa-solid fa-link" style="margin-right: 8px;"></i> GET BUTTON / WIDGET</span>
           <i class="fa-solid fa-chevron-down" id="buttonsChevron"></i>
@@ -895,7 +893,6 @@
         <div class="join-details-box" id="buttonsDetailsBox">
           <div class="button-section-wrapper">
             
-            <!-- BLOCCO BOTTONE STANDARD 88x31 -->
             <div class="button-block">
               <p><strong>88x31 Classic Button:</strong></p>
               <p style="font-size: 0.88rem; opacity: 0.8;">Grab the standard button to place on your site!</p>
@@ -913,14 +910,13 @@
 
             <hr style="border: none; border-top: 1px dashed rgba(225, 218, 185, 0.3);">
 
-            <!-- BLOCCO GENERATORE WIDGET PERSONALIZZATO 300x300 -->
+            <!-- GENERATORE WIDGET CON SELETTORE DIMENSIONE (MINIMO 200px) -->
             <div class="button-block">
-              <p><strong>Custom Member Widget (300x300):</strong></p>
-              <p style="font-size: 0.88rem; opacity: 0.8;">Paste the URL of your 200x200 symbol to generate your customized club widget!</p>
+              <p><strong>Custom Member Widget:</strong></p>
+              <p style="font-size: 0.88rem; opacity: 0.8;">Paste the URL of your symbol and pick a size (min 200px) to generate your customized widget!</p>
 
               <div class="custom-generator-container">
                 
-                <!-- ANTEPRIMA LIVE 300x300 CON ANIMAZIONE AL CLICK -->
                 <div class="generator-preview-side">
                   <a href="https://seea-star.github.io/Cosmic-S-Club/" target="_blank" class="cosmic-club-widget" id="widgetLivePreview">
                     <img id="widgetCustomImg" src="Senza titolo 13_20260914185659.png" alt="Cosmic Club Member">
@@ -928,12 +924,14 @@
                   <span style="font-size: 0.75rem; opacity: 0.7; margin-top: 4px;">Live Preview (Click to test)</span>
                 </div>
 
-                <!-- CAMPO INPUT E CODICE GENERATO -->
                 <div class="generator-controls-side">
-                  <label style="font-size: 0.85rem; font-weight: 700;">Your Symbol Image URL (200x200):</label>
+                  <label style="font-size: 0.85rem; font-weight: 700;">Widget Size (px, min 200):</label>
+                  <input type="number" id="widgetSizeInput" class="custom-input-field" value="300" min="200" step="10">
+
+                  <label style="font-size: 0.85rem; font-weight: 700; margin-top: 4px;">Your Symbol Image URL:</label>
                   <input type="text" id="customSymbolInput" class="custom-input-field" placeholder="Paste your image link here..." value="Senza titolo 13_20260914185659.png">
 
-                  <label style="font-size: 0.85rem; font-weight: 700; margin-top: 6px;">Generated Widget Code:</label>
+                  <label style="font-size: 0.85rem; font-weight: 700; margin-top: 4px;">Generated Widget Code:</label>
                   <textarea readonly id="customWidgetCode" class="code-textarea" onclick="this.select()"></textarea>
 
                   <button class="copy-code-btn" id="copyCustomBtn">
@@ -1230,7 +1228,7 @@
       }
     });
 
-    // SCRIPT TOGGLE FIRST BOX (HOW TO JOIN)
+    // TOGGLES
     const joinToggleBtn = document.getElementById('joinToggleBtn');
     const joinDetailsBox = document.getElementById('joinDetailsBox');
     const joinChevron = document.getElementById('joinChevron');
@@ -1247,7 +1245,6 @@
       }
     });
 
-    // SCRIPT TOGGLE SECOND BOX (GET BUTTON / WIDGET)
     const buttonsToggleBtn = document.getElementById('buttonsToggleBtn');
     const buttonsDetailsBox = document.getElementById('buttonsDetailsBox');
     const buttonsChevron = document.getElementById('buttonsChevron');
@@ -1264,24 +1261,48 @@
       }
     });
 
-    // SCRIPT GENERATORE LIVE WIDGET CUSTOM (FORMATTATO PULITO)
+    // GENERATORE WIDGET DINAMICO CON DIMENSIONE CONFIGURABILE (MIN 200px)
+    const widgetSizeInput = document.getElementById('widgetSizeInput');
     const customSymbolInput = document.getElementById('customSymbolInput');
     const widgetCustomImg = document.getElementById('widgetCustomImg');
     const customWidgetCode = document.getElementById('customWidgetCode');
     const widgetLivePreview = document.getElementById('widgetLivePreview');
 
     function updateWidgetGenerator() {
+      let size = parseInt(widgetSizeInput.value, 10);
+      if (isNaN(size) || size < 200) {
+        size = 200;
+      }
+
       const imgUrl = customSymbolInput.value.trim() || 'LINK_DELLA_TUA_IMMAGINE_QUI';
+      
+      // CALCOLO PROPORZIONI DINAMICHE
+      const imgSize = Math.round(size * (200 / 300));
+      const borderRadius = Math.round(size * (20 / 300));
+      const borderWidth = Math.max(2, Math.round(size * (3 / 300)));
+      const shadowOffset = Math.max(3, Math.round(size * (6 / 300)));
+      const shadowActiveOffset = Math.max(1, Math.round(size * (2 / 300)));
+
+      // AGGIORNA LA PREVIEW LIVE
+      widgetLivePreview.style.width = `${size}px`;
+      widgetLivePreview.style.height = `${size}px`;
+      widgetLivePreview.style.borderRadius = `${borderRadius}px`;
+      widgetLivePreview.style.borderWidth = `${borderWidth}px`;
+      widgetLivePreview.style.boxShadow = `${shadowOffset}px ${shadowOffset}px 0px #E1DAB9`;
+
+      widgetCustomImg.style.width = `${imgSize}px`;
+      widgetCustomImg.style.height = `${imgSize}px`;
       widgetCustomImg.src = imgUrl;
 
+      // GENERA CODICE HTML
       const generatedHTML = `<style>
   .cosmic-club-widget {
-    width: 300px;
-    height: 300px;
+    width: ${size}px;
+    height: ${size}px;
     background-color: #000000;
-    border: 3px solid #E1DAB9;
-    border-radius: 20px;
-    box-shadow: 6px 6px 0px #E1DAB9;
+    border: ${borderWidth}px solid #E1DAB9;
+    border-radius: ${borderRadius}px;
+    box-shadow: ${shadowOffset}px ${shadowOffset}px 0px #E1DAB9;
     background-image: 
       radial-gradient(#FFFFFF 1.3px, transparent 1.3px),
       radial-gradient(rgba(255,255,255,0.7) 1px, transparent 1px),
@@ -1299,12 +1320,12 @@
     transform: scale(1.02);
   }
   .cosmic-club-widget:active {
-    transform: translate(4px, 4px) scale(1.0);
-    box-shadow: 2px 2px 0px #E1DAB9;
+    transform: translate(2px, 2px) scale(0.99);
+    box-shadow: ${shadowActiveOffset}px ${shadowActiveOffset}px 0px #E1DAB9;
   }
   .cosmic-club-widget img {
-    width: 200px;
-    height: 200px;
+    width: ${imgSize}px;
+    height: ${imgSize}px;
     object-fit: contain;
     display: block;
     pointer-events: none;
@@ -1318,10 +1339,17 @@
       customWidgetCode.value = generatedHTML;
     }
 
+    widgetSizeInput.addEventListener('input', updateWidgetGenerator);
+    widgetSizeInput.addEventListener('change', () => {
+      if (parseInt(widgetSizeInput.value, 10) < 200 || isNaN(parseInt(widgetSizeInput.value, 10))) {
+        widgetSizeInput.value = 200;
+      }
+      updateWidgetGenerator();
+    });
+
     customSymbolInput.addEventListener('input', updateWidgetGenerator);
     updateWidgetGenerator();
 
-    // ANIMAZIONE PRESSIONE WIDGET AL CLICK
     widgetLivePreview.addEventListener('click', function(e) {
       e.preventDefault();
       const targetUrl = this.href;
@@ -1334,7 +1362,6 @@
       }, 150);
     });
 
-    // FUNZIONALITÀ COPIA CODICE
     function setupCopyButton(btnId, textareaId) {
       const btn = document.getElementById(btnId);
       const textarea = document.getElementById(textareaId);
@@ -1365,4 +1392,3 @@
 
 </body>
 </html>
-
