@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>COSMIC-S - Cosmic Club</title>
+  <title>COSMIC-S - COSMIC CLUB</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -709,7 +709,7 @@
       box-shadow: 0px 0px 0px #E1DAB9;
     }
 
-    /* WIDGET PERSONALIZZATO FLUIDO */
+    /* WIDGET PERSONALIZZATO FLUIDO CON ANIMAZIONE DI PRESSIONE */
     .cosmic-club-widget {
       width: 200px;
       height: 200px;
@@ -730,16 +730,16 @@
       justify-content: center;
       text-decoration: none;
       box-sizing: border-box;
-      transition: transform 0.15s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.15s cubic-bezier(0.25, 1, 0.5, 1);
+      transition: transform 0.1s ease, box-shadow 0.1s ease;
       cursor: pointer;
     }
 
     .cosmic-club-widget:hover {
-      transform: scale(1.02);
+      /* Nessun ingrandimento, resta fermo o stile pulito */
     }
 
-    .cosmic-club-widget.clicked {
-      transform: translate(4px, 4px) scale(0.98) !important;
+    .cosmic-club-widget:active, .cosmic-club-widget.clicked {
+      transform: translate(4px, 4px) !important;
       box-shadow: 2px 2px 0px #E1DAB9 !important;
     }
 
@@ -910,7 +910,7 @@
 
             <hr style="border: none; border-top: 1px dashed rgba(225, 218, 185, 0.3);">
 
-            <!-- GENERATORE WIDGET CON DOPPIO CONTROLLO DIMENSIONI LIBERO -->
+            <!-- GENERATORE WIDGET CON ANIMAZIONE DI PRESSIONE CORRETTA -->
             <div class="button-block">
               <p><strong>Custom Member Widget:</strong></p>
               <p style="font-size: 0.88rem; opacity: 0.8;">Paste the URL of your symbol and customize sizes to generate your widget!</p>
@@ -1264,7 +1264,7 @@
       }
     });
 
-    // GENERATORE WIDGET DINAMICO CON DOPPIO CONTROLLO LIBERO
+    // GENERATORE WIDGET CON ANIMAZIONE DI PRESSIONE CORRETTA
     const widgetSizeInput = document.getElementById('widgetSizeInput');
     const imageSizeInput = document.getElementById('imageSizeInput');
     const customSymbolInput = document.getElementById('customSymbolInput');
@@ -1297,7 +1297,7 @@
       widgetCustomImg.style.height = `${imgSize}px`;
       widgetCustomImg.src = imgUrl;
 
-      // GENERA CODICE HTML
+      // GENERA CODICE HTML CON TRANSLATE IN BASSO (EFFETTO PRESSIONE)
       const generatedHTML = `<style>
   .cosmic-club-widget {
     width: ${size}px;
@@ -1319,12 +1319,9 @@
     box-sizing: border-box;
     transition: transform 0.1s ease, box-shadow 0.1s ease;
   }
-  .cosmic-club-widget:hover {
-    transform: scale(1.02);
-  }
   .cosmic-club-widget:active {
-    transform: translate(2px, 2px) scale(0.99);
-    box-shadow: ${shadowActiveOffset}px ${shadowActiveOffset}px 0px #E1DAB9;
+    transform: translate(4px, 4px) !important;
+    box-shadow: ${shadowActiveOffset}px ${shadowActiveOffset}px 0px #E1DAB9 !important;
   }
   .cosmic-club-widget img {
     width: ${imgSize}px;
