@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>COSMIC-S - COSMIC CLUB</title>
+  <title>COSMIC-S - COSMIC CLUB RING</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -47,7 +47,7 @@
     }
 
     .top-banner h1 { 
-      font-size: 2rem; 
+      font-size: 1.8rem; 
       font-weight: 800; 
       letter-spacing: 2px; 
       color: #E1DAB9;
@@ -734,10 +734,6 @@
       cursor: pointer;
     }
 
-    .cosmic-club-widget:hover {
-      /* Nessun ingrandimento, resta fermo o stile pulito */
-    }
-
     .cosmic-club-widget:active, .cosmic-club-widget.clicked {
       transform: translate(4px, 4px) !important;
       box-shadow: 2px 2px 0px #E1DAB9 !important;
@@ -772,7 +768,7 @@
   <div class="site-wrapper">
 
     <header class="top-banner">
-      <h1>COSMIC-S - COSMIC CLUB</h1>
+      <h1>COSMIC-S - COSMIC CLUB RING</h1>
     </header>
 
     <div class="space-container">
@@ -851,10 +847,10 @@
       </div>
 
       <div class="space-intro">
-        <span>Welcome to the Cosmic Club! This is an interactive canvas for web space explorers. Join the space canvas and let your custom artwork float around in space!</span>
+        <span>Welcome to the Cosmic Club Ring! This is an interactive canvas for web space explorers. Join the space canvas and let your custom artwork float around in space!</span>
         
         <button class="join-toggle-btn" id="joinToggleBtn">
-          <span><i class="fa-solid fa-rocket" style="margin-right: 8px;"></i> HOW TO JOIN THE COSMIC CLUB</span>
+          <span><i class="fa-solid fa-rocket" style="margin-right: 8px;"></i> HOW TO JOIN THE COSMIC CLUB RING</span>
           <i class="fa-solid fa-chevron-down" id="joinChevron"></i>
         </button>
 
@@ -898,10 +894,10 @@
               <p style="font-size: 0.88rem; opacity: 0.8;">Grab the standard button to place on your site!</p>
               
               <div style="display: flex; align-items: center; gap: 12px; margin-top: 4px;">
-                <img src="https://cosmic-seea.neocities.org/button.gif" alt="Cosmic Club Button" style="width: 88px; height: 31px; border: none;">
+                <img src="https://cosmic-seea.neocities.org/button.gif" alt="Cosmic Club Ring Button" style="width: 88px; height: 31px; border: none;">
               </div>
 
-              <textarea readonly id="classicButtonCode" class="code-textarea" style="height: 55px; margin-top: 4px;" onclick="this.select()">&lt;a href="https://seea-star.github.io/Cosmic-S-Club/" target="_blank"&gt;&lt;img src="https://cosmic-seea.neocities.org/button.gif" alt="Cosmic Club" width="88" height="31"&gt;&lt;/a&gt;</textarea>
+              <textarea readonly id="classicButtonCode" class="code-textarea" style="height: 55px; margin-top: 4px;" onclick="this.select()">&lt;a href="https://seea-star.github.io/Cosmic-S-Club/" target="_blank"&gt;&lt;img src="https://cosmic-seea.neocities.org/button.gif" alt="Cosmic Club Ring" width="88" height="31"&gt;&lt;/a&gt;</textarea>
               
               <button class="copy-code-btn" id="copyClassicBtn">
                 <i class="fa-regular fa-copy"></i> <span>Copy Code</span>
@@ -910,7 +906,7 @@
 
             <hr style="border: none; border-top: 1px dashed rgba(225, 218, 185, 0.3);">
 
-            <!-- GENERATORE WIDGET CON ANIMAZIONE DI PRESSIONE CORRETTA -->
+            <!-- GENERATORE WIDGET -->
             <div class="button-block">
               <p><strong>Custom Member Widget:</strong></p>
               <p style="font-size: 0.88rem; opacity: 0.8;">Paste the URL of your symbol and customize sizes to generate your widget!</p>
@@ -919,7 +915,7 @@
                 
                 <div class="generator-preview-side">
                   <a href="https://seea-star.github.io/Cosmic-S-Club/" target="_blank" class="cosmic-club-widget" id="widgetLivePreview">
-                    <img id="widgetCustomImg" src="Senza titolo 13_20260914185659.png" alt="Cosmic Club Member">
+                    <img id="widgetCustomImg" src="Senza titolo 13_20260914185659.png" alt="Cosmic Club Ring Member">
                   </a>
                   <span style="font-size: 0.75rem; opacity: 0.7; margin-top: 4px;">Live Preview (Click to test)</span>
                 </div>
@@ -1264,7 +1260,7 @@
       }
     });
 
-    // GENERATORE WIDGET CON ANIMAZIONE DI PRESSIONE CORRETTA
+    // GENERATORE WIDGET
     const widgetSizeInput = document.getElementById('widgetSizeInput');
     const imageSizeInput = document.getElementById('imageSizeInput');
     const customSymbolInput = document.getElementById('customSymbolInput');
@@ -1297,7 +1293,7 @@
       widgetCustomImg.style.height = `${imgSize}px`;
       widgetCustomImg.src = imgUrl;
 
-      // GENERA CODICE HTML CON TRANSLATE IN BASSO (EFFETTO PRESSIONE)
+      // GENERA CODICE HTML
       const generatedHTML = `<style>
   .cosmic-club-widget {
     width: ${size}px;
@@ -1333,7 +1329,7 @@
 </style>
 
 <a href="https://seea-star.github.io/Cosmic-S-Club/" target="_blank" class="cosmic-club-widget">
-  <img src="${imgUrl}" alt="Cosmic Club Member">
+  <img src="${imgUrl}" alt="Cosmic Club Ring Member">
 </a>`;
 
       customWidgetCode.value = generatedHTML;
