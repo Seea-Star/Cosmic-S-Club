@@ -711,8 +711,8 @@
 
     /* WIDGET PERSONALIZZATO FLUIDO */
     .cosmic-club-widget {
-      width: 300px;
-      height: 300px;
+      width: 200px;
+      height: 200px;
       background-color: #000000;
       border: 3px solid #E1DAB9;
       border-radius: 20px;
@@ -910,10 +910,10 @@
 
             <hr style="border: none; border-top: 1px dashed rgba(225, 218, 185, 0.3);">
 
-            <!-- GENERATORE WIDGET CON SELETTORE DIMENSIONE (MINIMO 200px) -->
+            <!-- GENERATORE WIDGET CON DOPPIO CONTROLLO DIMENSIONI LIBERO -->
             <div class="button-block">
               <p><strong>Custom Member Widget:</strong></p>
-              <p style="font-size: 0.88rem; opacity: 0.8;">Paste the URL of your symbol and pick a size (min 200px) to generate your customized widget!</p>
+              <p style="font-size: 0.88rem; opacity: 0.8;">Paste the URL of your symbol and customize sizes to generate your widget!</p>
 
               <div class="custom-generator-container">
                 
@@ -925,8 +925,11 @@
                 </div>
 
                 <div class="generator-controls-side">
-                  <label style="font-size: 0.85rem; font-weight: 700;">Widget Size (px, min 200):</label>
-                  <input type="number" id="widgetSizeInput" class="custom-input-field" value="300" min="200" step="10">
+                  <label style="font-size: 0.85rem; font-weight: 700;">Widget Container Size (px):</label>
+                  <input type="number" id="widgetSizeInput" class="custom-input-field" value="200" step="10">
+
+                  <label style="font-size: 0.85rem; font-weight: 700; margin-top: 4px;">Image Size (px):</label>
+                  <input type="number" id="imageSizeInput" class="custom-input-field" value="200" step="10">
 
                   <label style="font-size: 0.85rem; font-weight: 700; margin-top: 4px;">Your Symbol Image URL:</label>
                   <input type="text" id="customSymbolInput" class="custom-input-field" placeholder="Paste your image link here..." value="Senza titolo 13_20260914185659.png">
@@ -1261,8 +1264,9 @@
       }
     });
 
-    // GENERATORE WIDGET DINAMICO CON DIMENSIONE CONFIGURABILE (MIN 200px)
+    // GENERATORE WIDGET DINAMICO CON DOPPIO CONTROLLO LIBERO
     const widgetSizeInput = document.getElementById('widgetSizeInput');
+    const imageSizeInput = document.getElementById('imageSizeInput');
     const customSymbolInput = document.getElementById('customSymbolInput');
     const widgetCustomImg = document.getElementById('widgetCustomImg');
     const customWidgetCode = document.getElementById('customWidgetCode');
@@ -1270,14 +1274,13 @@
 
     function updateWidgetGenerator() {
       let size = parseInt(widgetSizeInput.value, 10);
-      if (isNaN(size) || size < 200) {
-        size = 200;
-      }
+      if (isNaN(size)) size = 200;
+
+      let imgSize = parseInt(imageSizeInput.value, 10);
+      if (isNaN(imgSize)) imgSize = 200;
 
       const imgUrl = customSymbolInput.value.trim() || 'LINK_DELLA_TUA_IMMAGINE_QUI';
       
-      // CALCOLO PROPORZIONI DINAMICHE
-      const imgSize = Math.round(size * (200 / 300));
       const borderRadius = Math.round(size * (20 / 300));
       const borderWidth = Math.max(2, Math.round(size * (3 / 300)));
       const shadowOffset = Math.max(3, Math.round(size * (6 / 300)));
@@ -1340,12 +1343,10 @@
     }
 
     widgetSizeInput.addEventListener('input', updateWidgetGenerator);
-    widgetSizeInput.addEventListener('change', () => {
-      if (parseInt(widgetSizeInput.value, 10) < 200 || isNaN(parseInt(widgetSizeInput.value, 10))) {
-        widgetSizeInput.value = 200;
-      }
-      updateWidgetGenerator();
-    });
+    widgetSizeInput.addEventListener('change', updateWidgetGenerator);
+
+    imageSizeInput.addEventListener('input', updateWidgetGenerator);
+    imageSizeInput.addEventListener('change', updateWidgetGenerator);
 
     customSymbolInput.addEventListener('input', updateWidgetGenerator);
     updateWidgetGenerator();
