@@ -744,8 +744,8 @@
     }
 
     .cosmic-club-widget img {
-      width: 200px;
-      height: 200px;
+      width: 150px;
+      height: 150px;
       object-fit: contain;
       display: block;
       pointer-events: none;
@@ -772,7 +772,7 @@
   <div class="site-wrapper">
 
     <header class="top-banner">
-      <h1>COSMIC CLUB</h1>
+      <h1>COSMIC-S - COSMIC CLUB</h1>
     </header>
 
     <div class="space-container">
@@ -898,7 +898,7 @@
               <p style="font-size: 0.88rem; opacity: 0.8;">Grab the standard button to place on your site!</p>
               
               <div style="display: flex; align-items: center; gap: 12px; margin-top: 4px;">
-                <img src="https://cosmic-seea.neocities.org/button.gif" alt="Cosmic Club Button" style="width: 88px; height: 31px; border: 1px solid #E1DAB9;">
+                <img src="https://cosmic-seea.neocities.org/button.gif" alt="Cosmic Club Button" style="width: 88px; height: 31px; border: none;">
               </div>
 
               <textarea readonly id="classicButtonCode" class="code-textarea" style="height: 55px; margin-top: 4px;" onclick="this.select()">&lt;a href="https://seea-star.github.io/Cosmic-S-Club/" target="_blank"&gt;&lt;img src="https://cosmic-seea.neocities.org/button.gif" alt="Cosmic Club" width="88" height="31"&gt;&lt;/a&gt;</textarea>
@@ -929,7 +929,7 @@
                   <input type="number" id="widgetSizeInput" class="custom-input-field" value="200" step="10">
 
                   <label style="font-size: 0.85rem; font-weight: 700; margin-top: 4px;">Image Size (px):</label>
-                  <input type="number" id="imageSizeInput" class="custom-input-field" value="200" step="10">
+                  <input type="number" id="imageSizeInput" class="custom-input-field" value="150" step="10">
 
                   <label style="font-size: 0.85rem; font-weight: 700; margin-top: 4px;">Your Symbol Image URL:</label>
                   <input type="text" id="customSymbolInput" class="custom-input-field" placeholder="Paste your image link here..." value="Senza titolo 13_20260914185659.png">
@@ -1277,7 +1277,7 @@
       if (isNaN(size)) size = 200;
 
       let imgSize = parseInt(imageSizeInput.value, 10);
-      if (isNaN(imgSize)) imgSize = 200;
+      if (isNaN(imgSize)) imgSize = 150;
 
       const imgUrl = customSymbolInput.value.trim() || 'LINK_DELLA_TUA_IMMAGINE_QUI';
       
