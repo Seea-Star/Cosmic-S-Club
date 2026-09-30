@@ -791,21 +791,21 @@
             <img src="Senza titolo 13_20260914185659.png" alt="Cosmic-S" class="sticker-img">
           </a>
 
-          <!-- 4 STICKER SEGNAPOSTO CON 200×200Symbol.png E TAG VARIABILI -->
-          <a href="#" target="_blank" data-name="Example Site 1" data-desc="Placeholder site." data-tags="tag1" data-id="Ex1" data-date="2026-09-01" data-button="88×31buttoneg.png" data-img="200×200Symbol.png" class="cosmic-sticker-link anim-drift" style="top: 150px; left: 420px; animation-delay: 1.2s;">
-            <img src="200×200Symbol.png" alt="Example Site 1" class="sticker-img">
+          <!-- 4 STICKER SEGNAPOSTO -->
+          <a href="#" target="_blank" data-name="site name" data-desc="Placeholder site." data-tags="tag" data-id="Ex1" data-date="2026-09-01" data-button="88×31buttoneg.png" data-img="200×200Symbol.png" class="cosmic-sticker-link anim-drift" style="top: 150px; left: 420px; animation-delay: 1.2s;">
+            <img src="200×200Symbol.png" alt="site name" class="sticker-img">
           </a>
           
-          <a href="#" target="_blank" data-name="Example Site 2" data-desc="Placeholder site." data-tags="tag1, tag2" data-id="Ex2" data-date="2026-09-02" data-button="88×31buttoneg.png" data-img="200×200Symbol.png" class="cosmic-sticker-link anim-pulse" style="top: 610px; left: 240px; animation-delay: 2.5s;">
-            <img src="200×200Symbol.png" alt="Example Site 2" class="sticker-img">
+          <a href="#" target="_blank" data-name="site name" data-desc="Placeholder site." data-tags="tag" data-id="Ex2" data-date="2026-09-02" data-button="88×31buttoneg.png" data-img="200×200Symbol.png" class="cosmic-sticker-link anim-pulse" style="top: 610px; left: 240px; animation-delay: 2.5s;">
+            <img src="200×200Symbol.png" alt="site name" class="sticker-img">
           </a>
 
-          <a href="#" target="_blank" data-name="Example Site 3" data-desc="Placeholder site." data-tags="tag1, retro, space" data-id="Ex3" data-date="2026-09-03" data-button="88×31buttoneg.png" data-img="200×200Symbol.png" class="cosmic-sticker-link anim-float" style="top: 780px; left: 950px; animation-delay: 0.8s;">
-            <img src="200×200Symbol.png" alt="Example Site 3" class="sticker-img">
+          <a href="#" target="_blank" data-name="site name" data-desc="Placeholder site." data-tags="tag" data-id="Ex3" data-date="2026-09-03" data-button="88×31buttoneg.png" data-img="200×200Symbol.png" class="cosmic-sticker-link anim-float" style="top: 780px; left: 950px; animation-delay: 0.8s;">
+            <img src="200×200Symbol.png" alt="site name" class="sticker-img">
           </a>
           
-          <a href="#" target="_blank" data-name="Example Site 4" data-desc="Placeholder site." data-tags="tag1, tag2, tag3, web" data-id="Ex4" data-date="2026-09-04" data-button="88×31buttoneg.png" data-img="200×200Symbol.png" class="cosmic-sticker-link anim-drift" style="top: 490px; left: 610px; animation-delay: 1.8s;">
-            <img src="200×200Symbol.png" alt="Example Site 4" class="sticker-img">
+          <a href="#" target="_blank" data-name="site name" data-desc="Placeholder site." data-tags="tag" data-id="Ex4" data-date="2026-09-04" data-button="88×31buttoneg.png" data-img="200×200Symbol.png" class="cosmic-sticker-link anim-drift" style="top: 490px; left: 610px; animation-delay: 1.8s;">
+            <img src="200×200Symbol.png" alt="site name" class="sticker-img">
           </a>
         </div>
 
@@ -824,7 +824,7 @@
             </div>
 
             <div class="command-button-box">
-              <a href="#" id="commandVisitLink" target="_blank">
+              <a href="#" id="commandVisitLink">
                 <img id="commandBannerImg" src="" alt="88x31 button">
               </a>
             </div>
@@ -1096,7 +1096,15 @@
           });
         }
 
-        commandVisitLink.href = link.href;
+        const isPlaceholder = (link.getAttribute('data-name') === 'site name');
+        if (isPlaceholder) {
+          commandVisitLink.setAttribute('href', '#');
+          commandVisitLink.onclick = function(ev) { ev.preventDefault(); };
+        } else {
+          commandVisitLink.setAttribute('href', link.href);
+          commandVisitLink.onclick = null;
+        }
+
         commandBannerImg.src = link.getAttribute('data-button') || '';
 
         commandScreen.classList.add('active');
