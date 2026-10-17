@@ -125,7 +125,6 @@
       cursor: grabbing;
     }
 
-    /* CANVAS QUADRATO ESPANSO (5000px x 5000px) */
     .galaxy-canvas-world {
       position: absolute;
       width: 5000px;
@@ -457,13 +456,25 @@
       border-radius: 4px;
     }
 
+    .command-button-box {
+      width: 88px;
+      height: 31px;
+      background: rgba(225, 218, 185, 0.05);
+      border: 1px dashed rgba(225, 218, 185, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
     .command-button-box a {
-      display: inline-block;
+      display: block;
+      width: 100%;
+      height: 100%;
       transition: transform 0.15s ease;
     }
 
     .command-button-box a:hover {
-      transform: scale(1.1);
+      transform: scale(1.05);
     }
 
     .command-button-box img {
@@ -805,7 +816,7 @@
             <img src="https://richardnyxon.neocities.org/i/planet.png" alt="richardnyxon" class="sticker-img">
           </a>
 
-          <!-- WARMAGAMING -->
+          <!-- WARMAGAMING (SOSTITUISCE IL SEGNAPOSTO EX4 NELLE VICINANZE) -->
           <a href="https://warmagaming.neocities.org/" target="_blank" data-name="warmagaming" data-desc="Tabletop and video gaming site." data-tags="gaming, tabletopgames, videogames" data-id="Ex4" data-date="2026-10-02" data-button="https://warmagaming.neocities.org/images/web/button.gif" data-img="https://warmagaming.neocities.org/images/web/warmagaming-planet.png" class="cosmic-sticker-link anim-drift" style="top: 1690px; left: 1710px; animation-delay: 1.8s;">
             <img src="https://warmagaming.neocities.org/images/web/warmagaming-planet.png" alt="warmagaming" class="sticker-img">
           </a>
@@ -1137,12 +1148,11 @@
 
       links.forEach(link => {
         const name = link.getAttribute('data-name').toLowerCase();
-        const desc = link.getAttribute('data-desc') ? link.getAttribute('data-desc').toLowerCase() : '';
         const tags = link.getAttribute('data-tags') ? link.getAttribute('data-tags').toLowerCase() : '';
 
         if (term === '') {
           link.classList.remove('dimmed', 'highlighted');
-        } else if (name.includes(term) || desc.includes(term) || tags.includes(term)) {
+        } else if (name.includes(term) || tags.includes(term)) {
           link.classList.remove('dimmed');
           link.classList.add('highlighted');
           
@@ -1164,6 +1174,10 @@
         e.preventDefault();
         playWarpSound();
         
+        // Svuota immediatamente la vecchia immagine del bottone 88x31
+        commandBannerImg.src = '';
+        commandBannerImg.style.display = 'none';
+
         const customImg = link.getAttribute('data-img');
         if (customImg) {
           commandViewer.innerHTML = `<img src="${customImg}" alt="${link.getAttribute('data-name')}">`;
@@ -1193,7 +1207,16 @@
           commandVisitLink.onclick = null;
         }
 
-        commandBannerImg.src = link.getAttribute('data-button') || '';
+        // Carica la nuova immagine 88x31 in modo pulito
+        const newButtonSrc = link.getAttribute('data-button');
+        if (newButtonSrc) {
+          const tempImg = new Image();
+          tempImg.onload = function() {
+            commandBannerImg.src = newButtonSrc;
+            commandBannerImg.style.display = 'block';
+          };
+          tempImg.src = newButtonSrc;
+        }
 
         commandScreen.classList.add('active');
       });
@@ -1208,7 +1231,6 @@
       return Math.max(min, Math.min(max, val));
     }
 
-    /* MATEMATICA DELLO ZOOM PERFETTAMENTE CENTRATO SENZA SPOSTAMENTI */
     function updateWorldTransform(withTransition = false) {
       const boardWidth = board.clientWidth || 800;
       const boardHeight = board.clientHeight || 450;
@@ -1287,18 +1309,12 @@
 
     document.getElementById('zoomInBtn').addEventListener('click', () => {
       playBeep(600, 'sine', 0.06);
-      if (scale < 1.8) { 
-        scale += 0.2; 
-        updateWorldTransform(false); 
-      }
+      if (scale < 1.8) { scale += 0.2; updateWorldTransform(false); }
     });
 
     document.getElementById('zoomOutBtn').addEventListener('click', () => {
       playBeep(300, 'sine', 0.06);
-      if (scale > 0.15) { 
-        scale -= 0.2; 
-        updateWorldTransform(false); 
-      }
+      if (scale > 0.15) { scale -= 0.2; updateWorldTransform(false); }
     });
 
     board.addEventListener('wheel', (e) => {
