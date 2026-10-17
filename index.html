@@ -127,8 +127,8 @@
 
     .galaxy-canvas-world {
       position: absolute;
-      width: 4000px;
-      height: 4000px;
+      width: 4800px;
+      height: 3600px;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
@@ -195,7 +195,7 @@
       0% { top: -40px; left: -40px; opacity: 0; }
       10% { opacity: 1; }
       90% { opacity: 1; }
-      100% { top: 2840px; left: 3640px; opacity: 0; }
+      100% { top: 3640px; left: 4840px; opacity: 0; }
     }
 
     .shooting-comet-2 {
@@ -208,10 +208,10 @@
       z-index: 5;
     }
     @keyframes shootComet2 {
-      0% { top: 2840px; left: -40px; opacity: 0; }
+      0% { top: 3640px; left: -40px; opacity: 0; }
       10% { opacity: 1; }
       90% { opacity: 1; }
-      100% { top: -40px; left: 3640px; opacity: 0; }
+      100% { top: -40px; left: 4840px; opacity: 0; }
     }
 
     .anim-float { animation: float 4s ease-in-out infinite; }
@@ -1147,8 +1147,8 @@
           
           const targetTop = parseFloat(link.style.top);
           const targetLeft = parseFloat(link.style.left);
-          currentX = -(targetLeft - 1800);
-          currentY = -(targetTop - 1400);
+          currentX = -(targetLeft - 2400);
+          currentY = -(targetTop - 1800);
           scale = 0.9;
           updateWorldTransform(true);
         } else {
@@ -1208,8 +1208,8 @@
     }
 
     function updateWorldTransform(withTransition = false) {
-      const maxDragX = 1200;
-      const maxDragY = 900;
+      const maxDragX = 1800;
+      const maxDragY = 1300;
 
       currentX = clamp(currentX, -maxDragX, maxDragX);
       currentY = clamp(currentY, -maxDragY, maxDragY);
@@ -1281,13 +1281,13 @@
 
     document.getElementById('zoomOutBtn').addEventListener('click', () => {
       playBeep(300, 'sine', 0.06);
-      if (scale > 0.25) { scale -= 0.2; updateWorldTransform(false); }
+      if (scale > 0.18) { scale -= 0.2; updateWorldTransform(false); }
     });
 
     board.addEventListener('wheel', (e) => {
       e.preventDefault();
       if (e.deltaY < 0 && scale < 1.8) scale += 0.08;
-      else if (e.deltaY > 0 && scale > 0.25) scale -= 0.08;
+      else if (e.deltaY > 0 && scale > 0.18) scale -= 0.08;
       updateWorldTransform(false);
     }, { passive: false });
 
@@ -1299,8 +1299,8 @@
         const targetTop = parseFloat(targetLink.style.top);
         const targetLeft = parseFloat(targetLink.style.left);
 
-        currentX = -(targetLeft - 1800);
-        currentY = -(targetTop - 1400);
+        currentX = -(targetLeft - 2400);
+        currentY = -(targetTop - 1800);
         scale = 0.9;
         updateWorldTransform(true);
       }
